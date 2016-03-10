@@ -12,6 +12,13 @@ tests_require = [
     'plone.testing',
 ]
 
+extras_require = {
+    'tests': tests_require,
+    'development': [
+        'plonetheme.blueberry',
+    ]
+}
+
 setup(
     name='ftw.events',
     version=version,
@@ -52,7 +59,7 @@ setup(
     ],
 
     tests_require=tests_require,
-    extras_require={'tests': tests_require},
+    extras_require=extras_require,
 
     entry_points="""
     # -*- Entry points: -*-
