@@ -40,6 +40,7 @@ setup(
 
     install_requires=[
         'Plone',
+        'ftw.upgrade',
         'setuptools',
     ],
 
