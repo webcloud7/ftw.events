@@ -2,5 +2,6 @@
 <object name="portal_types" meta_type="Plone Types Tool">
 
     <object name="ftw.events.EventsFolder" meta_type="Dexterity FTI"/>
+    <object name="ftw.events.EventPage" meta_type="Dexterity FTI"/>
 
 </object>

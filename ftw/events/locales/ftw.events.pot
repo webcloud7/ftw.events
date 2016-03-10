@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-10 10:02+0000\n"
+"POT-Creation-Date: 2016-03-10 11:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
+
+#: ./ftw/events/profiles/default/types/ftw.events.EventPage.xml
+msgid "Event Page"
+msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventsFolder.xml
 msgid "Events Folder"

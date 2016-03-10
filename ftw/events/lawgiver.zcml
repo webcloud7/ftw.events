@@ -10,4 +10,9 @@
         permissions="ftw.events: Add Events Folder"
         />
 
+    <lawgiver:map_permissions
+        action_group="add"
+        permissions="ftw.events: Add Event Page"
+        />
+
 </configure>

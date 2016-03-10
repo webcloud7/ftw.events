@@ -5,7 +5,9 @@ from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.testing import z2
 from zope.configuration import xmlconfig
+import ftw.events.tests.builders
 
 
 class EventsLayer(PloneSandboxLayer):
@@ -20,6 +22,9 @@ class EventsLayer(PloneSandboxLayer):
             '  <includePluginsOverrides package="plone" />'
             '</configure>',
             context=configurationContext)
+
+        z2.installProduct(app, 'Products.DateRecurringIndex')
+        z2.installProduct(app, 'ftw.simplelayout')
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'ftw.events:default')

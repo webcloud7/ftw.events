@@ -41,8 +41,11 @@ setup(
 
     install_requires=[
         'Plone',
+        'collective.dexteritytextindexer',
+        'ftw.simplelayout [contenttypes]',
         'ftw.upgrade',
         'plone.app.dexterity',
+        'plone.app.event [dexterity]',
         'plone.app.referenceablebehavior',
         'plone.directives.form',
         'setuptools',
