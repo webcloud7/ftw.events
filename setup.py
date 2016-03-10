@@ -5,6 +5,7 @@ version = '1.0.0.dev0'
 
 tests_require = [
     'ftw.builder',
+    'ftw.lawgiver',
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
@@ -41,6 +42,9 @@ setup(
     install_requires=[
         'Plone',
         'ftw.upgrade',
+        'plone.app.dexterity',
+        'plone.app.referenceablebehavior',
+        'plone.directives.form',
         'setuptools',
     ],
 

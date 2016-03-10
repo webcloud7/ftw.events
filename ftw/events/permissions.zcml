@@ -1,0 +1,10 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="ftw.events">
+
+    <permission
+        id="ftw.events.AddEventsFolder"
+        title="ftw.events: Add Events Folder"
+        />
+
+</configure>
