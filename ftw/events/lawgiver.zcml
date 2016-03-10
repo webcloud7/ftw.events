@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:lawgiver="http://namespaces.zope.org/lawgiver"
+    i18n_domain="ftw.events">
+
+    <include package="ftw.lawgiver" />
+
+    <lawgiver:map_permissions
+        action_group="add"
+        permissions="ftw.events: Add Events Folder"
+        />
+
+</configure>
