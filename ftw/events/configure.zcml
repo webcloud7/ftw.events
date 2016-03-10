@@ -4,6 +4,8 @@
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.events">
 
+    <i18n:registerTranslations directory="locales" />
+
     <include file="lawgiver.zcml" zcml:condition="installed ftw.lawgiver" />
     <include file="permissions.zcml" />
     <include file="profiles.zcml" />
