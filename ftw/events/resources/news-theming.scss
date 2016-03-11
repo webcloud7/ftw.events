@@ -1,2 +1,13 @@
 @include portal-type-font-awesome-icon(ftw-events-eventsfolder, calendar);
 @include portal-type-font-awesome-icon(ftw-events-eventpage, calendar-o);
+
+
+.event-details {
+  border: 2px dashed fuchsia;
+
+  .when {
+    ul {
+      @include list;
+    }
+  }
+}

@@ -8,7 +8,20 @@ class EventsFolderBuilder(DexterityBuilder):
 builder_registry.register('events folder', EventsFolderBuilder)
 
 
-class EventsBuilder(DexterityBuilder):
+class EventPageBuilder(DexterityBuilder):
     portal_type = 'ftw.events.EventPage'
 
-builder_registry.register('event page', EventsBuilder)
+    def __init__(self, *args, **kwargs):
+        super(EventPageBuilder, self).__init__(*args, **kwargs)
+        # ftw.builders auto-discovery does not work for recurrence:
+        self.having(recurrence='')
+        # using greenwich, since the test-site / browser is set up with it:
+        self.having(timezone='Etc/Greenwich')
+
+    def starting(self, date):
+        return self.having(start=date)
+
+    def ending(self, date):
+        return self.having(end=date)
+
+builder_registry.register('event page', EventPageBuilder)
