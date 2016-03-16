@@ -10,6 +10,7 @@
     <genericsetup:registerProfile
         name="default"
         title="ftw.events"
+        description="Provides event pages based on simplelayout."
         directory="profiles/default"
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-16 07:22+0000\n"
+"POT-Creation-Date: 2016-03-16 07:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,11 @@ msgstr ""
 msgid "Event Page"
 msgstr ""
 
-#: ./ftw/events/profiles.zcml:15
+#: ./ftw/events/profiles.zcml:16
+msgid "Provides event pages based on simplelayout."
+msgstr ""
+
+#: ./ftw/events/profiles.zcml:16
 msgid "ftw.events"
 msgstr ""
 
