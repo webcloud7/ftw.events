@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<object name="ftw.events.EventsFolder"
+<object name="ftw.events.EventFolder"
         meta_type="Dexterity FTI"
         xmlns:i18n="http://xml.zope.org/namespaces/i18n"
         i18n:domain="ftw.events" >
 
-    <property name="title" i18n:translate="">Events Folder</property>
+    <property name="title" i18n:translate="">Event Folder</property>
     <property name="icon_expr"></property>
     <property name="allow_discussion">False</property>
     <property name="global_allow">True</property>
@@ -13,9 +13,9 @@
         <element value="ftw.events.EventPage" />
     </property>
 
-    <property name="schema">ftw.events.contents.events_folder.IEventsFolderSchema</property>
-    <property name="klass">ftw.events.contents.events_folder.EventsFolder</property>
-    <property name="add_permission">ftw.events.AddEventsFolder</property>
+    <property name="schema">ftw.events.contents.eventfolder.IEventFolderSchema</property>
+    <property name="klass">ftw.events.contents.eventfolder.EventFolder</property>
+    <property name="add_permission">ftw.events.AddEventFolder</property>
 
     <property name="behaviors">
         <element value="plone.app.content.interfaces.INameFromTitle" />

@@ -1,4 +1,4 @@
-from ftw.events.interfaces import IEventsFolder
+from ftw.events.interfaces import IEventFolder
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Container
 from plone.directives import form
@@ -6,11 +6,11 @@ from zope.interface import alsoProvides
 from zope.interface import implements
 
 
-class IEventsFolderSchema(form.Schema):
+class IEventFolderSchema(form.Schema):
     pass
 
-alsoProvides(IEventsFolderSchema, IFormFieldProvider)
+alsoProvides(IEventFolderSchema, IFormFieldProvider)
 
 
-class EventsFolder(Container):
-    implements(IEventsFolder)
+class EventFolder(Container):
+    implements(IEventFolder)

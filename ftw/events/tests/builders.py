@@ -2,10 +2,10 @@ from ftw.builder import builder_registry
 from ftw.builder.dexterity import DexterityBuilder
 
 
-class EventsFolderBuilder(DexterityBuilder):
-    portal_type = 'ftw.events.EventsFolder'
+class EventFolderBuilder(DexterityBuilder):
+    portal_type = 'ftw.events.EventFolder'
 
-builder_registry.register('events folder', EventsFolderBuilder)
+builder_registry.register('event folder', EventFolderBuilder)
 
 
 class EventPageBuilder(DexterityBuilder):

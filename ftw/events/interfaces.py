@@ -5,8 +5,8 @@ class IFTWEventsLayer(Interface):
     """Request layer for ftw.events"""
 
 
-class IEventsFolder(Interface):
-    """Events folder marker interface.
+class IEventFolder(Interface):
+    """Event folder marker interface.
     """
 
 

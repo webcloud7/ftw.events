@@ -12,7 +12,7 @@ class TestEventPage(FunctionalTestCase):
     @browsing
     def test_create_event_page(self, browser):
         self.grant('Manager')
-        folder = create(Builder('events folder').titled(u'Activities'))
+        folder = create(Builder('event folder').titled(u'Activities'))
         browser.login().open(folder)
         factoriesmenu.add('Event Page')
 
@@ -24,7 +24,7 @@ class TestEventPage(FunctionalTestCase):
     @browsing
     def test_event_details_WHEN_shows_dates(self, browser):
         self.grant('Manager')
-        folder = create(Builder('events folder'))
+        folder = create(Builder('event folder'))
         event = create(Builder('event page')
                        .starting(datetime(2013, 10, 7, 9, 00))
                        .ending(datetime(2013, 10, 7, 16, 00))

@@ -10,7 +10,7 @@ class TestEventFolder(FunctionalTestCase):
     def test_create_event_folder(self, browser):
         self.grant('Manager')
         browser.login().open()
-        factoriesmenu.add('Events Folder')
+        factoriesmenu.add('Event Folder')
 
         browser.fill({'Title': 'Activities'}).save()
         statusmessages.assert_no_error_messages()

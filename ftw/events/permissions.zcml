@@ -3,8 +3,8 @@
     i18n_domain="ftw.events">
 
     <permission
-        id="ftw.events.AddEventsFolder"
-        title="ftw.events: Add Events Folder"
+        id="ftw.events.AddEventFolder"
+        title="ftw.events: Add Event Folder"
         />
 
     <permission

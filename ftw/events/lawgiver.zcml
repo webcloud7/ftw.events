@@ -7,7 +7,7 @@
 
     <lawgiver:map_permissions
         action_group="add"
-        permissions="ftw.events: Add Events Folder"
+        permissions="ftw.events: Add Event Folder"
         />
 
     <lawgiver:map_permissions
