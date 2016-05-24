@@ -6,7 +6,7 @@
     <include package="ftw.theming" file="meta.zcml"/>
 
     <theme:resources profile="ftw.events:default" slot="addon">
-        <theme:scss file="resources/news-theming.scss" />
+        <theme:scss file="resources/events-theming.scss" />
     </theme:resources>
 
 </configure>
