@@ -11,5 +11,11 @@
     <include file="profiles.zcml" />
     <include file="resources.zcml" zcml:condition="installed ftw.theming" />
     <include package=".viewlets" />
+    <include package=".browser" />
+
+    <utility
+        component=".vocabularies.SubjectVocabulary"
+        name="ftw.events.vocabulary.subjects"
+        />
 
 </configure>

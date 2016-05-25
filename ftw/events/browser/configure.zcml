@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.events">
+
+    <browser:page
+        for="ftw.events.interfaces.IEventListingBlock"
+        name="block_view"
+        permission="zope2.View"
+        class=".eventlistingblock.EventListingBlockView"
+        />
+
+</configure>

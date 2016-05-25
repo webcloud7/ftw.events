@@ -3,5 +3,6 @@
 
     <object name="ftw.events.EventFolder" meta_type="Dexterity FTI"/>
     <object name="ftw.events.EventPage" meta_type="Dexterity FTI"/>
+    <object name="ftw.events.EventListingBlock" meta_type="Dexterity FTI"/>
 
 </object>

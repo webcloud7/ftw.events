@@ -15,4 +15,9 @@
         permissions="ftw.events: Add Event Page"
         />
 
+    <lawgiver:map_permissions
+        action_group="edit"
+        permissions="ftw.events: Add EventListingBlock"
+        />
+
 </configure>
