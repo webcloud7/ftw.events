@@ -1,10 +1,13 @@
 from Acquisition._Acquisition import aq_inner, aq_parent
+from ftw.events import _
 from ftw.events import utils
+from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
+from zope.i18n import translate
 
 
 class EventListingBlockView(BaseBlock):
@@ -15,9 +18,21 @@ class EventListingBlockView(BaseBlock):
         This method returns a dict containing information to be used in
         the block's template.
         """
+        more_items_link_url = ''
+        if self.context.show_more_items_link:
+            more_items_link_url = '/'.join([self.context.absolute_url(), 'events'])
+
+        more_items_link_label = (
+            self.context.more_items_link_label or
+            translate(_('more_items_link_label', default=u'More Items'),
+                      context=self.request)
+        )
+
         info = {
             'title': self.context.title,
             'show_title': self.context.show_title,
+            'more_items_link_url': more_items_link_url,
+            'more_items_link_label': more_items_link_label,
         }
 
         return info
@@ -41,9 +56,7 @@ class EventListingBlockView(BaseBlock):
 
     def get_query(self):
         query = {
-            'object_provides': {
-                'query': ['ftw.events.interfaces.IEventPage'],
-            },
+            'object_provides': IEventPage.__identifier__,
             'sort_on': 'start',
             'sort_order': 'descending',
         }

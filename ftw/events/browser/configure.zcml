@@ -10,4 +10,12 @@
         class=".eventlistingblock.EventListingBlockView"
         />
 
+    <browser:page
+        for="ftw.events.interfaces.IEventListingBlock"
+        name="events"
+        class=".eventlisting.EventListing"
+        template="./templates/eventlisting.pt"
+        permission="zope2.View"
+        />
+
 </configure>

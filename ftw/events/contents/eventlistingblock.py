@@ -89,6 +89,31 @@ class IEventListingBlockSchema(form.Schema):
         default=50,
     )
 
+    show_more_items_link = schema.Bool(
+        title=_(u'event_listing_config_show_more_items_link',
+                default=u'Show link to more items'),
+        description=_(u'event_listing_show_more_items_link_description',
+                      default=u'Render a link to a page which renders more '
+                              u'items (only if there is at least one item.'),
+        default=False,
+    )
+
+    more_items_link_label = schema.TextLine(
+        title=_(u'label_more_items_link_label',
+                default=u'Label for the "more items" link'),
+        description=_(u'description_more_items_link_label',
+                      default=u'This custom label will not be translated.'),
+        required=False,
+    )
+
+    more_items_view_title = schema.TextLine(
+        title=_(u'label_more_items_view_title',
+                default=u'Title of the view behind the "more items" link'),
+        description=_(u'description_more_items_view_title',
+                      default=u'This title will not be translated.'),
+        required=False,
+    )
+
     @invariant
     def is_either_path_or_context(obj):
         """Checks if not both path and current context are defined.

@@ -28,6 +28,16 @@
             </li>
         </ul>
 
+        <tal:footer tal:define="more_items_link_url block_info/more_items_link_url;
+                                more_items_link_label block_info/more_items_link_label">
+            <a class="event-listingblock-moreitemslink"
+               tal:condition="more_items_link_url"
+               title="More Items"
+               i18n:attributes="title more_items_link_label"
+               tal:attributes="href more_items_link_url"
+               tal:content="more_items_link_label"/>
+        </tal:footer>
+
     </tal:events>
 
 </html>

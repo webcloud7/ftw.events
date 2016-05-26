@@ -321,3 +321,69 @@ class TestEventListingBlock(FunctionalTestCase):
             ['Jan 02, 2010 from 02:00 PM to 03:00 PM Event of Peter'],
             browser.css('.sl-block.ftw-events-eventlistingblock').text
         )
+
+    @browsing
+    def test_block_renders_link_to_more_items(self, browser):
+        page = create(Builder('sl content page')
+                      .titled(u'Content Page'))
+        event_folder = create(Builder('event folder').
+                              titled(u'Event Folder')
+                              .within(page))
+        create(Builder('event page')
+               .titled(u'Event')
+               .within(event_folder))
+        block = create(Builder('event listing block')
+                       .within(page)
+                       .having(show_more_items_link=True)
+                       .titled(u'This is a EventListingBlock'))
+
+        browser.login()
+
+        # Make sure the link is there.
+        browser.visit(page)
+        self.assertEqual(
+            'http://nohost/plone/content-page/this-is-a-eventlistingblock/events',
+            browser.find('More Items').attrib['href']
+        )
+
+        # Tell the block to no longer render the link
+        browser.login().visit(block, view='edit.json')
+        response = browser.json
+        browser.open_html(response['content'])
+        browser.fill({
+            'Show link to more items': False,
+        })
+        browser.find_button_by_label('Save').click()
+
+        # Make sure the link is no longer there.
+        browser.visit(page)
+        self.assertIsNone(browser.find('More Items'))
+
+    @browsing
+    def test_block_renders_link_to_more_items_with_custom_label(self, browser):
+        """
+        This test makes sure that the link to thew view which renders more items
+        has a custom label.
+        """
+        page = create(Builder('sl content page')
+                      .titled(u'Content Page'))
+        event_folder = create(Builder('event folder').
+                              titled(u'Event Folder')
+                              .within(page))
+        create(Builder('event page')
+               .titled(u'Event')
+               .within(event_folder))
+        create(Builder('event listing block')
+               .within(page)
+               .having(show_more_items_link=True)
+               .having(more_items_link_label=u'Show me more')
+               .titled(u'This is a EventListingBlock'))
+
+        browser.login()
+
+        # Make sure the link is there.
+        browser.visit(page)
+        self.assertEqual(
+            'http://nohost/plone/content-page/this-is-a-eventlistingblock/events',
+            browser.find('Show me more').attrib['href']
+        )
