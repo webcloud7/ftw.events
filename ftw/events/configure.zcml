@@ -18,4 +18,10 @@
         name="ftw.events.vocabulary.subjects"
         />
 
+    <subscriber
+        for="ftw.events.interfaces.IEventFolder
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler="ftw.events.contents.eventfolder.create_event_listing_block"
+        />
+
 </configure>
