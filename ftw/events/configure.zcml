@@ -24,4 +24,9 @@
         handler="ftw.events.contents.eventfolder.create_event_listing_block"
         />
 
+    <adapter
+        factory=".syndication.EventFolderFeed"
+        for="ftw.events.interfaces.IEventFolder"
+        />
+
 </configure>
