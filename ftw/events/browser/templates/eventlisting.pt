@@ -18,7 +18,7 @@
     <metal:main fill-slot="content-core" tal:define="batch view/batch">
 
         <p tal:condition="not:batch"
-           i18n:translate="eventlisting_no_content_text">No content available</p>
+           i18n:translate="eventlisting_no_content_text">No content available.</p>
 
         <ul class="event-row">
             <tal:batch repeat="lazy_item batch">

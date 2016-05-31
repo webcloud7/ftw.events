@@ -11,7 +11,7 @@
     <tal:events tal:define="items view/get_items;">
 
         <p tal:condition="not: items"
-           i18n:translate="">No content available</p>
+           i18n:translate="eventlisting_no_content_text">No content available.</p>
 
         <ul class="event-row">
             <li tal:repeat="item items">

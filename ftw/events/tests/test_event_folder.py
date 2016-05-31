@@ -26,7 +26,7 @@ class TestEventFolder(FunctionalTestCase):
         folder = create(Builder('event folder'))
         browser.login().visit(folder, view='@@simplelayout-view')
         self.assertEqual(
-            ['No content available'],
+            ['No content available.'],
             browser.css('.sl-layout .ftw-events-eventlistingblock').text
         )
 

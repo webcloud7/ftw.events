@@ -68,7 +68,7 @@ class IEventListingBlockSchema(form.Schema):
         title=_(u'event_listing_config_subjects_label',
                 default=u'Filter by subject'),
         description=_(u'event_listing_config_subjects_description',
-                      default=u'Only with the selected subjects will '
+                      default=u'Only items with the selected subjects will '
                               u'be shown.'),
         value_type=schema.Choice(vocabulary='ftw.events.vocabulary.subjects'),
         required=False,
@@ -96,7 +96,7 @@ class IEventListingBlockSchema(form.Schema):
                 default=u'Show link to more items'),
         description=_(u'event_listing_show_more_items_link_description',
                       default=u'Render a link to a page which renders more '
-                              u'items (only if there is at least one item.'),
+                              u'items (only if there is at least one item).'),
         default=False,
     )
 
