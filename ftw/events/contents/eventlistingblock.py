@@ -6,6 +6,8 @@ from plone.directives import form
 from plone.formwidget.autocomplete.widget import AutocompleteMultiFieldWidget
 from plone.formwidget.contenttree import MultiContentTreeFieldWidget
 from plone.formwidget.contenttree import ObjPathSourceBinder
+from Products.CMFPlone.interfaces.syndication import IFeedSettings
+from Products.CMFPlone.interfaces.syndication import ISyndicatable
 from z3c.relationfield import RelationChoice
 from zope import schema
 from zope.interface import alsoProvides
@@ -129,4 +131,16 @@ alsoProvides(IEventListingBlockSchema, IFormFieldProvider)
 
 
 class EventListingBlock(Item):
-    implements(IEventListingBlock)
+    implements(IEventListingBlock, ISyndicatable)
+
+
+def enable_syndication(event_listing_block, event=None):
+    """
+    Enables syndication on the given event listing block. This
+    must be called from a subscriber when an event listing block is
+    created so the syndication is enabled by default on the event
+    listing blocks.
+    """
+    settings = IFeedSettings(event_listing_block)
+    settings.enabled = True
+    settings.feed_types = ('RSS', 'rss.xml', 'atom.xml')

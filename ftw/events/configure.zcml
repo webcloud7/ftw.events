@@ -24,9 +24,20 @@
         handler="ftw.events.contents.eventfolder.create_event_listing_block"
         />
 
+    <subscriber
+        for="ftw.events.interfaces.IEventListingBlock
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler="ftw.events.contents.eventlistingblock.enable_syndication"
+        />
+
     <adapter
         factory=".syndication.EventFolderFeed"
         for="ftw.events.interfaces.IEventFolder"
+        />
+
+    <adapter
+        factory=".syndication.EventListingBlockFeed"
+        for="ftw.events.interfaces.IEventListingBlock"
         />
 
 </configure>

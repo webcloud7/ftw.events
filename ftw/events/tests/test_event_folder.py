@@ -54,3 +54,106 @@ class TestEventFolder(FunctionalTestCase):
             [event1.Title(), event2.Title()],
             browser.css('item title').text
         )
+
+    @browsing
+    def test_event_folder_contains_links_to_rss_feeds_of_block(self, browser):
+        """
+        This test makes sure that the feed links of the event listing block
+        (which is created automatically after the creation of the event folder)
+         are rendered in the source of the event folder.
+        """
+        self.grant('Manager')
+        folder = create(Builder('event folder'))
+        browser.login()
+
+        browser.visit(folder)
+        self.assertEqual(
+            [
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/RSS',
+                    'Events - RSS 1.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/rss.xml',
+                    'Events - RSS 2.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/atom.xml',
+                    'Events - Atom'
+                )
+            ],
+            [
+                (link.attrib['type'], link.attrib['href'], link.attrib['title'])
+                for link in browser.css('link[rel="alternate"]')
+            ]
+        )
+
+        # Disable syndication on the event listing block and make sure
+        # the feed links are no longer rendered in the source of the
+        # event folder.
+        # Note that a default event listing block is created
+        # automatically in the event folder.
+        block = folder.listFolderContents(
+            contentFilter={'portal_type': 'ftw.events.EventListingBlock'}
+        )[0]
+        IFeedSettings(block).enabled = False
+        transaction.commit()
+
+        browser.visit(folder)
+        self.assertEqual([], browser.css('link[rel="alternate"]'))
+
+    @browsing
+    def test_event_folder_contains_links_to_rss_feeds_of_multiple_blocks(self, browser):
+        """
+        This test makes sure that the feed links of multiples event listing blocks
+        are rendered in the source of the event folder.
+        """
+        self.grant('Manager')
+        folder = create(Builder('event folder'))
+        create(Builder('event listing block')
+               .titled(u'Event Listing Block 2')
+               .within(folder))
+        browser.login()
+
+        browser.visit(folder)
+        self.assertEqual(
+            [
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/RSS',
+                    'Events - RSS 1.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/rss.xml',
+                    'Events - RSS 2.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/events/atom.xml',
+                    'Events - Atom'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/event-listing-block-2/RSS',
+                    'Event Listing Block 2 - RSS 1.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/event-listing-block-2/rss.xml',
+                    'Event Listing Block 2 - RSS 2.0'
+                ),
+                (
+                    'application/rss+xml',
+                    'http://nohost/plone/ftw-events-eventfolder/event-listing-block-2/atom.xml',
+                    'Event Listing Block 2 - Atom'
+                )
+            ],
+            [
+                (link.attrib['type'], link.attrib['href'], link.attrib['title'])
+                for link in browser.css('link[rel="alternate"]')
+            ]
+        )

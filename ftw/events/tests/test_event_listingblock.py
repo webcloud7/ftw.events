@@ -5,6 +5,7 @@ from ftw.events.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
+from Products.CMFPlone.interfaces.syndication import IFeedSettings
 
 
 class TestEventListingBlock(FunctionalTestCase):
@@ -386,4 +387,21 @@ class TestEventListingBlock(FunctionalTestCase):
         self.assertEqual(
             'http://nohost/plone/content-page/this-is-a-eventlistingblock/events',
             browser.find('Show me more').attrib['href']
+        )
+
+    def test_syndication_is_enabled_by_default_on_block(self):
+        folder = create(Builder('event folder'))
+
+        # Note that a default event listing block is created
+        # automatically in the event folder.
+        block = folder.listFolderContents(
+            contentFilter={'portal_type': 'ftw.events.EventListingBlock'}
+        )[0]
+
+        self.assertTrue(
+            IFeedSettings(block).enabled
+        )
+        self.assertEqual(
+            ('RSS', 'rss.xml', 'atom.xml'),
+            IFeedSettings(block).feed_types
         )
