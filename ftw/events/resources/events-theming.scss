@@ -4,9 +4,8 @@
 
 
 .event-details {
-  border: 2px dashed fuchsia;
-
   .when {
+    margin-bottom: $margin-vertical;
     ul {
       @include list;
     }
