@@ -2,6 +2,7 @@
 <object name="ftw.simplelayout.ContentPage">
 
     <property name="allowed_content_types" purge="False">
+        <element value="ftw.events.EventFolder"/>
         <element value="ftw.events.EventListingBlock"/>
     </property>
 
