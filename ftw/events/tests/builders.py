@@ -1,5 +1,6 @@
 from ftw.builder import builder_registry
 from ftw.builder.dexterity import DexterityBuilder
+from ftw.simplelayout.tests import builders
 
 
 class EventFolderBuilder(DexterityBuilder):
@@ -25,3 +26,9 @@ class EventPageBuilder(DexterityBuilder):
         return self.having(end=date)
 
 builder_registry.register('event page', EventPageBuilder)
+
+
+class EventListingBlockBuilder(DexterityBuilder):
+    portal_type = 'ftw.events.EventListingBlock'
+
+builder_registry.register('event listing block', EventListingBlockBuilder)

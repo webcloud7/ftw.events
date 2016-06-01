@@ -51,6 +51,7 @@ setup(
         'collective.dexteritytextindexer',
         'ftw.simplelayout [contenttypes]',
         'ftw.upgrade',
+        'plone.api',
         'plone.app.dexterity',
         'plone.app.event [dexterity]',
         'plone.app.referenceablebehavior',

@@ -5,7 +5,6 @@ from zope.contentprovider.interfaces import IContentProvider
 
 
 class EventDetailsViewlet(ViewletBase):
-    """Lists content by categories"""
 
     def events(self):
         return IRecurrenceSupport(self.context).occurrences()

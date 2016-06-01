@@ -12,4 +12,9 @@
         title="ftw.events: Add Event Page"
         />
 
+    <permission
+        id="ftw.events.AddEventListingBlock"
+        title="ftw.events: Add EventListingBlock"
+        />
+
 </configure>
