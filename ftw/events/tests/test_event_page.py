@@ -37,3 +37,17 @@ class TestEventPage(FunctionalTestCase):
                            'Oct 09, 2013 from 09:00 AM to 04:00 PM',
                            'Oct 10, 2013 from 09:00 AM to 04:00 PM'],
                           browser.css('.event-details .when li').text)
+
+    @browsing
+    def test_event_details_shows_location(self, browser):
+        self.grant('Manager')
+        folder = create(Builder('event folder'))
+        event = create(Builder('event page')
+                       .having(location='Infinite Loop 1')
+                       .within(folder))
+
+        browser.login().open(event)
+        self.assertEqual(
+            ['Infinite Loop 1'],
+            browser.css('.event-details .location p').text
+        )

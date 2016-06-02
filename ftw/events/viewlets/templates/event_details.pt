@@ -12,6 +12,10 @@
                     />
             </ul>
         </div>
+        <div class="location" tal:condition="context/location">
+            <b i18n:translate="">Where</b>
+            <p tal:content="context/location"/>
+        </div>
     </div>
 
 </html>

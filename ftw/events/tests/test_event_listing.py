@@ -25,7 +25,10 @@ class TestEventListing(FunctionalTestCase):
         browser.login()
 
         # Get the event folder's event listing block which has been created automatically.
-        block = api.content.find(portal_type='ftw.events.EventListingBlock')[0].getObject()
+        block = api.content.find(
+            portal_type='ftw.events.EventListingBlock',
+            within=event_folder
+        )[0].getObject()
 
         # Make sure the view renders the events.
         browser.visit(block, view='@@events')
@@ -71,4 +74,35 @@ class TestEventListing(FunctionalTestCase):
         self.assertEqual(
             ['All my events'],
             browser.css('.documentFirstHeading').text
+        )
+
+    @browsing
+    def test_event_listing_renders_location(self, browser):
+        event_folder = create(Builder('event folder'))
+        event = create(Builder('event page')
+                       .titled(u'My Event')
+                       .having(location='Infinite Loop 1')
+                       .within(event_folder))
+        browser.login()
+
+        # Get the event folder's event listing block which has been created automatically.
+        block = api.content.find(
+            portal_type='ftw.events.EventListingBlock',
+            within=event_folder
+        )[0].getObject()
+
+        # Make sure the location is rendered.
+        browser.visit(block, view='@@events')
+        self.assertEqual(
+            ['Infinite Loop 1'],
+            browser.css('.event-row .byline .location').text
+        )
+
+        # Empty the location and make sure it is no longer rendered.
+        browser.visit(event, view='edit')
+        browser.fill({'Location': u''}).submit()
+        browser.visit(block, view='@@events')
+        self.assertEqual(
+            [],
+            browser.css('.event-row .byline .location')
         )

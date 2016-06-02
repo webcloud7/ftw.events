@@ -3,6 +3,7 @@ from ftw.events import _
 from ftw.events import utils
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from plone.app.event.dx.behaviors import IEventLocation
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
@@ -92,9 +93,13 @@ class EventListingBlockView(BaseBlock):
         # Copied from "plone.app.event.portlets.portlet_events.Renderer#formatted_date".
         provider = getMultiAdapter(
             (self.context, self.request, self),
-            IContentProvider, name = 'formatted_date'
-            )
+            IContentProvider, name='formatted_date'
+        )
         date_snippet = provider(obj)
+
+        location = ''
+        if IEventLocation(obj, None):
+            location = obj.location
 
         item = {
             'title': brain.Title,
@@ -102,5 +107,6 @@ class EventListingBlockView(BaseBlock):
             'url': brain.getURL(),
             'brain': brain,
             'date_snippet': date_snippet,
+            'location': location,
         }
         return item

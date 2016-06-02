@@ -28,6 +28,9 @@
                             <span class="byline">
                             <span tal:condition="item/date_snippet"
                                   tal:replace="structure item/date_snippet"/>
+                            <tal:block tal:condition="item/location">
+                                <br /><span class="location" tal:content="item/location"></span>
+                            </tal:block>
                         </span>
                             <h3 class="title" tal:content="item/title" />
                             <span class="description" tal:condition="item/description" tal:content="item/description"/>

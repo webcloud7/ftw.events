@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-05-31 14:59+0000\n"
+"POT-Creation-Date: 2016-06-02 08:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,6 +37,10 @@ msgstr "Konfigurierbarer Block, welcher Veranstaltungen auflistet."
 #: ./ftw/events/viewlets/templates/event_details.pt:8
 msgid "When"
 msgstr "Wann"
+
+#: ./ftw/events/viewlets/templates/event_details.pt:16
+msgid "Where"
+msgstr "Wo"
 
 #. Default: "This custom label will not be translated."
 #: ./ftw/events/contents/eventlistingblock.py:106
@@ -149,13 +153,13 @@ msgid "label_more_items_view_title"
 msgstr "Titel der View hinter dem Link \"Weitere Einträge\""
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:27
-#: ./ftw/events/browser/templates/eventlistingblock.pt:33
+#: ./ftw/events/browser/eventlistingblock.py:28
+#: ./ftw/events/browser/templates/eventlistingblock.pt:36
 msgid "more_items_link_label"
 msgstr "Weitere Einträge"
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:75
+#: ./ftw/events/browser/eventlisting.py:80
 msgid "more_items_view_fallback_title"
 msgstr "Veranstaltungen"
 
