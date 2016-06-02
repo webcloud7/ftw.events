@@ -405,3 +405,29 @@ class TestEventListingBlock(FunctionalTestCase):
             ('RSS', 'rss.xml', 'atom.xml'),
             IFeedSettings(block).feed_types
         )
+
+    @browsing
+    def test_block_renders_location(self, browser):
+        event_folder = create(Builder('event folder'))
+        event = create(Builder('event page')
+                       .titled(u'My Event')
+                       .having(location='Infinite Loop 1')
+                       .within(event_folder))
+        browser.login()
+
+        # Make sure the location is rendered.
+        browser.open(event_folder)
+        self.assertEqual(
+            ['Infinite Loop 1'],
+            browser.css('.event-row .byline .location').text
+        )
+
+        # Empty the location and make sure it is no longer rendered.
+        browser.visit(event, view='edit')
+        browser.fill({'Location': u''}).submit()
+        browser.open(event_folder)
+        self.assertEqual(
+            [],
+            browser.css('.event-row .byline .location')
+        )
+
