@@ -5,6 +5,7 @@ from ftw.events.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
+from ftw.testing import freeze
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
 
 
@@ -13,6 +14,14 @@ class TestEventListingBlock(FunctionalTestCase):
     def setUp(self):
         super(TestEventListingBlock, self).setUp()
         self.grant('Manager')
+
+    def _get_event_titles_from_block(self, browser):
+        """
+        This helper method returns the titles of the events rendered
+        in the event listing block. Use this method in the test case to
+        make sure the block lists only the events we want it to.
+        """
+        return browser.css('.ftw-events-eventlistingblock .event-row h3.title').text
 
     @browsing
     def test_event_listing_block_builder(self, browser):
@@ -77,6 +86,42 @@ class TestEventListingBlock(FunctionalTestCase):
         )
 
     @browsing
+    def test_sort_order(self, browser):
+        """
+        This test makes sure that the events are sorted in ascending order by
+        their start date.
+        """
+        event_folder = create(Builder('event folder').titled(u'Event Folder'))
+        with freeze(datetime.datetime(2010, 7, 1)):
+            create(Builder('event page')
+                   .titled(u'Event of Hans')
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 3))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Event of Peter')
+                   .starting(datetime.datetime(2010, 7, 1))
+                   .ending(datetime.datetime(2010, 7, 5))
+                   .within(event_folder))
+
+            browser.login()
+
+            # Make sure that the events are sorted in ascending order.
+            browser.visit(event_folder)
+            self.assertEqual(
+                ['Event of Peter', 'Event of Hans'],
+                self._get_event_titles_from_block(browser),
+                "Event of Peter must be listed before the event of Hans"
+            )
+
+            # Folder listing still renders the items in the order they were added by.
+            browser.visit(event_folder, view='folder_contents')
+            self.assertEqual(
+                ['Event of Hans', 'Event of Peter'],
+                browser.css('table#listing-table tr td a.contenttype-ftw-events-eventpage').text
+            )
+
+    @browsing
     def test_block_filters_by_path(self, browser):
         """
         This test makes sure that the block only renders items
@@ -92,12 +137,17 @@ class TestEventListingBlock(FunctionalTestCase):
                                .within(self.portal))
         create(Builder('event page').titled(u'Hello World 2').within(event_folder2))
 
+        # Prepare a page containing an event listing block.
         page = create(Builder('sl content page').titled(u'Content Page with Eventlistingblock'))
         block = create(Builder('event listing block')
                        .within(page)
                        .having(current_context=False)
                        .titled(u'Not relevant in this test'))
-        browser.login().visit(block, view='edit.json')
+
+        browser.login()
+
+        # Edit the block and set a path (not possible with builder).
+        browser.visit(block, view='edit.json')
         response = browser.json
         browser.open_html(response['content'])
         browser.fill({
@@ -106,22 +156,32 @@ class TestEventListingBlock(FunctionalTestCase):
         browser.find_button_by_label('Save').click()
         browser.visit(page)
 
+        # Make sure the block only lists events from the path
+        # we have configured on the block.
         self.assertEqual(
             ['Hello World 2'],
-            browser.css('.sl-block.ftw-events-eventlistingblock h3').text
+            self._get_event_titles_from_block(browser)
         )
 
     @browsing
     def test_block_prevents_path_and_current_context(self, browser):
         """
         This test makes sure that a block cannot be configured to
-        have a filter by path and a filter by current context at the
+        have a "filter by path" and a "filter by current context" at the
         same time.
         """
         event_folder = create(Builder('event folder').titled(u'Event Folder'))
 
         browser.login()
-        browser.visit(event_folder, view='++add_block++ftw.events.EventListingBlock')
+
+        # Note that a default event listing block is created
+        # automatically in the event folder. Let's get the block.
+        block = event_folder.listFolderContents(
+            contentFilter={'portal_type': 'ftw.events.EventListingBlock'}
+        )[0]
+
+        # Edit the existing block.
+        browser.visit(block, view='edit.json')
         response = browser.json
         browser.open_html(response['content'])
         browser.fill({
@@ -133,6 +193,7 @@ class TestEventListingBlock(FunctionalTestCase):
         response = browser.json
         browser.open_html(response['content'])
 
+        # Make sure that the form refuses to save.
         self.assertEqual(
             ['There were some errors.'],
             statusmessages.error_messages()
@@ -169,7 +230,7 @@ class TestEventListingBlock(FunctionalTestCase):
         browser.visit(page2)
         self.assertEqual(
             ['Hello World 2'],
-            browser.css('.sl-block.ftw-events-eventlistingblock h3').text
+            self._get_event_titles_from_block(browser),
         )
 
         # Tell the block to no longer filter by the current context.
@@ -185,7 +246,7 @@ class TestEventListingBlock(FunctionalTestCase):
         browser.visit(page2)
         self.assertEqual(
             ['Hello World 1', 'Hello World 2'],
-            browser.css('.sl-block.ftw-events-eventlistingblock h3').text
+            self._get_event_titles_from_block(browser),
         )
 
     @browsing
@@ -271,57 +332,60 @@ class TestEventListingBlock(FunctionalTestCase):
         """
         page = create(Builder('sl content page').titled(u'Content Page'))
         event_folder = create(Builder('event folder').titled(u'Event Folder').within(page))
-        create(Builder('event page')
-               .titled(u'Event of Hans')
-               .having(subjects=['Hans'])
-               .starting(datetime.datetime(2010, 1, 1, 14, 0, 0))
-               .ending(datetime.datetime(2010, 1, 1, 15, 0, 0))
-               .within(event_folder))
-        create(Builder('event page')
-               .titled(u'Event of Peter')
-               .having(subjects=['Peter'])
-               .starting(datetime.datetime(2010, 1, 2, 15, 0, 0))
-               .ending(datetime.datetime(2010, 1, 2, 16, 0, 0))
-               .within(event_folder))
         create(Builder('event listing block')
                .within(page)
                .having(subjects=['Hans'])
-               .having(show_title=False)
                .titled(u'This is a EventListingBlock'))
+        with freeze(datetime.datetime(2010, 7, 1)):
+            create(Builder('event page')
+                   .titled(u'Event of Hans')
+                   .having(subjects=['Hans'])
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 2))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Event of Peter')
+                   .having(subjects=['Peter'])
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 2))
+                   .within(event_folder))
 
-        browser.login()
-        browser.visit(page)
-        self.assertEqual(
-            ['Jan 01, 2010 from 02:00 PM to 03:00 PM Event of Hans'],
-            browser.css('.sl-block.ftw-events-eventlistingblock').text
-        )
+            browser.login()
+            browser.visit(page)
+            self.assertEqual(
+                ['Event of Hans'],
+                self._get_event_titles_from_block(browser)
+            )
 
     @browsing
     def test_block_limits_quantity(self, browser):
         page = create(Builder('sl content page').titled(u'Content Page'))
         event_folder = create(Builder('event folder').titled(u'Event Folder').within(page))
-        create(Builder('event page')
-               .titled(u'Event of Hans')
-               .starting(datetime.datetime(2010, 1, 1, 15, 0, 0))
-               .ending(datetime.datetime(2010, 1, 1, 16, 0, 0))
-               .within(event_folder))
-        create(Builder('event page')
-               .titled(u'Event of Peter')
-               .starting(datetime.datetime(2010, 1, 2, 14, 0, 0))
-               .ending(datetime.datetime(2010, 1, 2, 15, 0, 0))
-               .within(event_folder))
+        quantity = 1
         create(Builder('event listing block')
                .within(page)
-               .having(quantity=1)
+               .having(quantity=quantity)
                .having(show_title=False)
                .titled(u'This is a EventListingBlock'))
 
-        browser.login()
-        browser.visit(page)
-        self.assertEqual(
-            ['Jan 02, 2010 from 02:00 PM to 03:00 PM Event of Peter'],
-            browser.css('.sl-block.ftw-events-eventlistingblock').text
-        )
+        with freeze(datetime.datetime(2010, 7, 1)):
+            create(Builder('event page')
+                   .titled(u'Event of Hans')
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 2))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Event of Peter')
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 2))
+                   .within(event_folder))
+
+            browser.login()
+            browser.visit(page)
+            self.assertEqual(
+                quantity,
+                len(self._get_event_titles_from_block(browser))
+            )
 
     @browsing
     def test_block_renders_link_to_more_items(self, browser):
@@ -431,3 +495,39 @@ class TestEventListingBlock(FunctionalTestCase):
             browser.css('.event-row .byline .location')
         )
 
+    @browsing
+    def test_block_does_not_render_past_events(self, browser):
+        page = create(Builder('sl content page'))
+        event_folder = create(Builder('event folder').titled(u'Event Folder').within(page))
+        create(Builder('event listing block')
+               .within(page)
+               .titled(u'Event listing block'))
+
+        with freeze(datetime.datetime(2010, 7, 1, 15, 0, 0)):
+            create(Builder('event page')
+                   .titled(u'Past event')
+                   .starting(datetime.datetime(2010, 1, 1))
+                   .ending(datetime.datetime(2010, 1, 1))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Today event')
+                   .starting(datetime.datetime(2010, 7, 1, 12, 0, 0))
+                   .ending(datetime.datetime(2010, 7, 1, 18, 0, 0))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Future event')
+                   .starting(datetime.datetime(2010, 7, 2))
+                   .ending(datetime.datetime(2010, 7, 2))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Event which ended a few hours ago')
+                   .starting(datetime.datetime(2010, 7, 1, 9, 0, 0))
+                   .ending(datetime.datetime(2010, 7, 1, 14, 0, 0))
+                   .within(event_folder))
+
+            browser.login()
+            browser.visit(page)
+            self.assertEqual(
+                ['Event which ended a few hours ago', 'Today event', 'Future event'],
+                self._get_event_titles_from_block(browser)
+            )

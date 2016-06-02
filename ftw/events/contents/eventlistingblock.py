@@ -29,6 +29,12 @@ class IEventListingBlockSchema(form.Schema):
         required=False,
     )
 
+    exclude_past_events = schema.Bool(
+        title=_(u'label_exclude_past_events', default=u'Exclude past events'),
+        default=True,
+        required=False,
+    )
+
     form.widget(filter_by_path=MultiContentTreeFieldWidget)
     filter_by_path = schema.List(
         title=_(u'event_listing_config_filter_path_label',
