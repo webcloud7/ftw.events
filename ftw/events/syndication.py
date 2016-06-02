@@ -13,7 +13,7 @@ class EventFolderFeed(FolderFeed):
                 'query': '/'.join(self.context.getPhysicalPath()),
             },
             'sort_on': 'start',
-            'sort_order': 'descending',
+            'sort_order': 'ascending',
         }
         return catalog(**query)
 

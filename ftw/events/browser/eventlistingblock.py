@@ -3,12 +3,14 @@ from ftw.events import _
 from ftw.events import utils
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from plone.app.event.base import _prepare_range, filter_and_resort
 from plone.app.event.dx.behaviors import IEventLocation
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.i18n import translate
+import datetime
 
 
 class EventListingBlockView(BaseBlock):
@@ -44,8 +46,29 @@ class EventListingBlockView(BaseBlock):
         event page. It is called from the template.
         """
         catalog = getToolByName(self.context, 'portal_catalog')
+
+        start = None
+        end = None
+
+        if self.context.exclude_past_events:
+            # Start from midnight of today. This way the query will also include
+            # events which have ended just a few hours ago.
+            midnight_of_today = datetime.datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+            start = midnight_of_today
+
+        # Inspired by `plone.app.event.base.get_events`.
+        start, end = _prepare_range(self.context, start, end)
+
         brains = catalog.searchResults(
-            self.get_query()
+            self.get_query(start, end)
+        )
+
+        # Inspired by `plone.app.event.base.get_events`.
+        brains = filter_and_resort(
+            context=self.context, brains=brains, start=start,
+            end=end, sort='start', sort_reverse=False
         )
 
         if self.context.quantity:
@@ -55,12 +78,21 @@ class EventListingBlockView(BaseBlock):
 
         return items
 
-    def get_query(self):
+    def get_query(self, start=None, end=None):
         query = {
             'object_provides': IEventPage.__identifier__,
             'sort_on': 'start',
-            'sort_order': 'descending',
         }
+
+        # Inspired by `plone.app.event.base.get_events`.
+        if start:
+            # All events from start date ongoing:
+            # The minimum end date of events is the date from which we search.
+            query['end'] = {'query': start, 'range': 'min'}
+        if end:
+            # All events until end date:
+            # The maximum start date must be the date until we search.
+            query['start'] = {'query': end, 'range': 'max'}
 
         parent = aq_parent(aq_inner(self.context))
         if self.context.current_context:
