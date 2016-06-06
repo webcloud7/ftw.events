@@ -49,6 +49,7 @@ setup(
     install_requires=[
         'Plone',
         'collective.dexteritytextindexer',
+        'ftw.profilehook',
         'ftw.simplelayout [contenttypes]',
         'ftw.upgrade',
         'plone.api',
