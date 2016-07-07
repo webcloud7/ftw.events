@@ -5,4 +5,6 @@ Changelog
 1.0.0 (unreleased)
 ------------------
 
+- Don't list EventPage in the navigation [lkoepfel]
+
 - Initial implementation [jone]
