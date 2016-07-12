@@ -2,7 +2,18 @@ from Products.CMFCore.utils import getToolByName
 
 
 def default_profile_installed(portal):
+    set_calendar_types(portal)
     reindex_indexes(portal)
+
+
+def set_calendar_types(context):
+    """
+    Mark `ftw.events.EventPage` as an calendar type in portal_calendar.
+    """
+    portal_calendar = getToolByName(context, 'portal_calendar')
+    types = list(portal_calendar.calendar_types)
+    types.append('ftw.events.EventPage')
+    portal_calendar.calendar_types = tuple(types)
 
 
 def reindex_indexes(portal):
