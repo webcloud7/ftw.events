@@ -5,6 +5,8 @@ Changelog
 1.0.0 (unreleased)
 ------------------
 
+- Fixed bug where default value on eventlistingblock was not set. [lknoepfel]
+
 - Added ftw.calendar integration. [lknoepfel]
 
 - Don't list EventPage in the navigation [lkoepfel]

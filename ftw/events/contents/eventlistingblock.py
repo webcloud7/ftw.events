@@ -48,6 +48,7 @@ class IEventListingBlockSchema(form.Schema):
             ),
         ),
         required=False,
+        default=[],
         missing_value=[],
     )
 
@@ -78,6 +79,7 @@ class IEventListingBlockSchema(form.Schema):
                               u'be shown.'),
         value_type=schema.Choice(vocabulary='ftw.events.vocabulary.subjects'),
         required=False,
+        default=[],
         missing_value=[],
     )
 
