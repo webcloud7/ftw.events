@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0.0 (unreleased)
+1.0.0 (2016-08-02)
 ------------------
 
 - Fixed bug where default value on eventlistingblock was not set. [lknoepfel]
