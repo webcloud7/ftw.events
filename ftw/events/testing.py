@@ -4,6 +4,7 @@ from ftw.builder.testing import set_builder_session_factory
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PLONE_ZSERVER
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 from zope.configuration import xmlconfig
@@ -35,3 +36,15 @@ FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(EVENTS_FIXTURE,
            set_builder_session_factory(functional_session_factory)),
     name="ftw.events:functional")
+
+
+class EventsZserverLayer(PloneSandboxLayer):
+
+    defaultBases = (EVENTS_FIXTURE, PLONE_ZSERVER)
+
+
+EVENTS_ZSERVER_FIXTURE = EventsZserverLayer()
+FUNCTIONAL_ZSERVER_TESTING = FunctionalTesting(
+    bases=(EVENTS_ZSERVER_FIXTURE,
+           set_builder_session_factory(functional_session_factory)),
+    name="ftw.events:zserverfunctional")
