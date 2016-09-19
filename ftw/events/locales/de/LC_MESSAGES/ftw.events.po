@@ -29,7 +29,7 @@ msgstr "Veranstaltung"
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 msgid "EventListingBlock"
-msgstr "Veranstaltungen"
+msgstr "Auflistung von Veranstaltungen"
 
 #: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
@@ -182,4 +182,3 @@ msgstr "Veranstaltungen"
 #: ./ftw/events/contents/eventfolder.py:32
 msgid "title_default_eventlisting_block"
 msgstr "Veranstaltungen"
-
