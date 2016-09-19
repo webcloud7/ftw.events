@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-09-15 07:59+0000\n"
+"POT-Creation-Date: 2016-09-19 12:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 
 #: ./ftw/events/profiles/default/actions.xml
-msgid "Allows to exort the event to a calendar app"
+#: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
+msgid "Allows to export the event to a calendar app"
 msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventFolder.xml
@@ -31,6 +32,7 @@ msgid "EventListingBlock"
 msgstr ""
 
 #: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "ICS Export"
 msgstr ""
 
