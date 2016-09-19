@@ -5,6 +5,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Change German translation for event listing block. [jone]
+
 - Fix AttributeError in create_event_listing_block. [jone]
 
 
