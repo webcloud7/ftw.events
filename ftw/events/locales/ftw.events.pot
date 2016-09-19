@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-06-02 10:55+0000\n"
+"POT-Creation-Date: 2016-09-19 12:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
+
+#: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
+msgid "Allows to export the event to a calendar app"
+msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventFolder.xml
 msgid "Event Folder"
@@ -24,6 +29,11 @@ msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 msgid "EventListingBlock"
+msgstr ""
+
+#: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
+msgid "ICS Export"
 msgstr ""
 
 #: ./ftw/events/profiles.zcml:16
@@ -43,12 +53,12 @@ msgid "Where"
 msgstr ""
 
 #. Default: "This custom label will not be translated."
-#: ./ftw/events/contents/eventlistingblock.py:112
+#: ./ftw/events/contents/eventlistingblock.py:114
 msgid "description_more_items_link_label"
 msgstr ""
 
 #. Default: "This title will not be translated."
-#: ./ftw/events/contents/eventlistingblock.py:120
+#: ./ftw/events/contents/eventlistingblock.py:122
 msgid "description_more_items_view_title"
 msgstr ""
 
@@ -58,27 +68,27 @@ msgid "event_listing_block_show_title_label"
 msgstr ""
 
 #. Default: "You cannot filter by path and current context at the same time."
-#: ./ftw/events/contents/eventlistingblock.py:130
+#: ./ftw/events/contents/eventlistingblock.py:132
 msgid "event_listing_config_current_context_and_path_error"
 msgstr ""
 
 #. Default: "The maximum length of the item's description. Longer descriptions will be cropped. Enter 0 for no limitation."
-#: ./ftw/events/contents/eventlistingblock.py:93
+#: ./ftw/events/contents/eventlistingblock.py:95
 msgid "event_listing_config_description_length_description"
 msgstr ""
 
 #. Default: "Length of the description"
-#: ./ftw/events/contents/eventlistingblock.py:91
+#: ./ftw/events/contents/eventlistingblock.py:93
 msgid "event_listing_config_description_length_label"
 msgstr ""
 
 #. Default: "Only show items from the current context."
-#: ./ftw/events/contents/eventlistingblock.py:57
+#: ./ftw/events/contents/eventlistingblock.py:58
 msgid "event_listing_config_filter_current_context_description"
 msgstr ""
 
 #. Default: "Limit to current context"
-#: ./ftw/events/contents/eventlistingblock.py:55
+#: ./ftw/events/contents/eventlistingblock.py:56
 msgid "event_listing_config_filter_current_context_label"
 msgstr ""
 
@@ -93,32 +103,32 @@ msgid "event_listing_config_filter_path_label"
 msgstr ""
 
 #. Default: "The number of items to be shown at most. Enter 0 for no limitation."
-#: ./ftw/events/contents/eventlistingblock.py:65
+#: ./ftw/events/contents/eventlistingblock.py:66
 msgid "event_listing_config_quantity_description"
 msgstr ""
 
 #. Default: "Quantity"
-#: ./ftw/events/contents/eventlistingblock.py:64
+#: ./ftw/events/contents/eventlistingblock.py:65
 msgid "event_listing_config_quantity_label"
 msgstr ""
 
 #. Default: "Show the description of the item"
-#: ./ftw/events/contents/eventlistingblock.py:85
+#: ./ftw/events/contents/eventlistingblock.py:87
 msgid "event_listing_config_show_description_label"
 msgstr ""
 
 #. Default: "Show link to more items"
-#: ./ftw/events/contents/eventlistingblock.py:101
+#: ./ftw/events/contents/eventlistingblock.py:103
 msgid "event_listing_config_show_more_items_link"
 msgstr ""
 
 #. Default: "Only items with the selected subjects will be shown."
-#: ./ftw/events/contents/eventlistingblock.py:76
+#: ./ftw/events/contents/eventlistingblock.py:77
 msgid "event_listing_config_subjects_description"
 msgstr ""
 
 #. Default: "Filter by subject"
-#: ./ftw/events/contents/eventlistingblock.py:74
+#: ./ftw/events/contents/eventlistingblock.py:75
 msgid "event_listing_config_subjects_label"
 msgstr ""
 
@@ -128,7 +138,7 @@ msgid "event_listing_config_title_label"
 msgstr ""
 
 #. Default: "Render a link to a page which renders more items (only if there is at least one item)."
-#: ./ftw/events/contents/eventlistingblock.py:103
+#: ./ftw/events/contents/eventlistingblock.py:105
 msgid "event_listing_show_more_items_link_description"
 msgstr ""
 
@@ -148,12 +158,12 @@ msgid "label_exclude_past_events"
 msgstr ""
 
 #. Default: "Label for the \"more items\" link"
-#: ./ftw/events/contents/eventlistingblock.py:110
+#: ./ftw/events/contents/eventlistingblock.py:112
 msgid "label_more_items_link_label"
 msgstr ""
 
 #. Default: "Title of the view behind the \"more items\" link"
-#: ./ftw/events/contents/eventlistingblock.py:118
+#: ./ftw/events/contents/eventlistingblock.py:120
 msgid "label_more_items_view_title"
 msgstr ""
 
