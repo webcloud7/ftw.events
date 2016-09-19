@@ -1,10 +1,11 @@
-from zope.i18n import translate
 from ftw.events import _
 from ftw.events.interfaces import IEventFolder
 from plone import api
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Container
 from plone.directives import form
+from zope.component.hooks import getSite
+from zope.i18n import translate
 from zope.interface import alsoProvides
 from zope.interface import implements
 
@@ -30,7 +31,7 @@ def create_event_listing_block(event_folder, event=None):
         type='ftw.events.EventListingBlock',
         title=translate(
             _(u'title_default_eventlisting_block', u'Events'),
-            context=event.newParent.REQUEST
+            context=getSite().REQUEST,
         ),
         current_context=True,
         subjects=[],

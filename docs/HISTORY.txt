@@ -5,7 +5,7 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix AttributeError in create_event_listing_block. [jone]
 
 
 1.0.0 (2016-08-02)
