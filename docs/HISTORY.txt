@@ -15,6 +15,8 @@ Changelog
 
 - Fix AttributeError in create_event_listing_block. [jone]
 
+- Added action for ics export. [tschanzt]
+
 
 1.0.0 (2016-08-02)
 ------------------
