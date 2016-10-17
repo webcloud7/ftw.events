@@ -4,7 +4,6 @@ from ftw.events import utils
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
 from plone.app.event.base import _prepare_range, filter_and_resort
-from plone.app.event.dx.behaviors import IEventLocation
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
@@ -129,16 +128,12 @@ class EventListingBlockView(BaseBlock):
         )
         date_snippet = provider(obj)
 
-        location = ''
-        if IEventLocation(obj, None):
-            location = obj.location
-
         item = {
             'title': brain.Title,
             'description': description,
             'url': brain.getURL(),
             'brain': brain,
             'date_snippet': date_snippet,
-            'location': location,
+            'location': obj.location or '',
         }
         return item

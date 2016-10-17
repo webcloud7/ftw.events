@@ -43,7 +43,7 @@ class TestEventPage(FunctionalTestCase):
         self.grant('Manager')
         folder = create(Builder('event folder'))
         event = create(Builder('event page')
-                       .having(location='Infinite Loop 1')
+                       .having(location_title='Infinite Loop 1')
                        .within(folder))
 
         browser.login().open(event)

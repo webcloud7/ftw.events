@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-09-19 12:14+0000\n"
+"POT-Creation-Date: 2016-10-17 13:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,10 @@ msgstr ""
 msgid "Event Page"
 msgstr ""
 
+#: ./ftw/events/behaviors/configure.zcml:15
+msgid "Event location"
+msgstr ""
+
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 msgid "EventListingBlock"
 msgstr ""
@@ -34,6 +38,10 @@ msgstr ""
 #: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "ICS Export"
+msgstr ""
+
+#: ./ftw/events/behaviors/configure.zcml:15
+msgid "Location fields for event pages."
 msgstr ""
 
 #: ./ftw/events/profiles.zcml:16
@@ -157,6 +165,26 @@ msgstr ""
 msgid "label_exclude_past_events"
 msgstr ""
 
+#. Default: "Location: city"
+#: ./ftw/events/behaviors/location.py:40
+msgid "label_location_city"
+msgstr ""
+
+#. Default: "Location: street and number"
+#: ./ftw/events/behaviors/location.py:22
+msgid "label_location_street"
+msgstr ""
+
+#. Default: "Location: title"
+#: ./ftw/events/behaviors/location.py:13
+msgid "label_location_title"
+msgstr ""
+
+#. Default: "Location: ZIP code"
+#: ./ftw/events/behaviors/location.py:31
+msgid "label_location_zip"
+msgstr ""
+
 #. Default: "Label for the \"more items\" link"
 #: ./ftw/events/contents/eventlistingblock.py:112
 msgid "label_more_items_link_label"
@@ -168,18 +196,18 @@ msgid "label_more_items_view_title"
 msgstr ""
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:30
+#: ./ftw/events/browser/eventlistingblock.py:29
 #: ./ftw/events/browser/templates/eventlistingblock.pt:36
 msgid "more_items_link_label"
 msgstr ""
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:80
+#: ./ftw/events/browser/eventlisting.py:75
 msgid "more_items_view_fallback_title"
 msgstr ""
 
 #. Default: "Events"
-#: ./ftw/events/contents/eventfolder.py:32
+#: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
 msgstr ""
 

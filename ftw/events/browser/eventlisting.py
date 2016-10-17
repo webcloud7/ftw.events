@@ -1,7 +1,6 @@
 from ftw.events import _
 from ftw.events.interfaces import IEventListingView
 from plone import api
-from plone.app.event.dx.behaviors import IEventLocation
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
@@ -56,17 +55,13 @@ class EventListing(BrowserView):
         )
         date_snippet = provider(obj)
 
-        location = ''
-        if IEventLocation(obj, None):
-            location = obj.location
-
         item = {
             'title': brain.Title,
             'description': brain.Description,
             'url': brain.getURL(),
             'brain': brain,
             'date_snippet': date_snippet,
-            'location': location,
+            'location': obj.location or '',
         }
         return item
 

@@ -213,7 +213,7 @@ class TestEventListingBlock(FunctionalTestCase):
                                .titled(u'Event Folder 1')
                                .within(page1))
         create(Builder('event page').titled(u'Hello World 1').within(event_folder1))
-    
+
         page2 = create(Builder('sl content page').titled(u'Content Page 2'))
         event_folder2 = create(Builder('event folder')
                                .titled(u'Event Folder 2')
@@ -475,7 +475,7 @@ class TestEventListingBlock(FunctionalTestCase):
         event_folder = create(Builder('event folder'))
         event = create(Builder('event page')
                        .titled(u'My Event')
-                       .having(location='Infinite Loop 1')
+                       .having(location_title='Infinite Loop 1')
                        .within(event_folder))
         browser.login()
 
@@ -488,7 +488,7 @@ class TestEventListingBlock(FunctionalTestCase):
 
         # Empty the location and make sure it is no longer rendered.
         browser.visit(event, view='edit')
-        browser.fill({'Location': u''}).submit()
+        browser.fill({'Location: title': u''}).submit()
         browser.open(event_folder)
         self.assertEqual(
             [],

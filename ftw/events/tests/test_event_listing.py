@@ -81,7 +81,10 @@ class TestEventListing(FunctionalTestCase):
         event_folder = create(Builder('event folder'))
         event = create(Builder('event page')
                        .titled(u'My Event')
-                       .having(location='Infinite Loop 1')
+                       .having(location_title='Infinite Loop 1',
+                               location_street='Hamburgstrasse 3743x',
+                               location_zip=12345,
+                               location_city='Hamburg')
                        .within(event_folder))
         browser.login()
 
@@ -94,13 +97,16 @@ class TestEventListing(FunctionalTestCase):
         # Make sure the location is rendered.
         browser.visit(block, view='@@events')
         self.assertEqual(
-            ['Infinite Loop 1'],
+            ['Infinite Loop 1, Hamburgstrasse 3743x, 12345 Hamburg'],
             browser.css('.event-row .byline .location').text
         )
 
         # Empty the location and make sure it is no longer rendered.
         browser.visit(event, view='edit')
-        browser.fill({'Location': u''}).submit()
+        browser.fill({'Location: title': u'',
+                      'Location: street and number': u'',
+                      'Location: ZIP code': u'',
+                      'Location: city': u''}).submit()
         browser.visit(block, view='@@events')
         self.assertEqual(
             [],
