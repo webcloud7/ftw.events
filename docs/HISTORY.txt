@@ -5,6 +5,8 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
+- Implement mopage support. [jone]
+
 - Split up location into structured fields title, street, ZIP and city. [jone]
 
 
