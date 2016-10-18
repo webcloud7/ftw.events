@@ -13,6 +13,7 @@
     <include file="resources.zcml" zcml:condition="installed ftw.theming" />
     <include package=".viewlets" />
     <include package=".browser" />
+    <include package=".behaviors" />
 
     <utility
         component=".vocabularies.SubjectVocabulary"

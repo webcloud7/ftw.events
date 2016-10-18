@@ -5,7 +5,7 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Split up location into structured fields title, street, ZIP and city. [jone]
 
 
 1.1.0 (2016-09-26)
