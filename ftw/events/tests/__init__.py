@@ -1,6 +1,7 @@
 from ftw.events.testing import FUNCTIONAL_TESTING
 from ftw.events.testing import FUNCTIONAL_ZSERVER_TESTING
 from lxml import etree
+from ftw.referencewidget.tests.widgets import ReferenceBrowserWidget
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from StringIO import StringIO

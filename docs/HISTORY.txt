@@ -5,6 +5,11 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
+- Use ftw.referencewidget for saving path relations in eventlistingblocks.
+  Beacuse of a bug in MultiContentTreeFieldWidget, references were not saved
+  after a restart of the instance which lead to the blocks not working anymore.
+  [raphael-s]
+
 - Implement mopage support. [jone]
 
 - Split up location into structured fields title, street, ZIP and city. [jone]

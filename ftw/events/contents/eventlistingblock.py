@@ -1,11 +1,11 @@
 from ftw.events import _
 from ftw.events.interfaces import IEventListingBlock
+from ftw.referencewidget.widget import ReferenceWidgetFactory
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Item
 from plone.directives import form
 from plone.formwidget.autocomplete.widget import AutocompleteMultiFieldWidget
-from plone.formwidget.contenttree import MultiContentTreeFieldWidget
-from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.formwidget.contenttree import PathSourceBinder
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
 from Products.CMFPlone.interfaces.syndication import ISyndicatable
 from z3c.relationfield import RelationChoice
@@ -35,14 +35,14 @@ class IEventListingBlockSchema(form.Schema):
         required=False,
     )
 
-    form.widget(filter_by_path=MultiContentTreeFieldWidget)
+    form.widget(filter_by_path=ReferenceWidgetFactory)
     filter_by_path = schema.List(
         title=_(u'event_listing_config_filter_path_label',
                 default=u'Limit to path'),
         description=_(u'event_listing_config_filter_path_description',
                       default=u'Only show content from a specific path.'),
         value_type=RelationChoice(
-            source=ObjPathSourceBinder(
+            source=PathSourceBinder(
                 navigation_tree_query={'is_folderish': True},
                 is_folderish=True
             ),
