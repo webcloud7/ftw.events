@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-10-17 13:58+0000\n"
+"POT-Creation-Date: 2016-10-18 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,8 +44,20 @@ msgstr ""
 msgid "Location fields for event pages."
 msgstr ""
 
+#: ./ftw/events/behaviors/mopage.py:27
+msgid "Mopage"
+msgstr ""
+
+#: ./ftw/events/behaviors/configure.zcml:24
+msgid "Mopage trigger configuration"
+msgstr ""
+
 #: ./ftw/events/profiles.zcml:16
 msgid "Provides event pages based on simplelayout."
+msgstr ""
+
+#: ./ftw/events/behaviors/configure.zcml:24
+msgid "Provides fields for configuring a mopage trigger (ftw.publisher)."
 msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
@@ -58,6 +70,16 @@ msgstr ""
 
 #: ./ftw/events/viewlets/templates/event_details.pt:16
 msgid "Where"
+msgstr ""
+
+#. Default: "The mopage data endpoint URL points to the \"mopage.events.xml\" view somewhere on the public visible  Plone page. It must also contain the params \"partnerid\" and \"importid\". Example: https://mypage.ch/events/mopage.events.xml?partnerid=3&importid=6"
+#: ./ftw/events/behaviors/mopage.py:64
+msgid "description_mopage_data_endpoint_url"
+msgstr ""
+
+#. Default: "Contains the mopage URL to the trigger endpoint. This is only the base URL, it does not contain the endpoint URL from which the mopage server retrieves the events. Example: https://un:pw@xml.mopage.ch/infoservice/xml.php"
+#: ./ftw/events/behaviors/mopage.py:46
+msgid "description_mopage_trigger_url"
 msgstr ""
 
 #. Default: "This custom label will not be translated."
@@ -185,6 +207,16 @@ msgstr ""
 msgid "label_location_zip"
 msgstr ""
 
+#. Default: "Mopage data endpoint URL (Plone)"
+#: ./ftw/events/behaviors/mopage.py:62
+msgid "label_mopage_data_endpoint_url"
+msgstr ""
+
+#. Default: "Mopage trigger URL"
+#: ./ftw/events/behaviors/mopage.py:44
+msgid "label_mopage_trigger_url"
+msgstr ""
+
 #. Default: "Label for the \"more items\" link"
 #: ./ftw/events/contents/eventlistingblock.py:112
 msgid "label_more_items_link_label"
@@ -193,6 +225,11 @@ msgstr ""
 #. Default: "Title of the view behind the \"more items\" link"
 #: ./ftw/events/contents/eventlistingblock.py:120
 msgid "label_more_items_view_title"
+msgstr ""
+
+#. Default: "Mopage trigger enabled"
+#: ./ftw/events/behaviors/mopage.py:35
+msgid "label_trigger_enabled"
 msgstr ""
 
 #. Default: "More Items"

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-10-17 13:58+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2016-10-18 09:43+0000\n"
+"PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -44,9 +44,21 @@ msgstr "ICS Export"
 msgid "Location fields for event pages."
 msgstr "Felder für Veranstaltungsort."
 
+#: ./ftw/events/behaviors/mopage.py:27
+msgid "Mopage"
+msgstr "Mopage"
+
+#: ./ftw/events/behaviors/configure.zcml:24
+msgid "Mopage trigger configuration"
+msgstr "Mopage auslöser konfiguration"
+
 #: ./ftw/events/profiles.zcml:16
 msgid "Provides event pages based on simplelayout."
 msgstr "Veranstaltungens-Seiten auf Basis von Simplelayout."
+
+#: ./ftw/events/behaviors/configure.zcml:24
+msgid "Provides fields for configuring a mopage trigger (ftw.publisher)."
+msgstr "Felder für die Konfiguration des Mopage Auslösers."
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 msgid "The event listing block renders a configurable list of event pages."
@@ -59,6 +71,16 @@ msgstr "Wann"
 #: ./ftw/events/viewlets/templates/event_details.pt:16
 msgid "Where"
 msgstr "Wo"
+
+#. Default: "The mopage data endpoint URL points to the \"mopage.events.xml\" view somewhere on the public visible  Plone page. It must also contain the params \"partnerid\" and \"importid\". Example: https://mypage.ch/events/mopage.events.xml?partnerid=3&importid=6"
+#: ./ftw/events/behaviors/mopage.py:64
+msgid "description_mopage_data_endpoint_url"
+msgstr "Die Mopage Endpoint-URL zeigt auf die \"mopage.events.xml\"-Ansicht eines Events-Ordners auf Plone. Die URL muss die Parameter \"partnerid\" und \"importid\" enthalten. Die URL muss vollständig sein und auf die öffentliche Seite zeigen. Beispiel: https://mypage.ch/events/mopage.events.xml?partnerid=3&importid=6"
+
+#. Default: "Contains the mopage URL to the trigger endpoint. This is only the base URL, it does not contain the endpoint URL from which the mopage server retrieves the events. Example: https://un:pw@xml.mopage.ch/infoservice/xml.php"
+#: ./ftw/events/behaviors/mopage.py:46
+msgid "description_mopage_trigger_url"
+msgstr "Die Trigger-URL zeigt auf die Mopage-API. Sie enthält kein \"?url\"-Parameter, dieser wird automatisch angefügt. Beispiel: https://un:pw@xml.mopage.ch/infoservice/xml.php"
 
 #. Default: "This custom label will not be translated."
 #: ./ftw/events/contents/eventlistingblock.py:114
@@ -185,6 +207,16 @@ msgstr "Veranstaltungsort: Titel"
 msgid "label_location_zip"
 msgstr "Veranstaltungsort: PLZ"
 
+#. Default: "Mopage data endpoint URL (Plone)"
+#: ./ftw/events/behaviors/mopage.py:62
+msgid "label_mopage_data_endpoint_url"
+msgstr "Mopage: URL zu Daten-Endpoint"
+
+#. Default: "Mopage trigger URL"
+#: ./ftw/events/behaviors/mopage.py:44
+msgid "label_mopage_trigger_url"
+msgstr "Mopage Trigger URL"
+
 #. Default: "Label for the \"more items\" link"
 #: ./ftw/events/contents/eventlistingblock.py:112
 msgid "label_more_items_link_label"
@@ -194,6 +226,11 @@ msgstr "Label für den Link \"Weitere Einträge\""
 #: ./ftw/events/contents/eventlistingblock.py:120
 msgid "label_more_items_view_title"
 msgstr "Titel der View hinter dem Link \"Weitere Einträge\""
+
+#. Default: "Mopage trigger enabled"
+#: ./ftw/events/behaviors/mopage.py:35
+msgid "label_trigger_enabled"
+msgstr "Mopage Trigger aktiviert"
 
 #. Default: "More Items"
 #: ./ftw/events/browser/eventlistingblock.py:29
