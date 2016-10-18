@@ -63,6 +63,7 @@ setup(
         'collective.dexteritytextindexer',
         'ftw.autofeature',
         'ftw.profilehook',
+        'ftw.referencewidget',
         'ftw.simplelayout [contenttypes]',
         'ftw.upgrade',
         'plone.api',

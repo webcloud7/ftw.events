@@ -3,6 +3,7 @@ from ftw.events import _
 from ftw.events import utils
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from plone import api
 from plone.app.event.base import _prepare_range, filter_and_resort
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
@@ -98,8 +99,11 @@ class EventListingBlockView(BaseBlock):
             # `parent` is the object containing this block.
             path = '/'.join(parent.getPhysicalPath())
             query['path'] = {'query': path}
+
         elif self.context.filter_by_path:
-            paths = ['/'.join(item.getPhysicalPath()) for item in self.context.filter_by_path]
+            portal_path = '/'.join(api.portal.get().getPhysicalPath())
+            paths = ['/'.join([portal_path, path])
+                     for path in self.context.filter_by_path]
             query['path'] = {'query': paths}
 
         if self.context.subjects:
