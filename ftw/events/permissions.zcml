@@ -17,4 +17,9 @@
         title="ftw.events: Add EventListingBlock"
         />
 
+    <permission
+        id="ftw.events.ConfigureMopageTrigger"
+        title="ftw.events: Configure mopage trigger"
+        />
+
 </configure>

@@ -10,13 +10,25 @@ tests_require = [
     'ftw.testing',
     'plone.app.testing',
     'plone.testing',
+    'ftw.events[mopage_publisher_receiver]',
 ]
 
 extras_require = {
     'tests': tests_require,
     'development': [
         'plonetheme.blueberry',
-    ]
+        'ftw.events[mopage_publisher_receiver]',
+    ],
+
+    # The mopage_publisher_receiver should be installed on a ftw.publisher
+    # receiver installation in order to enable the mopage trigger function.
+    # It should *NOT* be installed on ftw.pubsliher.sender site, since
+    # the trigger will then be triggered too early.
+    'mopage_publisher_receiver': [
+        'collective.taskqueue',
+        'ftw.publisher.receiver',
+        'requests',
+    ],
 }
 
 setup(
@@ -49,6 +61,7 @@ setup(
     install_requires=[
         'Plone',
         'collective.dexteritytextindexer',
+        'ftw.autofeature',
         'ftw.profilehook',
         'ftw.simplelayout [contenttypes]',
         'ftw.upgrade',

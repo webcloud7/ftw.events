@@ -20,4 +20,9 @@
         permissions="ftw.events: Add EventListingBlock"
         />
 
+    <lawgiver:map_permissions
+        action_group="manage content settings"
+        permissions="ftw.events: Configure mopage trigger"
+        />
+
 </configure>
