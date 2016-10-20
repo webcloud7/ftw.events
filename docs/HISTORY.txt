@@ -5,7 +5,7 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix chameleon support for mopage export. [jone]
 
 
 1.2.0 (2016-10-18)
