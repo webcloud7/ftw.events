@@ -5,12 +5,13 @@ version = '1.2.1.dev0'
 
 tests_require = [
     'ftw.builder',
+    'ftw.chameleon',
+    'ftw.events[mopage_publisher_receiver]',
     'ftw.lawgiver',
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
     'plone.testing',
-    'ftw.events[mopage_publisher_receiver]',
 ]
 
 extras_require = {
