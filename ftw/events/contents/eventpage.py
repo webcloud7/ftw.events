@@ -34,7 +34,7 @@ class EventPage(Container):
             return ', '.join(filter(None, (
                 storage.location_title,
                 storage.location_street,
-                ' '.join((str(storage.location_zip or ''),
+                ' '.join((storage.location_zip or '',
                           storage.location_city or '')).strip(),
             ))) or ''
 
