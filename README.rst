@@ -34,14 +34,14 @@ Add as many *event pages* to the event folder as you like.
 
 
 Mopage Support
---------------
+==============
 
 ``ftw.events`` provides integration for the mopage mobile app
 (http://web.anthrazit.org/).
 
 
 Data Endpoint
-~~~~~~~~~~~~~
+-------------
 
 The view ``mopage.events.xml`` returns an XML-feed with the latest events within
 the context it is called. It can becalled on any type of object.
@@ -57,7 +57,7 @@ the context it is called. It can becalled on any type of object.
 
 
 Trigger behavior
-~~~~~~~~~~~~~~~~
+----------------
 
 The behavior ``ftw.events.behaviors.mopage.IPublisherMopageTrigger`` can be added
 on a event folder in order to configure automatic notification to the mopage API
