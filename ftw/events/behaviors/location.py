@@ -2,9 +2,7 @@ from ftw.events import _
 from plone.directives.form import IFormFieldProvider
 from plone.directives.form import Schema
 from zope.interface import alsoProvides
-from zope.schema import Int
 from zope.schema import TextLine
-
 
 
 class ILocationFields(Schema):
@@ -27,7 +25,7 @@ class ILocationFields(Schema):
         default=None,
     )
 
-    location_zip = Int(
+    location_zip = TextLine(
         title=_(
             u'label_location_zip',
             default=u'Location: ZIP code'

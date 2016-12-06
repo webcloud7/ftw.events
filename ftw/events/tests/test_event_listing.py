@@ -83,7 +83,7 @@ class TestEventListing(FunctionalTestCase):
                        .titled(u'My Event')
                        .having(location_title='Infinite Loop 1',
                                location_street='Hamburgstrasse 3743x',
-                               location_zip=12345,
+                               location_zip='12345',
                                location_city='Hamburg')
                        .within(event_folder))
         browser.login()

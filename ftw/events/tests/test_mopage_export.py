@@ -42,7 +42,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                         subjects=('Kaffee', 'Wanderausstellung'),
                         location_title='Kunstmuseum Bern',
                         location_street='Hodlerstrasse 8',
-                        location_zip=3011,
+                        location_zip='3011',
                         location_city='Bern'))
 
             lorem = RichTextValue(self.asset('lorem1.html'))
