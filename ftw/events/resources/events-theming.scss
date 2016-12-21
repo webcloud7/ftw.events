@@ -57,11 +57,3 @@
     @extend .fa-icon;
     @extend .fa-calendar;
 }
-#document-action-ics_export a {
-    font-size: 0px;
-}
-
-#document-action-ics_export > a:before {
-    padding-left: 0.5em;
-    font-size: 1.2rem;
-}
