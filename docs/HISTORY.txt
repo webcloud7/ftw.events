@@ -5,6 +5,10 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
+- Convert "filter_by_path" references of the event listing blocks.
+  This should have been done in 1.2.0.
+  [mbaechtold]
+
 - Show text of "ICS Export" action again.
   [Kevin Bieri]
 
