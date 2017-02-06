@@ -5,7 +5,8 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make Event and EventFolder linkable in TinyMCE
+  [raphael-s]
 
 
 1.4.0 (2017-01-19)
