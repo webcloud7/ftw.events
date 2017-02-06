@@ -10,8 +10,11 @@
 
     <tal:events tal:define="items view/get_items;">
 
-        <p tal:condition="not: items"
-           i18n:translate="eventlisting_no_content_text">No content available.</p>
+        <tal:no-items tal:condition="not: items">
+           <p i18n:translate="eventlisting_no_content_text">No content available.</p>
+           <p i18n:translate="eventlisting_hide_empty_block_text"
+              tal:condition="block_info/hide_empty_block">The block is only visible to editors so it can still be edited.</p>
+        </tal:no-items>
 
         <ul class="event-row">
             <li tal:repeat="item items">

@@ -3,6 +3,7 @@ from ftw.events import _
 from ftw.events import utils
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
+from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
 from plone import api
 from plone.app.event.base import _prepare_range, filter_and_resort
 from Products.CMFCore.utils import getToolByName
@@ -36,6 +37,7 @@ class EventListingBlockView(BaseBlock):
             'show_title': self.context.show_title,
             'more_items_link_url': more_items_link_url,
             'more_items_link_label': more_items_link_label,
+            'hide_empty_block':  self.context.hide_empty_block,
         }
 
         return info

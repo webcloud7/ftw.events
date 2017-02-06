@@ -5,6 +5,9 @@ Changelog
 1.5.1 (unreleased)
 ------------------
 
+- Add option allowing to hide the event listing block if there are no
+  events to be shown. [mbaechtold]
+
 - Show inactive events if the user has the permission to add
   events. [mbaechtold]
 
