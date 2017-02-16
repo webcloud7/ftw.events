@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-10-18 09:43+0000\n"
+"POT-Creation-Date: 2017-02-16 14:53+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
 
-#: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "Allows to export the event to a calendar app"
 msgstr "Exportiert die Veranstaltung für eine externe Kalenderapplikation"
@@ -35,7 +34,6 @@ msgstr "Veranstaltungsort"
 msgid "EventListingBlock"
 msgstr "Auflistung von Veranstaltungen"
 
-#: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "ICS Export"
 msgstr "ICS Export"
@@ -64,11 +62,11 @@ msgstr "Felder für die Konfiguration des Mopage Auslösers."
 msgid "The event listing block renders a configurable list of event pages."
 msgstr "Konfigurierbarer Block, welcher Veranstaltungen auflistet."
 
-#: ./ftw/events/viewlets/templates/event_details.pt:8
+#: ./ftw/events/viewlets/templates/event_details.pt:14
 msgid "When"
 msgstr "Wann"
 
-#: ./ftw/events/viewlets/templates/event_details.pt:16
+#: ./ftw/events/viewlets/templates/event_details.pt:22
 msgid "Where"
 msgstr "Wo"
 
@@ -187,23 +185,28 @@ msgstr "ftw.events"
 msgid "label_exclude_past_events"
 msgstr "Vergangene Veranstaltungen nicht anzeigen"
 
+#. Default: "ICS Export"
+#: ./ftw/events/viewlets/templates/event_details.pt:7
+msgid "label_ics_export"
+msgstr "ICS Export"
+
 #. Default: "Location: city"
-#: ./ftw/events/behaviors/location.py:40
+#: ./ftw/events/behaviors/location.py:38
 msgid "label_location_city"
 msgstr "Veranstaltungsort: Ort"
 
 #. Default: "Location: street and number"
-#: ./ftw/events/behaviors/location.py:22
+#: ./ftw/events/behaviors/location.py:20
 msgid "label_location_street"
 msgstr "Veranstaltungsort: Strasse und Nummer"
 
 #. Default: "Location: title"
-#: ./ftw/events/behaviors/location.py:13
+#: ./ftw/events/behaviors/location.py:11
 msgid "label_location_title"
 msgstr "Veranstaltungsort: Titel"
 
 #. Default: "Location: ZIP code"
-#: ./ftw/events/behaviors/location.py:31
+#: ./ftw/events/behaviors/location.py:29
 msgid "label_location_zip"
 msgstr "Veranstaltungsort: PLZ"
 
@@ -233,7 +236,7 @@ msgid "label_trigger_enabled"
 msgstr "Mopage Trigger aktiviert"
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:29
+#: ./ftw/events/browser/eventlistingblock.py:30
 #: ./ftw/events/browser/templates/eventlistingblock.pt:36
 msgid "more_items_link_label"
 msgstr "Weitere Einträge"
@@ -247,3 +250,8 @@ msgstr "Veranstaltungen"
 #: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
 msgstr "Veranstaltungen"
+
+#: ./ftw/events/viewlets/templates/event_details.pt:7
+msgid "title_ics_export"
+msgstr "Diese Veranstaltung als Kalender exportieren"
+
