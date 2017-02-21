@@ -2,6 +2,7 @@ import datetime
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.tests import FunctionalTestCase
+from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
@@ -531,3 +532,33 @@ class TestEventListingBlock(FunctionalTestCase):
                 ['Event which ended a few hours ago', 'Today event', 'Future event'],
                 self._get_event_titles_from_block(browser)
             )
+
+    @browsing
+    def test_contributor_can_see_inactive_events_in_event_listing_block(self, browser):
+        enable_behavior('plone.app.dexterity.behaviors.metadata.IPublication', 'ftw.events.EventPage')
+
+        page = create(Builder('sl content page').titled(u'Content Page'))
+        create(Builder('event listing block')
+               .within(page)
+               .titled(u'Not relevant for this test'))
+
+        event_folder = create(Builder('event folder').within(page))
+        create(Builder('event page')
+               .titled(u'Future Event')
+               .within(event_folder)
+               .having(effective=datetime.datetime.now() + datetime.timedelta(days=10)))
+
+        # Make sure a contributor can see inactive news.
+        contributor = create(Builder('user').named('A', 'Contributor').with_roles('Contributor'))
+        browser.login(contributor).visit(page)
+        self.assertEqual(
+            ['Future Event'],
+            self._get_event_titles_from_block(browser),
+        )
+
+        # Make sure an anonymous user does not see the inactive news.
+        browser.logout().visit(page)
+        self.assertEquals(
+            [],
+            self._get_event_titles_from_block(browser),
+        )

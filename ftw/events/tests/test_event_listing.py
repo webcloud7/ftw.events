@@ -1,6 +1,9 @@
+from datetime import datetime
+from datetime import timedelta
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.tests import FunctionalTestCase
+from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
 from plone import api
 
@@ -111,4 +114,35 @@ class TestEventListing(FunctionalTestCase):
         self.assertEqual(
             [],
             browser.css('.event-row .byline .location')
+        )
+
+    @browsing
+    def test_contributor_can_see_inactive_events_in_event_listing_view(self, browser):
+        enable_behavior('plone.app.dexterity.behaviors.metadata.IPublication', 'ftw.events.EventPage')
+
+        event_folder = create(Builder('event folder'))
+        create(Builder('event page')
+               .titled(u'Future Event')
+               .within(event_folder)
+               .having(effective=datetime.now() + timedelta(days=10)))
+
+        # Get the event folder's event listing block which has been created automatically.
+        block = api.content.find(
+            portal_type='ftw.events.EventListingBlock',
+            within=event_folder
+        )[0].getObject()
+
+        # Make sure an editor can see inactive events.
+        contributor = create(Builder('user').named('A', 'Contributor').with_roles('Contributor'))
+        browser.login(contributor).visit(block, view='@@events')
+        self.assertEqual(
+            ['Future Event'],
+            browser.css('.event-row .title').text
+        )
+
+        # Make sure an anonymous user does not see the inactive news.
+        browser.logout().visit(block, view='@@events')
+        self.assertEqual(
+            [],
+            browser.css('.event-row .title').text
         )

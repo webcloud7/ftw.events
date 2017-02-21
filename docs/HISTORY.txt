@@ -5,6 +5,9 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Show inactive events if the user has the permission to add
+  events. [mbaechtold]
+
 - Move the global ics export documentaction.
   [Kevin Bieri]
 
