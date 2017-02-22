@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-10-18 09:43+0000\n"
+"POT-Creation-Date: 2017-02-16 14:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
 
-#: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "Allows to export the event to a calendar app"
 msgstr ""
@@ -35,7 +34,6 @@ msgstr ""
 msgid "EventListingBlock"
 msgstr ""
 
-#: ./ftw/events/profiles/default/actions.xml
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "ICS Export"
 msgstr ""
@@ -64,11 +62,11 @@ msgstr ""
 msgid "The event listing block renders a configurable list of event pages."
 msgstr ""
 
-#: ./ftw/events/viewlets/templates/event_details.pt:8
+#: ./ftw/events/viewlets/templates/event_details.pt:14
 msgid "When"
 msgstr ""
 
-#: ./ftw/events/viewlets/templates/event_details.pt:16
+#: ./ftw/events/viewlets/templates/event_details.pt:22
 msgid "Where"
 msgstr ""
 
@@ -187,23 +185,28 @@ msgstr ""
 msgid "label_exclude_past_events"
 msgstr ""
 
+#. Default: "ICS Export"
+#: ./ftw/events/viewlets/templates/event_details.pt:7
+msgid "label_ics_export"
+msgstr ""
+
 #. Default: "Location: city"
-#: ./ftw/events/behaviors/location.py:40
+#: ./ftw/events/behaviors/location.py:38
 msgid "label_location_city"
 msgstr ""
 
 #. Default: "Location: street and number"
-#: ./ftw/events/behaviors/location.py:22
+#: ./ftw/events/behaviors/location.py:20
 msgid "label_location_street"
 msgstr ""
 
 #. Default: "Location: title"
-#: ./ftw/events/behaviors/location.py:13
+#: ./ftw/events/behaviors/location.py:11
 msgid "label_location_title"
 msgstr ""
 
 #. Default: "Location: ZIP code"
-#: ./ftw/events/behaviors/location.py:31
+#: ./ftw/events/behaviors/location.py:29
 msgid "label_location_zip"
 msgstr ""
 
@@ -233,7 +236,7 @@ msgid "label_trigger_enabled"
 msgstr ""
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:29
+#: ./ftw/events/browser/eventlistingblock.py:30
 #: ./ftw/events/browser/templates/eventlistingblock.pt:36
 msgid "more_items_link_label"
 msgstr ""
@@ -246,5 +249,9 @@ msgstr ""
 #. Default: "Events"
 #: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
+msgstr ""
+
+#: ./ftw/events/viewlets/templates/event_details.pt:7
+msgid "title_ics_export"
 msgstr ""
 

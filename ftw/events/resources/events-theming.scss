@@ -53,7 +53,10 @@
   }
 }
 
-#document-action-ics_export a{
+.ics-export {
     @extend .fa-icon;
     @extend .fa-calendar;
+    margin-bottom: $margin-vertical;
+    display: block;
+    float: right;
 }

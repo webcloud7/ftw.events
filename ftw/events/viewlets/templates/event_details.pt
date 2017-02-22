@@ -4,6 +4,12 @@
       i18n:domain="ftw.events">
 
     <div class="event-details">
+        <a tal:attributes="href string:${here/absolute_url}/ics_view"
+           i18n:translate="label_ics_export"
+           i18n:attributes="title title_ics_export"
+           class="ics-export">
+           ICS Export
+        </a>
         <div class="when">
             <b i18n:translate="">When</b>
             <ul>

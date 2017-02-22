@@ -5,6 +5,9 @@ Changelog
 1.4.1 (unreleased)
 ------------------
 
+- Move the global ics export documentaction.
+  [Kevin Bieri]
+
 - Make Event and EventFolder linkable in TinyMCE
   [raphael-s]
 
