@@ -5,14 +5,12 @@ Changelog
 1.5.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Show inactive events if the user has the permission to add
+  events. [mbaechtold]
 
 
 1.5.0 (2017-02-28)
 ------------------
-
-- Show inactive events if the user has the permission to add
-  events. [mbaechtold]
 
 - Move the global ics export documentaction.
   [Kevin Bieri]
