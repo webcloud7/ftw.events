@@ -109,6 +109,15 @@ class EventListingBlockView(BaseBlock):
         if self.context.subjects:
             query['Subject'] = self.context.subjects
 
+        # Show inactive events if the current user is allowed to add events on the
+        # parent of the event listing block. We must only render the inactive events
+        # if the block renders events from its parent (in order not to allow the user
+        # to view news items he is not allowed to see).
+        if self.context.current_context \
+                and not self.context.filter_by_path \
+                and api.user.has_permission('ftw.events: Add Event Page', obj=parent):
+            query['show_inactive'] = True
+
         return query
 
     def get_event_page_dict(self, brain):
