@@ -60,3 +60,14 @@
     display: block;
     float: right;
 }
+
+// Hide empty event listing block for anonymous users.
+.portlet.SimplelayoutPortlet .ftw-events-eventlistingblock.hidden {
+  display: none;
+}
+
+// Add special border to empty listing block for authenticated users.
+body.userrole-authenticated .portlet.SimplelayoutPortlet .ftw-events-eventlistingblock.hidden {
+  @include boxshadow(0 0 20px 0 $color-warning);
+  display: block;
+}

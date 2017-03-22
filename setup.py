@@ -65,7 +65,7 @@ setup(
         'ftw.autofeature',
         'ftw.profilehook',
         'ftw.referencewidget',
-        'ftw.simplelayout [contenttypes]',
+        'ftw.simplelayout [contenttypes] >= 1.14.0',
         'ftw.upgrade',
         'plone.api',
         'plone.app.dexterity',

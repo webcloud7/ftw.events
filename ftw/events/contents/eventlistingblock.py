@@ -1,11 +1,15 @@
+from Acquisition import aq_inner, aq_parent
 from ftw.events import _
 from ftw.events.interfaces import IEventListingBlock
 from ftw.referencewidget.widget import ReferenceWidgetFactory
+from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
+from plone import api
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Item
 from plone.directives import form
 from plone.formwidget.autocomplete.widget import AutocompleteMultiFieldWidget
 from plone.formwidget.contenttree import PathSourceBinder
+from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
 from Products.CMFPlone.interfaces.syndication import ISyndicatable
 from z3c.relationfield import RelationChoice
@@ -124,6 +128,15 @@ class IEventListingBlockSchema(form.Schema):
         required=False,
     )
 
+    hide_empty_block = schema.Bool(
+        title=_(u'label_hide_empty_block',
+                default=u'Hide empty block'),
+        description=_(u'description_hide_empty_block',
+                      default=u'Hide the block if there are not events to be shown.'),
+        default=False,
+        required=False,
+    )
+
     @invariant
     def is_either_path_or_context(obj):
         """Checks if not both path and current context are defined.
@@ -139,7 +152,47 @@ alsoProvides(IEventListingBlockSchema, IFormFieldProvider)
 
 
 class EventListingBlock(Item):
-    implements(IEventListingBlock, ISyndicatable)
+    implements(IEventListingBlock, ISyndicatable, IHiddenBlock)
+
+    @property
+    def is_hidden(self):
+        if not self.hide_empty_block:
+            return False
+
+        # For unknown reason, `self` is not acquisition wrapped. We
+        # need to get an acquisition wrapped event listing block we
+        # work with.
+        obj = api.content.get(UID=IUUID(self))
+
+        if self.user_can_edit_block(obj):
+            # Editors must always see the block or they cannot edit it anymore.
+            return True
+
+        items = api.content.get_view(
+            name='block_view', context=obj, request=obj.REQUEST
+        ).get_items()
+        return self.hide_empty_block and not items
+
+    @is_hidden.setter
+    def is_hidden(self, value):
+        """
+        This is a dummy setter method in case somebody activates the IHiddenBlock
+        behavior from ftw.simplelayout on the event listing block which makes no
+        sense. It should not be a use case to allow hiding event listing blocks
+        because the block does not really contain the objects, it only displays
+        them from a different location. So if an event listing block ist not desired
+        it should be removed from the content page instead.
+        """
+        raise Exception(
+            'You are not allowed to add the IHiddenBlock behavior on the event listing block.'
+        )
+
+    def user_can_edit_block(self, obj):
+        container = aq_parent(aq_inner(obj))
+        return api.user.has_permission(
+            'Modify portal content',
+            obj=container,
+        )
 
 
 def enable_syndication(event_listing_block, event=None):
