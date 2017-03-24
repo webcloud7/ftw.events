@@ -64,7 +64,7 @@ class EventListingBlockView(BaseBlock):
         start, end = _prepare_range(self.context, start, end)
 
         brains = catalog.searchResults(
-            self.get_query(start, end)
+            **self.get_query(start, end)
         )
 
         # Inspired by `plone.app.event.base.get_events`.
