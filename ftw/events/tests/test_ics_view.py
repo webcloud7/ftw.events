@@ -3,9 +3,6 @@ from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.tests import RealFuncitionalTestCase
 from ftw.testbrowser import browsing
-from plone.app.testing import TEST_USER_NAME
-from plone.app.testing import TEST_USER_PASSWORD
-import requests
 from ftw.testbrowser.core import LIB_REQUESTS
 
 
@@ -28,8 +25,7 @@ class TestIsICSView(RealFuncitionalTestCase):
         browser.request_library = LIB_REQUESTS
         browser.login().visit(self.event, view="ics_view")
 
-        response = browser.response
-        body = response.content
+        body = browser.contents
         self.assertIn('SUMMARY:A Event', body)
         self.assertIn('BEGIN:VCALENDAR', body)
         self.assertIn('BEGIN:VEVENT', body)

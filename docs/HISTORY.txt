@@ -5,6 +5,9 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
+- Add compatibilty with lates ftw.testbrowser 1.21.0.
+  [mathias.leimgruber]
+
 - Respect `exclude_past_events` setting of block, also on the event listing view.
   [mathias.leimgruber]
 

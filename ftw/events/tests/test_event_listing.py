@@ -68,7 +68,7 @@ class TestEventListing(FunctionalTestCase):
         # Configure a custom title.
         browser.login().visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Title of the view behind the "more items" link': u'All my events',
         })
