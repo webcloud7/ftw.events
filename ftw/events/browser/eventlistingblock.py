@@ -49,20 +49,7 @@ class EventListingBlockView(BaseBlock):
         """
         catalog = getToolByName(self.context, 'portal_catalog')
 
-        start = None
-        end = None
-
-        if self.context.exclude_past_events:
-            # Start from midnight of today. This way the query will also include
-            # events which have ended just a few hours ago.
-            midnight_of_today = datetime.datetime.now().replace(
-                hour=0, minute=0, second=0, microsecond=0
-            )
-            start = midnight_of_today
-
-        # Inspired by `plone.app.event.base.get_events`.
-        start, end = _prepare_range(self.context, start, end)
-
+        start, end = self.get_dates_for_query()
         brains = catalog.searchResults(
             **self.get_query(start, end)
         )
@@ -79,6 +66,20 @@ class EventListingBlockView(BaseBlock):
         items = [self.get_event_page_dict(brain) for brain in brains]
 
         return items
+
+    def get_dates_for_query(self):
+        start = None
+        if self.context.exclude_past_events:
+            # Start from midnight of today. This way the query will also
+            # include events which have ended just a few hours ago.
+            midnight_of_today = datetime.datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+            start = midnight_of_today
+
+        # Inspired by `plone.app.event.base.get_events`.
+        start, end = _prepare_range(self.context, start, None)
+        return start, end
 
     def get_query(self, start=None, end=None):
         query = {

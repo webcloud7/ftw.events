@@ -5,6 +5,7 @@ from ftw.builder import create
 from ftw.events.tests import FunctionalTestCase
 from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
+from ftw.testing import freeze
 from plone import api
 
 
@@ -27,7 +28,8 @@ class TestEventListing(FunctionalTestCase):
 
         browser.login()
 
-        # Get the event folder's event listing block which has been created automatically.
+        # Get the event folder's event listing block which has been created
+        # automatically.
         block = api.content.find(
             portal_type='ftw.events.EventListingBlock',
             within=event_folder
@@ -66,7 +68,7 @@ class TestEventListing(FunctionalTestCase):
         # Configure a custom title.
         browser.login().visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Title of the view behind the "more items" link': u'All my events',
         })
@@ -91,7 +93,8 @@ class TestEventListing(FunctionalTestCase):
                        .within(event_folder))
         browser.login()
 
-        # Get the event folder's event listing block which has been created automatically.
+        # Get the event folder's event listing block which has been created
+        # automatically.
         block = api.content.find(
             portal_type='ftw.events.EventListingBlock',
             within=event_folder
@@ -126,7 +129,8 @@ class TestEventListing(FunctionalTestCase):
                .within(event_folder)
                .having(effective=datetime.now() + timedelta(days=10)))
 
-        # Get the event folder's event listing block which has been created automatically.
+        # Get the event folder's event listing block which has been created
+        # automatically.
         block = api.content.find(
             portal_type='ftw.events.EventListingBlock',
             within=event_folder
@@ -146,3 +150,46 @@ class TestEventListing(FunctionalTestCase):
             [],
             browser.css('.event-row .title').text
         )
+
+    @browsing
+    def test_listing_does_not_render_past_events(self, browser):
+        page = create(Builder('sl content page'))
+        event_folder = create(Builder('event folder')
+                              .titled(u'Event Folder')
+                              .within(page))
+        create(Builder('event listing block')
+               .within(page)
+               .titled(u'Event listing block')
+               .having(show_more_items_link=True,
+                       exclude_past_events=True))
+
+        with freeze(datetime(2010, 7, 1, 15, 0, 0)):
+            create(Builder('event page')
+                   .titled(u'Past event')
+                   .starting(datetime(2010, 1, 1))
+                   .ending(datetime(2010, 1, 1))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Today event')
+                   .starting(datetime(2010, 7, 1, 12, 0, 0))
+                   .ending(datetime(2010, 7, 1, 18, 0, 0))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Future event')
+                   .starting(datetime(2010, 7, 2))
+                   .ending(datetime(2010, 7, 2))
+                   .within(event_folder))
+            create(Builder('event page')
+                   .titled(u'Event which ended a few hours ago')
+                   .starting(datetime(2010, 7, 1, 9, 0, 0))
+                   .ending(datetime(2010, 7, 1, 14, 0, 0))
+                   .within(event_folder))
+
+            browser.login().visit(page)
+            browser.css('a.event-listingblock-moreitemslink').first.click()
+            self.assertEqual(
+                ['Event which ended a few hours ago',
+                 'Today event',
+                 'Future event'],
+                browser.css('.event-item h3.title').text
+            )

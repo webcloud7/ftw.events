@@ -73,7 +73,7 @@ class TestEventListingBlock(FunctionalTestCase):
         # Tell the block to no longer display the title.
         browser.login().visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Show title': False,
         })
@@ -150,7 +150,7 @@ class TestEventListingBlock(FunctionalTestCase):
         # Edit the block and set a path (not possible with builder).
         browser.visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Limit to path': event_folder2,
         })
@@ -184,7 +184,7 @@ class TestEventListingBlock(FunctionalTestCase):
         # Edit the existing block.
         browser.visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Title': u'Not relevant for this test',
             'Limit to path': '/'.join(event_folder.getPhysicalPath()),
@@ -192,7 +192,7 @@ class TestEventListingBlock(FunctionalTestCase):
         })
         browser.find_button_by_label('Save').click()
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
 
         # Make sure that the form refuses to save.
         self.assertEqual(
@@ -237,7 +237,7 @@ class TestEventListingBlock(FunctionalTestCase):
         # Tell the block to no longer filter by the current context.
         browser.login().visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Limit to current context': False,
         })
@@ -415,7 +415,7 @@ class TestEventListingBlock(FunctionalTestCase):
         # Tell the block to no longer render the link
         browser.login().visit(block, view='edit.json')
         response = browser.json
-        browser.open_html(response['content'])
+        browser.parse(response['content'])
         browser.fill({
             'Show link to more items': False,
         })

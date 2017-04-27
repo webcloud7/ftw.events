@@ -32,7 +32,8 @@ class EventListing(BrowserView):
             context=self.context,
             request=self.request,
         )
-        block_query = block_view.get_query()
+        start, end = block_view.get_dates_for_query()
+        block_query = block_view.get_query(start, end)
         return block_query
 
     def get_items(self):
