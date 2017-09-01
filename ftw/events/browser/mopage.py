@@ -1,8 +1,8 @@
 from DateTime import DateTime
 from ftw.events.behaviors.location import ILocationFields
 from ftw.events.behaviors.mopage import IMopageModificationDate
+from ftw.keywordwidget.behavior import IKeywordCategorization
 from htmlentitydefs import name2codepoint as n2cp
-from plone.app.dexterity.behaviors.metadata import ICategorization
 from plone.event.interfaces import IRecurrenceSupport
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
@@ -141,7 +141,7 @@ class MopageEvents(BrowserView):
         if textlead:
             textlead = u'<![CDATA[{}]]>'.format(textlead)
 
-        subjects = getattr(ICategorization(obj, None), 'subjects', ())
+        subjects = getattr(IKeywordCategorization(obj, None), 'subjects', ())
         modified_date = IMopageModificationDate(obj).get_date()
         occurences = IRecurrenceSupport(obj).occurrences()
 

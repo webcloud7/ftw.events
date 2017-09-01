@@ -63,6 +63,7 @@ setup(
         'Plone',
         'collective.dexteritytextindexer',
         'ftw.autofeature',
+        'ftw.keywordwidget',
         'ftw.profilehook',
         'ftw.referencewidget',
         'ftw.simplelayout [contenttypes] >= 1.14.0',
