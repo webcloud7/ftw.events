@@ -9,7 +9,7 @@ tests_require = [
     'ftw.events[mopage_publisher_receiver]',
     'ftw.lawgiver',
     'ftw.testbrowser',
-    'ftw.testing',
+    'ftw.testing <= 1.15.0',
     'plone.app.testing',
     'plone.testing',
 ]
@@ -63,6 +63,7 @@ setup(
         'Plone',
         'collective.dexteritytextindexer',
         'ftw.autofeature',
+        'ftw.keywordwidget',
         'ftw.profilehook',
         'ftw.referencewidget',
         'ftw.simplelayout [contenttypes] >= 1.14.0',

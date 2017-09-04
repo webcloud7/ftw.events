@@ -1,13 +1,14 @@
 from Acquisition import aq_inner, aq_parent
 from ftw.events import _
 from ftw.events.interfaces import IEventListingBlock
+from ftw.keywordwidget.widget import KeywordFieldWidget
 from ftw.referencewidget.widget import ReferenceWidgetFactory
 from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
 from plone import api
+from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Item
 from plone.directives import form
-from plone.formwidget.autocomplete.widget import AutocompleteMultiFieldWidget
 from plone.formwidget.contenttree import PathSourceBinder
 from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
@@ -73,8 +74,7 @@ class IEventListingBlockSchema(form.Schema):
         default=5,
     )
 
-    # MAYBE: Find a better widget.
-    form.widget(subjects=AutocompleteMultiFieldWidget)
+    directives.widget('subjects', KeywordFieldWidget)
     subjects = schema.List(
         title=_(u'event_listing_config_subjects_label',
                 default=u'Filter by subject'),

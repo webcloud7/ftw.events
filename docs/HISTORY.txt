@@ -5,7 +5,8 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use "ftw.keywordwidget" for setting the keywords on the event listing
+  block and the event page. [mbaechtold]
 
 
 1.6.2 (2017-04-28)

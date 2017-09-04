@@ -35,7 +35,7 @@
         <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
         <element value="plone.app.event.dx.behaviors.IEventBasic"/>
         <element value="plone.app.event.dx.behaviors.IEventRecurrence"/>
-        <element value="plone.app.dexterity.behaviors.metadata.ICategorization" />
+        <element value="ftw.keywordwidget.behavior.IKeywordCategorization" />
         <element value="plone.app.referenceablebehavior.referenceable.IReferenceable"/>
         <element value="ftw.events.behaviors.location.ILocationFields"/>
     </property>
