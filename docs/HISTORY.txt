@@ -5,6 +5,9 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
+- Fix filter for subject on eventlistingblock: UnicodeDecodeError of the subject had umlauts.
+  [mathias.leimgruber]
+
 - Use "ftw.keywordwidget" for setting the keywords on the event listing
   block and the event page. [mbaechtold]
 

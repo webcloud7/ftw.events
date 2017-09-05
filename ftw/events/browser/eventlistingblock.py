@@ -6,6 +6,7 @@ from ftw.simplelayout.browser.blocks.base import BaseBlock
 from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
 from plone import api
 from plone.app.event.base import _prepare_range, filter_and_resort
+from plone.dexterity.utils import safe_utf8
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
@@ -109,8 +110,9 @@ class EventListingBlockView(BaseBlock):
                      for path in self.context.filter_by_path]
             query['path'] = {'query': paths}
 
-        if self.context.subjects:
-            query['Subject'] = self.context.subjects
+        subjects = self.context.subjects
+        if subjects:
+            query['Subject'] = map(safe_utf8, subjects)
 
         # Show inactive events if the current user is allowed to add events on the
         # parent of the event listing block. We must only render the inactive events
