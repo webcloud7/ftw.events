@@ -152,7 +152,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
 
         self.assertEquals(
             {
-                'export_time': '2016-08-09 23:45:00',
+                'export_time': '2016-08-09 22:45:00',
                 'partner': 'Partner',
                 'partnerid': '123',
                 'passwort': 's3c>r3t',

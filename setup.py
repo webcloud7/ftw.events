@@ -9,7 +9,7 @@ tests_require = [
     'ftw.events[mopage_publisher_receiver]',
     'ftw.lawgiver',
     'ftw.testbrowser',
-    'ftw.testing <= 1.15.0',
+    'ftw.testing',
     'plone.app.testing',
     'plone.testing',
 ]
