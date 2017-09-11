@@ -179,7 +179,7 @@ class TestMopageTrigger(FunctionalTestCase):
         with freeze(datetime(2016, 1, 1, tzinfo=zurich)) as clock:
             events = create(Builder('event page').within(folder))
             block = create(Builder('sl textblock').within(events))
-            self.assertEquals(DateTime('2016/01/01 01:00:00 GMT+1'),
+            self.assertEquals(DateTime('2016/01/01 00:00:00 GMT+1'),
                               IMopageModificationDate(events).get_date())
 
             clock.forward(days=1)
