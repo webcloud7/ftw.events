@@ -5,6 +5,9 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
+- Use ReferenceObjSourceBinder for filter by path field in eventlistingblock.
+  [mathias.leimgruber]
+
 - Fix filter for subject on eventlistingblock: UnicodeDecodeError of the subject had umlauts.
   [mathias.leimgruber]
 
