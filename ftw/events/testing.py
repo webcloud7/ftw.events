@@ -11,6 +11,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 from zope.configuration import xmlconfig
 import ftw.events.tests.builders
+import ftw.referencewidget.tests.widgets
 
 
 class EventsLayer(PloneSandboxLayer):

@@ -2,6 +2,8 @@ from Acquisition import aq_inner, aq_parent
 from ftw.events import _
 from ftw.events.interfaces import IEventListingBlock
 from ftw.keywordwidget.widget import KeywordFieldWidget
+from ftw.referencewidget.sources import DefaultSelectable
+from ftw.referencewidget.sources import ReferenceObjSourceBinder
 from ftw.referencewidget.widget import ReferenceWidgetFactory
 from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
 from plone import api
@@ -9,7 +11,6 @@ from plone.autoform import directives
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.dexterity.content import Item
 from plone.directives import form
-from plone.formwidget.contenttree import PathSourceBinder
 from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
 from Products.CMFPlone.interfaces.syndication import ISyndicatable
@@ -18,6 +19,13 @@ from zope import schema
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import invariant, Invalid
+
+
+class FilterByPathSelectable(DefaultSelectable):
+
+    def is_selectable(self):
+        """ Allow to reference any path"""
+        return True
 
 
 class IEventListingBlockSchema(form.Schema):
@@ -47,10 +55,8 @@ class IEventListingBlockSchema(form.Schema):
         description=_(u'event_listing_config_filter_path_description',
                       default=u'Only show content from a specific path.'),
         value_type=RelationChoice(
-            source=PathSourceBinder(
-                navigation_tree_query={'is_folderish': True},
-                is_folderish=True
-            ),
+            source=ReferenceObjSourceBinder(
+                selectable_class=FilterByPathSelectable),
         ),
         required=False,
         default=[],
