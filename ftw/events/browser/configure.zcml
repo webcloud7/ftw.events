@@ -19,6 +19,14 @@
         />
 
     <browser:page
+        for="ftw.events.interfaces.IEventListingBlock"
+        name="events_rss"
+        class=".eventlisting.EventListingRss"
+        template="./templates/events_rss.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
         for="*"
         name="mopage.events.xml"
         class=".mopage.MopageEvents"

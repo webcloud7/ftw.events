@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-09-27 16:12+0000\n"
+"POT-Creation-Date: 2018-02-02 12:42+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,6 +209,11 @@ msgstr "ftw.events"
 #: ./ftw/events/contents/eventlistingblock.py:78
 msgid "label_exclude_past_events"
 msgstr "Vergangene Veranstaltungen nicht anzeigen"
+
+#. Default: "${title} - Events Feed"
+#: ./ftw/events/browser/eventlisting.py:86
+msgid "label_feed_desc"
+msgstr "${title} - Veranstaltungs Feed"
 
 #. Default: "Hide empty block"
 #: ./ftw/events/contents/eventlistingblock.py:170
