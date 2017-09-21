@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-02-02 12:42+0000\n"
+"POT-Creation-Date: 2018-02-02 12:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,10 @@ msgstr ""
 msgid "Provides fields for configuring a mopage trigger (ftw.publisher)."
 msgstr ""
 
+#: ./ftw/events/browser/templates/eventlistingblock.pt:46
+msgid "Subscribe to the RSS feed"
+msgstr ""
+
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 msgid "The event listing block renders a configurable list of event pages."
 msgstr ""
@@ -71,7 +75,7 @@ msgid "Where"
 msgstr ""
 
 #. Default: "Hide the block if there are not events to be shown."
-#: ./ftw/events/contents/eventlistingblock.py:172
+#: ./ftw/events/contents/eventlistingblock.py:181
 msgid "description_hide_empty_block"
 msgstr ""
 
@@ -95,13 +99,18 @@ msgstr ""
 msgid "description_more_items_view_title"
 msgstr ""
 
+#. Default: "Render a link to the RSS feed of the events."
+#: ./ftw/events/contents/eventlistingblock.py:172
+msgid "description_show_rss_link"
+msgstr ""
+
 #. Default: "Show title"
 #: ./ftw/events/contents/eventlistingblock.py:72
 msgid "event_listing_block_show_title_label"
 msgstr ""
 
 #. Default: "You cannot filter by path and current context at the same time."
-#: ./ftw/events/contents/eventlistingblock.py:183
+#: ./ftw/events/contents/eventlistingblock.py:192
 msgid "event_listing_config_current_context_and_path_error"
 msgstr ""
 
@@ -216,7 +225,7 @@ msgid "label_feed_desc"
 msgstr ""
 
 #. Default: "Hide empty block"
-#: ./ftw/events/contents/eventlistingblock.py:170
+#: ./ftw/events/contents/eventlistingblock.py:179
 msgid "label_hide_empty_block"
 msgstr ""
 
@@ -265,14 +274,19 @@ msgstr ""
 msgid "label_more_items_view_title"
 msgstr ""
 
+#. Default: "Link to RSS feed"
+#: ./ftw/events/contents/eventlistingblock.py:170
+msgid "label_show_rss_link"
+msgstr ""
+
 #. Default: "Mopage trigger enabled"
 #: ./ftw/events/behaviors/mopage.py:35
 msgid "label_trigger_enabled"
 msgstr ""
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:32
-#: ./ftw/events/browser/templates/eventlistingblock.pt:39
+#: ./ftw/events/browser/eventlistingblock.py:37
+#: ./ftw/events/browser/templates/eventlistingblock.pt:40
 msgid "more_items_link_label"
 msgstr ""
 
