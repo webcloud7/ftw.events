@@ -5,6 +5,9 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
+- Group fields of the event listing block into separate fieldsets for
+  better user experience. [mbaechtold]
+
 - Use ReferenceObjSourceBinder for filter by path field in eventlistingblock.
   [mathias.leimgruber]
 

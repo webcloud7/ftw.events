@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2017-03-15 14:49+0000\n"
+"POT-Creation-Date: 2017-09-27 16:12+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,7 +71,7 @@ msgid "Where"
 msgstr "Wo"
 
 #. Default: "Hide the block if there are not events to be shown."
-#: ./ftw/events/contents/eventlistingblock.py:134
+#: ./ftw/events/contents/eventlistingblock.py:172
 msgid "description_hide_empty_block"
 msgstr "Der Block wird nicht angezeigt, wenn keine Veranstaltungen vorhanden sind."
 
@@ -86,92 +86,107 @@ msgid "description_mopage_trigger_url"
 msgstr "Die Trigger-URL zeigt auf die Mopage-API. Sie enthält kein \"?url\"-Parameter, dieser wird automatisch angefügt. Beispiel: https://un:pw@xml.mopage.ch/infoservice/xml.php"
 
 #. Default: "This custom label will not be translated."
-#: ./ftw/events/contents/eventlistingblock.py:118
+#: ./ftw/events/contents/eventlistingblock.py:156
 msgid "description_more_items_link_label"
 msgstr "Wird nicht übersetzt."
 
 #. Default: "This title will not be translated."
-#: ./ftw/events/contents/eventlistingblock.py:126
+#: ./ftw/events/contents/eventlistingblock.py:164
 msgid "description_more_items_view_title"
 msgstr "Wird nicht übersetzt."
 
 #. Default: "Show title"
-#: ./ftw/events/contents/eventlistingblock.py:31
+#: ./ftw/events/contents/eventlistingblock.py:72
 msgid "event_listing_block_show_title_label"
 msgstr "Titel anzeigen"
 
 #. Default: "You cannot filter by path and current context at the same time."
-#: ./ftw/events/contents/eventlistingblock.py:145
+#: ./ftw/events/contents/eventlistingblock.py:183
 msgid "event_listing_config_current_context_and_path_error"
 msgstr "Es ist nicht möglich, gleichzeitig nach Pfad und aktuellem Bereich zu filtern."
 
 #. Default: "The maximum length of the item's description. Longer descriptions will be cropped. Enter 0 for no limitation."
-#: ./ftw/events/contents/eventlistingblock.py:99
+#: ./ftw/events/contents/eventlistingblock.py:137
 msgid "event_listing_config_description_length_description"
 msgstr "Maximale Länge der Beschreibung. Längere Beschreibungen werden gekürzt (0 = keine Einschränkung)."
 
 #. Default: "Length of the description"
-#: ./ftw/events/contents/eventlistingblock.py:97
+#: ./ftw/events/contents/eventlistingblock.py:135
 msgid "event_listing_config_description_length_label"
 msgstr "Länge der Beschreibung"
 
 #. Default: "Only show items from the current context."
-#: ./ftw/events/contents/eventlistingblock.py:62
+#: ./ftw/events/contents/eventlistingblock.py:101
 msgid "event_listing_config_filter_current_context_description"
 msgstr "Nur Einträge aus dem aktuellen Bereich anzeigen."
 
 #. Default: "Limit to current context"
-#: ./ftw/events/contents/eventlistingblock.py:60
+#: ./ftw/events/contents/eventlistingblock.py:99
 msgid "event_listing_config_filter_current_context_label"
 msgstr "Auf aktuellen Bereich einschränken"
 
 #. Default: "Only show content from a specific path."
-#: ./ftw/events/contents/eventlistingblock.py:46
+#: ./ftw/events/contents/eventlistingblock.py:87
 msgid "event_listing_config_filter_path_description"
 msgstr "Nur Einträge aus einem bestimmten Pfad anzeigen"
 
 #. Default: "Limit to path"
-#: ./ftw/events/contents/eventlistingblock.py:44
+#: ./ftw/events/contents/eventlistingblock.py:85
 msgid "event_listing_config_filter_path_label"
 msgstr "Auf Pfad einschränken"
 
 #. Default: "The number of items to be shown at most. Enter 0 for no limitation."
-#: ./ftw/events/contents/eventlistingblock.py:70
+#: ./ftw/events/contents/eventlistingblock.py:109
 msgid "event_listing_config_quantity_description"
 msgstr "Die maximale Anzahl anzuzeigender Einträge (0 = keine Einschränkung)."
 
 #. Default: "Quantity"
-#: ./ftw/events/contents/eventlistingblock.py:69
+#: ./ftw/events/contents/eventlistingblock.py:108
 msgid "event_listing_config_quantity_label"
 msgstr "Anzahl"
 
 #. Default: "Show the description of the item"
-#: ./ftw/events/contents/eventlistingblock.py:91
+#: ./ftw/events/contents/eventlistingblock.py:129
 msgid "event_listing_config_show_description_label"
 msgstr "Beschreibung anzeigen"
 
 #. Default: "Show link to more items"
-#: ./ftw/events/contents/eventlistingblock.py:107
+#: ./ftw/events/contents/eventlistingblock.py:145
 msgid "event_listing_config_show_more_items_link"
 msgstr "Einen Link zu weiteren Einträgen anzeigen."
 
 #. Default: "Only items with the selected subjects will be shown."
-#: ./ftw/events/contents/eventlistingblock.py:81
+#: ./ftw/events/contents/eventlistingblock.py:119
 msgid "event_listing_config_subjects_description"
 msgstr "Es werden nur Einträge angezeigt, welche mit diesen Stichworten versehen sind."
 
 #. Default: "Filter by subject"
-#: ./ftw/events/contents/eventlistingblock.py:79
+#: ./ftw/events/contents/eventlistingblock.py:117
 msgid "event_listing_config_subjects_label"
 msgstr "Nach Stichworten filtern"
 
 #. Default: "Title"
-#: ./ftw/events/contents/eventlistingblock.py:24
+#: ./ftw/events/contents/eventlistingblock.py:65
 msgid "event_listing_config_title_label"
 msgstr "Titel"
 
+#. Default: "Advanced"
+#: ./ftw/events/contents/eventlistingblock.py:56
+msgid "event_listing_fieldset_advanced_label"
+msgstr "Erweitert"
+
+#. Default: "Filter"
+#: ./ftw/events/contents/eventlistingblock.py:34
+msgid "event_listing_fieldset_filter_label"
+msgstr "Filter"
+
+#. Default: "Link"
+#: ./ftw/events/contents/eventlistingblock.py:45
+msgid "event_listing_fieldset_link_label"
+msgstr "Link"
+
 #. Default: "Render a link to a page which renders more items (only if there is at least one item)."
-#: ./ftw/events/contents/eventlistingblock.py:109
+#: ./ftw/events/contents/eventlistingblock.py:147
 msgid "event_listing_show_more_items_link_description"
 msgstr "Einen Link zu weiteren Einträgen anzeigen (wird nur angezeigt, wenn es mindestens einen Eintrag gibt)."
 
@@ -191,12 +206,12 @@ msgid "ftw.events"
 msgstr "ftw.events"
 
 #. Default: "Exclude past events"
-#: ./ftw/events/contents/eventlistingblock.py:37
+#: ./ftw/events/contents/eventlistingblock.py:78
 msgid "label_exclude_past_events"
 msgstr "Vergangene Veranstaltungen nicht anzeigen"
 
 #. Default: "Hide empty block"
-#: ./ftw/events/contents/eventlistingblock.py:132
+#: ./ftw/events/contents/eventlistingblock.py:170
 msgid "label_hide_empty_block"
 msgstr "Leeren Block ausblenden"
 
@@ -236,12 +251,12 @@ msgid "label_mopage_trigger_url"
 msgstr "Mopage Trigger URL"
 
 #. Default: "Label for the \"more items\" link"
-#: ./ftw/events/contents/eventlistingblock.py:116
+#: ./ftw/events/contents/eventlistingblock.py:154
 msgid "label_more_items_link_label"
 msgstr "Label für den Link \"Weitere Einträge\""
 
 #. Default: "Title of the view behind the \"more items\" link"
-#: ./ftw/events/contents/eventlistingblock.py:124
+#: ./ftw/events/contents/eventlistingblock.py:162
 msgid "label_more_items_view_title"
 msgstr "Titel der View hinter dem Link \"Weitere Einträge\""
 
@@ -251,13 +266,13 @@ msgid "label_trigger_enabled"
 msgstr "Mopage Trigger aktiviert"
 
 #. Default: "More Items"
-#: ./ftw/events/browser/eventlistingblock.py:31
+#: ./ftw/events/browser/eventlistingblock.py:32
 #: ./ftw/events/browser/templates/eventlistingblock.pt:39
 msgid "more_items_link_label"
 msgstr "Weitere Einträge"
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:75
+#: ./ftw/events/browser/eventlisting.py:76
 msgid "more_items_view_fallback_title"
 msgstr "Veranstaltungen"
 

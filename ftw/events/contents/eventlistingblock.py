@@ -29,6 +29,38 @@ class FilterByPathSelectable(DefaultSelectable):
 
 
 class IEventListingBlockSchema(form.Schema):
+    form.fieldset(
+        'filter',
+        label=_(u'event_listing_fieldset_filter_label',
+                default=u'Filter'),
+        fields=[
+            'filter_by_path',
+            'current_context',
+            'subjects',
+        ]
+    )
+
+    form.fieldset(
+        'link',
+        label=_(u'event_listing_fieldset_link_label',
+                default=u'Link'),
+        fields=[
+            'show_more_items_link',
+            'more_items_link_label',
+            'more_items_view_title',
+        ]
+    )
+
+    form.fieldset(
+        'advanced',
+        label=_(u'event_listing_fieldset_advanced_label',
+                default=u'Advanced'),
+        fields=[
+            'exclude_past_events',
+            'hide_empty_block',
+        ]
+    )
+
     title = schema.TextLine(
         title=_(u'event_listing_config_title_label', default=u'Title'),
         description=u'',
