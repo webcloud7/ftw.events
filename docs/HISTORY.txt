@@ -5,6 +5,8 @@ Changelog
 1.6.3 (unreleased)
 ------------------
 
+- Add collective.taskqueue to test-dependencies [raphael-s]
+
 - Group fields of the event listing block into separate fieldsets for
   better user experience. [mbaechtold]
 

@@ -4,6 +4,7 @@ import os
 version = '1.6.3.dev0'
 
 tests_require = [
+    'collective.taskqueue',
     'ftw.builder',
     'ftw.chameleon',
     'ftw.events[mopage_publisher_receiver]',
