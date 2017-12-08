@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.3 (unreleased)
+1.7.0 (2017-12-08)
 ------------------
 
 - Add collective.taskqueue to test-dependencies [raphael-s]
