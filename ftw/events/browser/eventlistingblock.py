@@ -23,6 +23,11 @@ class EventListingBlockView(BaseBlock):
         This method returns a dict containing information to be used in
         the block's template.
         """
+        rss_link_url = ''
+        if self.context.show_rss_link:
+            rss_link_url = '/'.join([self.context.absolute_url(),
+                                     'events_rss'])
+
         more_items_link_url = ''
         if self.context.show_more_items_link:
             more_items_link_url = '/'.join([self.context.absolute_url(), 'events'])
@@ -36,6 +41,7 @@ class EventListingBlockView(BaseBlock):
         info = {
             'title': self.context.title,
             'show_title': self.context.show_title,
+            'rss_link_url': rss_link_url,
             'more_items_link_url': more_items_link_url,
             'more_items_link_label': more_items_link_label,
             'hide_empty_block':  self.context.hide_empty_block,

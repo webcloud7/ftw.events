@@ -77,3 +77,20 @@ class EventListing(BrowserView):
             context=self.request
         )
         return self.context.more_items_view_title or fallback_title
+
+
+class EventListingRss(EventListing):
+
+    @property
+    def description(self):
+        return _(u'label_feed_desc',
+                 default=u'${title} - Events Feed',
+                 mapping={'title': self.context.Title().decode('utf-8')})
+
+    @property
+    def link(self):
+        url = self.context.absolute_url() + '/' + self.__name__
+        return '<link>{}</link>'.format(url)
+
+    def get_item_link(self, url):
+        return '<link>{}</link>'.format(url)

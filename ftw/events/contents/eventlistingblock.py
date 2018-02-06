@@ -166,6 +166,15 @@ class IEventListingBlockSchema(form.Schema):
         required=False,
     )
 
+    show_rss_link = schema.Bool(
+        title=_(u'label_show_rss_link',
+                default=u'Link to RSS feed'),
+        description=_(u'description_show_rss_link',
+                      default=u'Render a link to the RSS feed of the events.'),
+        default=False,
+        required=False,
+    )
+
     hide_empty_block = schema.Bool(
         title=_(u'label_hide_empty_block',
                 default=u'Hide empty block'),

@@ -71,3 +71,9 @@ body.userrole-authenticated .portlet.SimplelayoutPortlet .ftw-events-eventlistin
   @include boxshadow(0 0 20px 0 $color-warning);
   display: block;
 }
+
+// Add RSS icon to rss link in eventlisting block
+.events-rss {
+  @extend .fa-icon;
+  @extend .fa-rss;
+}
