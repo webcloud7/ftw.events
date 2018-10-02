@@ -1,8 +1,10 @@
+from Products.CMFCore.permissions import AccessInactivePortalContent
+from Products.CMFCore.utils import getToolByName, _checkPermission
+from Products.CMFPlone.PloneBatch import Batch
+from Products.Five.browser import BrowserView
 from ftw.events import _
 from ftw.events.interfaces import IEventListingView
 from plone import api
-from Products.CMFPlone.PloneBatch import Batch
-from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.i18n import translate
@@ -94,3 +96,22 @@ class EventListingRss(EventListing):
 
     def get_item_link(self, url):
         return '<link>{}</link>'.format(url)
+
+
+class EventListingFolder(EventListing):
+    @property
+    def title(self):
+        return self.context.Title()
+
+    def get_query(self):
+        query = {
+            'object_provides': 'ftw.events.interfaces.IEventPage',
+            'sort_on': 'start',
+            'sort_order': 'reverse',
+            'path': '/'.join(self.context.getPhysicalPath())
+        }
+
+        if api.user.has_permission('ftw.events: Add Event Page', obj=self.context):
+            query['show_inactive'] = True
+
+        return query

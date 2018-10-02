@@ -34,6 +34,7 @@
     <property name="view_methods">
         <element value="@@simplelayout-view"/>
         <element value="ftwcalendar_view"/>
+        <element value="event_listing"/>
     </property>
     <property name="default_view_fallback">False</property>
 
