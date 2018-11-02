@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-02-02 12:43+0000\n"
+"POT-Creation-Date: 2018-11-02 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -214,6 +214,12 @@ msgstr ""
 msgid "ftw.events"
 msgstr ""
 
+#. Default: "Export an ICS file containing all events from the current context."
+#: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/upgrades/20181031165317_add_object_action_for_exporting_ics_file/actions.xml
+msgid "help_ical_export"
+msgstr ""
+
 #. Default: "Exclude past events"
 #: ./ftw/events/contents/eventlistingblock.py:78
 msgid "label_exclude_past_events"
@@ -298,6 +304,12 @@ msgstr ""
 #. Default: "Events"
 #: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
+msgstr ""
+
+#. Default: "Ical export"
+#: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/upgrades/20181031165317_add_object_action_for_exporting_ics_file/actions.xml
+msgid "title_ical_export"
 msgstr ""
 
 #: ./ftw/events/viewlets/templates/event_details.pt:7

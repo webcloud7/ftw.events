@@ -34,4 +34,11 @@
         permission="zope2.View"
         />
 
+    <browser:page
+        for="ftw.events.interfaces.IEventFolder"
+        name="ics_view"
+        class="plone.app.event.ical.exporter.EventsICal"
+        permission="zope2.View"
+        />
+
 </configure>
