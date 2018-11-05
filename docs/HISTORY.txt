@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.7.2 (unreleased)
+1.8.0 (2018-11-05)
 ------------------
 
 - Enable "ics_view" on event folder, so a ICS file can be exported containing
