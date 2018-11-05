@@ -1,9 +1,11 @@
 from datetime import datetime
 from ftw.builder import Builder
 from ftw.builder import create
+from ftw.events.tests import FunctionalTestCase
 from ftw.events.tests import RealFuncitionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.core import LIB_REQUESTS
+from ftw.testbrowser.pages import editbar
 
 
 class TestIsICSView(RealFuncitionalTestCase):
@@ -31,3 +33,43 @@ class TestIsICSView(RealFuncitionalTestCase):
         self.assertIn('BEGIN:VEVENT', body)
         self.assertIn('END:VCALENDAR', body)
         self.assertIn('END:VEVENT', body)
+
+    @browsing
+    def test_ics_view_is_ics_on_eventfolder(self, browser):
+        browser.request_library = LIB_REQUESTS
+
+        # Create a second event within the event folder
+        create(Builder('event page')
+               .titled(u"Another Event")
+               .starting(datetime(2017, 1, 7, 15, 00))
+               .ending(datetime(2017, 1, 7, 20, 00))
+               .having(recurrence='RRULE:FREQ=DAILY;COUNT=4')
+               .within(self.folder))
+
+        browser.login().visit(self.folder, view="ics_view")
+
+        body = browser.contents
+
+        self.assertIn('BEGIN:VCALENDAR', body)
+        self.assertIn('END:VCALENDAR', body)
+
+        # Both events are in the file.
+        self.assertEqual(2, body.count("BEGIN:VEVENT"))
+        self.assertIn('SUMMARY:A Event', body)
+        self.assertIn('SUMMARY:Another Event', body)
+
+
+class TestICSView(FunctionalTestCase):
+
+    def setUp(self):
+        super(TestICSView, self).setUp()
+        self.grant('Manager')
+
+    @browsing
+    def test_export_action_on_eventfolder(self, browser):
+        event_folder = create(Builder('event folder').titled(u'Activities'))
+        browser.login().visit(event_folder)
+        self.assertEqual(
+            'http://nohost/plone/activities/ics_view',
+            editbar.contentview('Ical export').attrib['href']
+        )

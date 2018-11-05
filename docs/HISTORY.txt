@@ -5,7 +5,8 @@ Changelog
 1.7.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enable "ics_view" on event folder, so a ICS file can be exported containing
+  all the events within the event folder. [mbaechtold]
 
 
 1.7.1 (2018-02-06)
