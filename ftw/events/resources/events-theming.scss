@@ -2,6 +2,11 @@
 @include portal-type-font-awesome-icon(ftw-events-eventpage, calendar-o);
 @include portal-type-font-awesome-icon(ftw-events-eventlistingblock, calendar-o);
 
+.event-listingblock-moreitemslink {
+  @extend .fa-icon;
+  @extend .fa-caret-right;
+  display: block;
+}
 
 .event-details {
   .when {
