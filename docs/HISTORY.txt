@@ -5,6 +5,10 @@ Changelog
 1.8.1 (unreleased)
 ------------------
 
+- Add simplelayout view to plone views action.
+  The prefix "@@"" hides the simplelayout view in plone views action.
+  Removing this makes it accessible. [busykoala]
+
 - Add arrow in front of "more"-button, to create a similar appearance as
   in ftw.news. [busykoala]
 
