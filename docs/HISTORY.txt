@@ -2,13 +2,7 @@ Changelog
 =========
 
 
-1.8.2 (unreleased)
-------------------
-
-- Nothing changed yet.
-
-
-1.8.1 (2019-01-18)
+1.9.0 (unreleased)
 ------------------
 
 - Add simplelayout view to plone views action.
