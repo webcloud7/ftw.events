@@ -6,6 +6,7 @@ Changelog
 ------------------
 
 - Add event_listing view for EventFolder [Nachtalb]
+- Add plone 5.1 support [busykoala]
 
 
 1.9.0 (2019-01-18)
