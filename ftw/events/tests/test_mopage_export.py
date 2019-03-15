@@ -9,7 +9,6 @@ from ftw.events.tests import XMLDiffTestCase
 from ftw.events.tests import utils
 from ftw.testbrowser import browser
 from ftw.testbrowser import browsing
-from ftw.testing import IS_PLONE_5
 from ftw.testing import freeze
 from ftw.testing import staticuid
 from path import Path
@@ -29,7 +28,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
         self.grant('Manager')
         event_folder = create(Builder('event folder').titled(u'event folder'))
 
-        with freeze(datetime(2010, 3, 14, 20, 18, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2010, 3, 14, 20, 18))):
             events1 = create(
                 Builder('event page')
                 .titled(u'Wanderausstellung Kaffeebohnen')
@@ -51,9 +50,9 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                            .with_dummy_image()
                            .having(text=lorem))
             utils.create_page_state(events1, block)
-            IMopageModificationDate(events1).set_date(DateTime('2010/3/15'))
+            IMopageModificationDate(events1).set_date(ZURICH.localize(datetime(2010, 3, 15)))
 
-        with freeze(datetime(2010, 5, 17, 15, 34, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2010, 5, 17, 15, 34))):
             create(Builder('event page')
                    .titled(u'Bratwurstgrillieren')
                    .within(event_folder)
@@ -63,14 +62,14 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                            # Location is incomplete and will not appear.
                            location_title='Kunstmuseum Bern'))
 
-        with freeze(datetime(2011, 1, 2, 3, 4, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2011, 1, 2, 3, 4))):
             self.assert_mopage_export('mopage.events.xml', event_folder)
 
     @browsing
     def test_pagination(self, browser):
         self.grant('Manager')
         event_folder = create(Builder('event folder').titled(u'Events'))
-        with freeze(datetime(2015, 10, 1, 14, 0, tzinfo=ZURICH)) as clock:
+        with freeze(ZURICH.localize(datetime(2015, 10, 1, 14, 0))) as clock:
             create(Builder('event page').titled(u'One').within(event_folder)
                    .starting(datetime.now() + timedelta(hours=2))
                    .ending(datetime.now() + timedelta(hours=2)))
@@ -142,21 +141,19 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
         self.grant('Manager')
         create(Builder('event page').within(create(Builder('event folder'))))
 
-        if IS_PLONE_5:
-            from plone.event.utils import pydt
-            date = pydt(datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH))
-            self.include_root_arguments_when_submitted_as_GET_param_helper(
-                browser,
-                date)
-        else:
-            date = datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH)
-            self.include_root_arguments_when_submitted_as_GET_param_helper(
-                browser,
-                date)
+        date = ZURICH.localize(datetime(2016, 8, 9, 21, 45))
+        with freeze(date):
+            browser.open(self.portal, view='mopage.events.xml',
+                         data={'partner': 'Partner',
+                               'partnerid': '123',
+                               'passwort': 's3c>r3t',
+                               'importid': '456',
+                               'vaterobjekt': 'xy',
+                               'unkown_key': 'should not appear'})
 
         self.assertEquals(
             {
-                'export_time': '2016-08-09 22:45:00',
+                'export_time': '2016-08-09 21:45:00',
                 'partner': 'Partner',
                 'partnerid': '123',
                 'passwort': 's3c>r3t',

@@ -1,12 +1,14 @@
 from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from datetime import datetime
 from ftw.events.behaviors.location import ILocationFields
 from ftw.events.behaviors.mopage import IMopageModificationDate
 from ftw.keywordwidget.behavior import IKeywordCategorization
 from htmlentitydefs import name2codepoint as n2cp
 from plone.event.interfaces import IRecurrenceSupport
 from plone.uuid.interfaces import IUUID
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
+from pytz import timezone
 from zExceptions import BadRequest
 import lxml.html
 import math
@@ -85,7 +87,8 @@ class MopageEvents(BrowserView):
         return super(MopageEvents, self).__call__()
 
     def import_node_attributes(self):
-        attrs = {'export_time': self.normalize_date(DateTime())}
+        attrs = {'export_time': self.normalize_date(
+            timezone('Europe/Zurich').localize(datetime.now()))}
         for name in ('partner', 'partnerid', 'passwort', 'importid',
                      'vaterobjekt'):
             attrs[name] = self.request.form.get(name, None)
@@ -143,7 +146,7 @@ class MopageEvents(BrowserView):
 
         subjects = getattr(IKeywordCategorization(obj, None), 'subjects', ())
         modified_date = IMopageModificationDate(obj).get_date()
-        occurences = IRecurrenceSupport(obj).occurrences()
+        occurences = list(IRecurrenceSupport(obj).occurrences())
 
         location = {}
         if ILocationFields.providedBy(obj):
@@ -160,6 +163,12 @@ class MopageEvents(BrowserView):
                     'zip': storage.location_zip,
                     'city': storage.location_city,
                 })
+
+        for occurence in occurences:
+            if occurence.start == occurence.end and occurence.whole_day:
+                from datetime import timedelta
+                occurence.end = occurence.end + timedelta(hours=23, minutes=59,
+                                                          seconds=59)
 
         return {'title': crop(100, brain.Title),
                 'modified_date': self.normalize_date(modified_date),

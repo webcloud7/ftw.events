@@ -1,6 +1,7 @@
 from ftw.builder import builder_registry
 from ftw.builder.dexterity import DexterityBuilder
 from ftw.simplelayout.tests import builders
+from ftw.testing import IS_PLONE_5
 
 
 class EventFolderBuilder(DexterityBuilder):
@@ -20,10 +21,18 @@ class EventPageBuilder(DexterityBuilder):
         self.having(timezone='Etc/Greenwich')
 
     def starting(self, date):
-        return self.having(start=date)
+        if IS_PLONE_5:
+            from plone.event.utils import pydt
+            return self.having(start=pydt(date))
+        else:
+            return self.having(start=date)
 
     def ending(self, date):
-        return self.having(end=date)
+        if IS_PLONE_5:
+            from plone.event.utils import pydt
+            return self.having(end=pydt(date))
+        else:
+            return self.having(end=date)
 
 builder_registry.register('event page', EventPageBuilder)
 

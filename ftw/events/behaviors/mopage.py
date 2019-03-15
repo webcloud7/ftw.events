@@ -1,21 +1,23 @@
 from Acquisition import aq_chain
 from DateTime import DateTime
+from Products.Five.browser import BrowserView
+from datetime import datetime
 from ftw.events import _
 from ftw.events.interfaces import IEventPage
 from plone.app.dexterity.behaviors.metadata import DCFieldProperty
 from plone.app.dexterity.behaviors.metadata import MetadataBase
 from plone.autoform.directives import read_permission
 from plone.autoform.directives import write_permission
-from plone.directives.form import fieldset
 from plone.directives.form import IFormFieldProvider
 from plone.directives.form import Schema
-from Products.Five.browser import BrowserView
+from plone.directives.form import fieldset
+from pytz import timezone
 from zope import schema
 from zope.annotation import IAnnotations
 from zope.component.hooks import getSite
+from zope.interface import Interface
 from zope.interface import alsoProvides
 from zope.interface import implements
-from zope.interface import Interface
 import requests
 import urllib
 import urlparse
@@ -141,13 +143,16 @@ class MopageModificationDate(object):
 
     def get_date(self):
         date = IAnnotations(self.context).get(self.annotations_key, None)
+        if date:
+            date = DateTime(date.strftime('%Y/%m/%d %H:%M:%S') + ' GMT+1')
         return date or self.context.modified()
 
     def set_date(self, date):
-        IAnnotations(self.context)[self.annotations_key] = DateTime(date)
+        IAnnotations(self.context)[self.annotations_key] = date
 
     def touch(self):
-        self.set_date(DateTime())
+        zone = timezone('Europe/Zurich')
+        self.set_date(zone.localize(datetime.now()))
 
 
 def trigger_mopage_refresh(obj, event):

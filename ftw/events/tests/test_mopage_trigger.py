@@ -14,7 +14,6 @@ from ftw.publisher.receiver.events import AfterUpdatedEvent
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
-from ftw.testing import IS_PLONE_5
 from ftw.testing import freeze
 from persistent.list import PersistentList
 from pytz import timezone
@@ -176,21 +175,10 @@ class TestMopageTrigger(FunctionalTestCase):
                                 mopage_trigger_url=trigger_url,
                                 mopage_data_endpoint_url=endpoint_url))
 
-        zurich = timezone('Europe/Zurich')
+        tz_zurich = timezone('Europe/Zurich')
+        freezing_date = tz_zurich.localize(datetime(2016, 1, 1))
 
-        if IS_PLONE_5:
-            from plone.event.utils import pydt
-            date = pydt(datetime(2016, 1, 1, tzinfo=zurich))
-            self.publisher_event_updates_mopage_modified_date_assertion(folder,
-                                                                        date)
-        else:
-            date = datetime(2016, 1, 1, tzinfo=zurich)
-            self.publisher_event_updates_mopage_modified_date_assertion(folder,
-                                                                        date)
-
-    def publisher_event_updates_mopage_modified_date_assertion(self, folder,
-                                                               date):
-        with freeze(date) as clock:
+        with freeze(freezing_date) as clock:
             events = create(Builder('event page').within(folder))
             block = create(Builder('sl textblock').within(events))
 
