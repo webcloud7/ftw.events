@@ -118,13 +118,6 @@ class TestEventListingBlock(FunctionalTestCase):
                 "Event of Peter must be listed before the event of Hans"
             )
 
-            # Folder listing still renders the items in the order they were added by.
-            browser.visit(event_folder, view='folder_contents')
-            self.assertEqual(
-                ['Event of Hans', 'Event of Peter'],
-                browser.css('table#listing-table tr td a.contenttype-ftw-events-eventpage').text
-            )
-
     @browsing
     def test_block_filters_by_path(self, browser):
         """
