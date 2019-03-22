@@ -7,6 +7,7 @@ from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
 from ftw.testing import freeze
 from plone import api
+from plone.protect.authenticator import createToken
 
 
 class TestEventListing(FunctionalTestCase):
@@ -56,6 +57,7 @@ class TestEventListing(FunctionalTestCase):
                        .within(page)
                        .titled(u'Not relevant in this test'))
 
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
         browser.login()
 
         # A fallback title must be rendered on the view by default.
@@ -92,6 +94,7 @@ class TestEventListing(FunctionalTestCase):
                                location_city='Hamburg')
                        .within(event_folder))
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Get the event folder's event listing block which has been created
         # automatically.
