@@ -9,6 +9,7 @@ from ftw.events.tests import XMLDiffTestCase
 from ftw.events.tests import utils
 from ftw.testbrowser import browser
 from ftw.testbrowser import browsing
+from ftw.testing import IS_PLONE_5
 from ftw.testing import freeze
 from ftw.testing import staticuid
 from path import Path
@@ -141,14 +142,17 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
         self.grant('Manager')
         create(Builder('event page').within(create(Builder('event folder'))))
 
-        with freeze(datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH)):
-            browser.open(self.portal, view='mopage.events.xml',
-                         data={'partner': 'Partner',
-                               'partnerid': '123',
-                               'passwort': 's3c>r3t',
-                               'importid': '456',
-                               'vaterobjekt': 'xy',
-                               'unkown_key': 'should not appear'})
+        if IS_PLONE_5:
+            from plone.event.utils import pydt
+            date = pydt(datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH))
+            self.include_root_arguments_when_submitted_as_GET_param_helper(
+                browser,
+                date)
+        else:
+            date = datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH)
+            self.include_root_arguments_when_submitted_as_GET_param_helper(
+                browser,
+                date)
 
         self.assertEquals(
             {
@@ -160,6 +164,16 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                 'vaterobjekt': 'xy',
             },
             browser.css('import').first.attrib)
+
+    def include_root_arguments_when_submitted_as_GET_param_helper(self, browser, date):
+        with freeze(date):
+            browser.open(self.portal, view='mopage.events.xml',
+                         data={'partner': 'Partner',
+                               'partnerid': '123',
+                               'passwort': 's3c>r3t',
+                               'importid': '456',
+                               'vaterobjekt': 'xy',
+                               'unkown_key': 'should not appear'})
 
     def assert_mopage_export(self, asset_name, export_context):
         expected = self.asset(asset_name)
