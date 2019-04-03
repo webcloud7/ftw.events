@@ -12,6 +12,8 @@ from zope.interface import implements
 
 class EventListing(BrowserView):
     """
+    EventListingBlock event listing
+
     This browser view renders a list of event pages based on the parameters
     defined on the event listing block which renders a link to this browser
     view.
@@ -98,6 +100,12 @@ class EventListing(BrowserView):
 
 
 class EventListingRss(EventListing):
+    """
+    RSS-Feed event listing
+
+    This view is to be called on an EventListingBlock and does takes its
+    parameters into account.
+    """
 
     @property
     def description(self):
@@ -115,6 +123,14 @@ class EventListingRss(EventListing):
 
 
 class EventListingFolder(EventListing):
+    """
+    EventFolder event listing
+
+    This event listing view is a simpler stripped down version of the
+    EventListingBlockEventListing. It is used on the EventFolder directly and
+    it does not take any EventListingBlock's parameters into account.
+    """
+
     @property
     def title(self):
         return self.context.Title()
