@@ -98,6 +98,10 @@ class EventListing(BrowserView):
         )
         return self.context.more_items_view_title or fallback_title
 
+    @property
+    def description(self):
+        return ''
+
 
 class EventListingRss(EventListing):
     """
@@ -134,6 +138,10 @@ class EventListingFolder(EventListing):
     @property
     def title(self):
         return self.context.Title()
+
+    @property
+    def description(self):
+        return self.context.description
 
     def get_query(self):
         query = {
