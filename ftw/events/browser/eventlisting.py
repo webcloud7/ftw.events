@@ -1,5 +1,4 @@
-from Products.CMFCore.permissions import AccessInactivePortalContent
-from Products.CMFCore.utils import getToolByName, _checkPermission
+from DateTime import DateTime
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from ftw.events import _
@@ -34,8 +33,25 @@ class EventListing(BrowserView):
             context=self.context,
             request=self.request,
         )
-        start, end = block_view.get_dates_for_query()
+
+        datestring = self.request.get('archive')
+        if datestring:
+            try:
+                start = DateTime(datestring)
+            except DateTime.interfaces.SyntaxError:
+                raise
+            end = DateTime('{0}/{1}/{2}'.format(
+                start.year() + start.month() / 12,
+                start.month() % 12 + 1,
+                1)
+            ) - 1
+
+            start = start.earliestTime()
+            end = end.latestTime()
+        else:
+            start, end = block_view.get_dates_for_query()
         block_query = block_view.get_query(start, end)
+
         return block_query
 
     def get_items(self):
