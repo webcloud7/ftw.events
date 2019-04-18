@@ -5,7 +5,7 @@ Changelog
 1.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add event_listing view for EventFolder [Nachtalb]
 
 
 1.9.0 (2019-01-18)
