@@ -4,10 +4,12 @@ from Products.Five.browser import BrowserView
 from ftw.events import _
 from ftw.events.interfaces import IEventListingView
 from plone import api
+from plone.app.event.base import _prepare_range
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.i18n import translate
 from zope.interface import implements
+import datetime
 
 
 class EventListing(BrowserView):
@@ -153,5 +155,32 @@ class EventListingFolder(EventListing):
 
         if api.user.has_permission('ftw.events: Add Event Page', obj=self.context):
             query['show_inactive'] = True
+
+        datestring = self.request.get('archive')
+        if datestring:
+            try:
+                start = DateTime(datestring)
+            except DateTime.interfaces.SyntaxError:
+                raise
+            end = DateTime('{0}/{1}/{2}'.format(
+                start.year() + start.month() / 12,
+                start.month() % 12 + 1,
+                1)
+            ) - 1
+
+            start, end = start.earliestTime(), end.latestTime()
+        else:
+            start = datetime.datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+
+            start, end = _prepare_range(self.context, start, None)
+
+        # All events from start date ongoing:
+        # The minimum end date of events is the date from which we search.
+        query['end'] = {'query': start, 'range': 'min'}
+        # All events until end date:
+        # The maximum start date must be the date until we search.
+        query['start'] = {'query': end, 'range': 'max'}
 
         return query
