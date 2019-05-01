@@ -6,7 +6,7 @@ Changelog
 -------------------
 
 - Add event archive portlet [Nachtalb]
-
+- Add missing plone 5 registry.xml records (previously plone 4 propertiestool.xml) [Nachtalb]
 
 1.10.0 (2019-05-01)
 -------------------
