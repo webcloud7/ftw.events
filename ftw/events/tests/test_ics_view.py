@@ -6,6 +6,7 @@ from ftw.events.tests import RealFuncitionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.core import LIB_REQUESTS
 from ftw.testbrowser.pages import editbar
+import urlparse
 
 
 class TestIsICSView(RealFuncitionalTestCase):
@@ -69,7 +70,16 @@ class TestICSView(FunctionalTestCase):
     def test_export_action_on_eventfolder(self, browser):
         event_folder = create(Builder('event folder').titled(u'Activities'))
         browser.login().visit(event_folder)
+
+        # in plone 5.1 we have additional get params of the _authenticator.
+        # To test if the view is right we strip them off the url.
+        ics_url = editbar.contentview('Ical export').attrib['href']
+        stripped_ics_url = urlparse.urljoin(ics_url,
+                                            urlparse.urlparse(ics_url).path)
+
         self.assertEqual(
             'http://nohost/plone/activities/ics_view',
-            editbar.contentview('Ical export').attrib['href']
+            stripped_ics_url,
+            'We expect that the action goes to '
+            'PloneSite/EventFolder/ics_view.'
         )

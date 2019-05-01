@@ -1,4 +1,3 @@
-import datetime
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.tests import FunctionalTestCase
@@ -7,7 +6,9 @@ from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
 from ftw.testing import freeze
+from plone.protect.authenticator import createToken
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
+import datetime
 
 
 class TestEventListingBlock(FunctionalTestCase):
@@ -42,6 +43,7 @@ class TestEventListingBlock(FunctionalTestCase):
     def test_event_listing_block_can_be_added_on_contentpage(self, browser):
         page = create(Builder('sl content page').titled(u'A page'))
         browser.login().visit(page)
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         factoriesmenu.add('EventListingBlock')
         browser.fill({
@@ -62,6 +64,7 @@ class TestEventListingBlock(FunctionalTestCase):
                        .within(page)
                        .titled(u'This block renders event pages'))
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Make sure the title is rendered by default.
         browser.visit(page)
@@ -115,13 +118,6 @@ class TestEventListingBlock(FunctionalTestCase):
                 "Event of Peter must be listed before the event of Hans"
             )
 
-            # Folder listing still renders the items in the order they were added by.
-            browser.visit(event_folder, view='folder_contents')
-            self.assertEqual(
-                ['Event of Hans', 'Event of Peter'],
-                browser.css('table#listing-table tr td a.contenttype-ftw-events-eventpage').text
-            )
-
     @browsing
     def test_block_filters_by_path(self, browser):
         """
@@ -146,6 +142,7 @@ class TestEventListingBlock(FunctionalTestCase):
                        .titled(u'Not relevant in this test'))
 
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Edit the block and set a path (not possible with builder).
         browser.visit(block, view='edit.json')
@@ -226,6 +223,7 @@ class TestEventListingBlock(FunctionalTestCase):
                        .titled(u'Not relevant for this test'))
 
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Make sure that the filter by context is active by default.
         browser.visit(page2)
@@ -404,6 +402,7 @@ class TestEventListingBlock(FunctionalTestCase):
                        .titled(u'This is a EventListingBlock'))
 
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Make sure the link is there.
         browser.visit(page)
@@ -578,6 +577,7 @@ class TestEventListingBlock(FunctionalTestCase):
             return 'hidden' in browser.css('.ftw-events-eventlistingblock').first.attrib['class']
 
         browser.login()
+        browser.append_request_header('X-CSRF-TOKEN', createToken())
 
         # Make sure the block has no "hidden" class.
         browser.visit(page)

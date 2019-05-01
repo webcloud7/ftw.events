@@ -1,12 +1,12 @@
-from datetime import datetime
 from DateTime import DateTime
+from datetime import datetime
 from datetime import timedelta
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.behaviors.mopage import IMopageModificationDate
 from ftw.events.tests import FunctionalTestCase
-from ftw.events.tests import utils
 from ftw.events.tests import XMLDiffTestCase
+from ftw.events.tests import utils
 from ftw.testbrowser import browser
 from ftw.testbrowser import browsing
 from ftw.testing import freeze
@@ -28,7 +28,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
         self.grant('Manager')
         event_folder = create(Builder('event folder').titled(u'event folder'))
 
-        with freeze(datetime(2010, 3, 14, 20, 18, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2010, 3, 14, 20, 18))):
             events1 = create(
                 Builder('event page')
                 .titled(u'Wanderausstellung Kaffeebohnen')
@@ -50,9 +50,9 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                            .with_dummy_image()
                            .having(text=lorem))
             utils.create_page_state(events1, block)
-            IMopageModificationDate(events1).set_date(DateTime('2010/3/15'))
+            IMopageModificationDate(events1).set_date(ZURICH.localize(datetime(2010, 3, 15)))
 
-        with freeze(datetime(2010, 5, 17, 15, 34, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2010, 5, 17, 15, 34))):
             create(Builder('event page')
                    .titled(u'Bratwurstgrillieren')
                    .within(event_folder)
@@ -62,14 +62,14 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                            # Location is incomplete and will not appear.
                            location_title='Kunstmuseum Bern'))
 
-        with freeze(datetime(2011, 1, 2, 3, 4, tzinfo=ZURICH)):
+        with freeze(ZURICH.localize(datetime(2011, 1, 2, 3, 4))):
             self.assert_mopage_export('mopage.events.xml', event_folder)
 
     @browsing
     def test_pagination(self, browser):
         self.grant('Manager')
         event_folder = create(Builder('event folder').titled(u'Events'))
-        with freeze(datetime(2015, 10, 1, 14, 0, tzinfo=ZURICH)) as clock:
+        with freeze(ZURICH.localize(datetime(2015, 10, 1, 14, 0))) as clock:
             create(Builder('event page').titled(u'One').within(event_folder)
                    .starting(datetime.now() + timedelta(hours=2))
                    .ending(datetime.now() + timedelta(hours=2)))
@@ -141,7 +141,8 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
         self.grant('Manager')
         create(Builder('event page').within(create(Builder('event folder'))))
 
-        with freeze(datetime(2016, 8, 9, 21, 45, tzinfo=ZURICH)):
+        date = ZURICH.localize(datetime(2016, 8, 9, 21, 45))
+        with freeze(date):
             browser.open(self.portal, view='mopage.events.xml',
                          data={'partner': 'Partner',
                                'partnerid': '123',
@@ -152,7 +153,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
 
         self.assertEquals(
             {
-                'export_time': '2016-08-09 22:45:00',
+                'export_time': '2016-08-09 21:45:00',
                 'partner': 'Partner',
                 'partnerid': '123',
                 'passwort': 's3c>r3t',
@@ -160,6 +161,16 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
                 'vaterobjekt': 'xy',
             },
             browser.css('import').first.attrib)
+
+    def include_root_arguments_when_submitted_as_GET_param_helper(self, browser, date):
+        with freeze(date):
+            browser.open(self.portal, view='mopage.events.xml',
+                         data={'partner': 'Partner',
+                               'partnerid': '123',
+                               'passwort': 's3c>r3t',
+                               'importid': '456',
+                               'vaterobjekt': 'xy',
+                               'unkown_key': 'should not appear'})
 
     def assert_mopage_export(self, asset_name, export_context):
         expected = self.asset(asset_name)

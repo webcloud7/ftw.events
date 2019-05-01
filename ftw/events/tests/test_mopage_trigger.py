@@ -1,5 +1,7 @@
-from collective.taskqueue.testing import runAsyncTest
 from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from collective.taskqueue.testing import runAsyncTest
 from datetime import datetime
 from ftw.builder import Builder
 from ftw.builder import create
@@ -14,8 +16,6 @@ from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
 from ftw.testing import freeze
 from persistent.list import PersistentList
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
 from pytz import timezone
 from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
@@ -175,10 +175,13 @@ class TestMopageTrigger(FunctionalTestCase):
                                 mopage_trigger_url=trigger_url,
                                 mopage_data_endpoint_url=endpoint_url))
 
-        zurich = timezone('Europe/Zurich')
-        with freeze(datetime(2016, 1, 1, tzinfo=zurich)) as clock:
+        tz_zurich = timezone('Europe/Zurich')
+        freezing_date = tz_zurich.localize(datetime(2016, 1, 1))
+
+        with freeze(freezing_date) as clock:
             events = create(Builder('event page').within(folder))
             block = create(Builder('sl textblock').within(events))
+
             self.assertEquals(DateTime('2016/01/01 00:00:00 GMT+1'),
                               IMopageModificationDate(events).get_date())
 
