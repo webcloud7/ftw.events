@@ -1,4 +1,8 @@
+from pkg_resources import get_distribution
 from plone import api
+
+
+IS_PLONE_5 = get_distribution('Plone').version >= '5'
 
 
 def get_creator(item):

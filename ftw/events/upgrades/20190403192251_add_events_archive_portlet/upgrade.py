@@ -1,3 +1,4 @@
+from ftw.events.utils import IS_PLONE_5
 from ftw.upgrade import UpgradeStep
 
 
@@ -6,4 +7,7 @@ class AddEventsArchivePortlet(UpgradeStep):
     """
 
     def __call__(self):
-        self.install_upgrade_profile()
+        if IS_PLONE_5:
+            self.install_upgrade_profile(['plone.app.registry', 'portlets'])
+        else:
+            self.install_upgrade_profile(['jsregistry', 'portlets'])

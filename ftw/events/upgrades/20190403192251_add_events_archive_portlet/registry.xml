@@ -1,19 +1,4 @@
 <registry>
-
-  <record name="plone.types_not_searched"
-          interface="Products.CMFPlone.interfaces.controlpanel.ISearchSchema"
-          field="types_not_searched">
-    <value>
-      <element>ftw.events.EventListingBlock</element>
-    </value>
-  </record>
-
-  <record name="plone.displayed_types">
-    <value purge="false">
-      <element>ftw.events.EventFolder</element>
-    </value>
-  </record>
-
   <records prefix="plone.resources/ftw.events_archive_portlet_js"
            interface="Products.CMFPlone.interfaces.IResourceRegistry">
     <value key="js">++resource++ftw.events.resources/event-archive-portlet.js</value>
@@ -32,5 +17,6 @@
     <value key="jscompilation">++plone++ftw.events/ftw-events-compiled.js</value>
     <value key="merge_with">default</value>
   </records>
-
 </registry>
+
+
