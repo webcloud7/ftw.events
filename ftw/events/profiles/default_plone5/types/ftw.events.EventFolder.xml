@@ -27,7 +27,6 @@
         <element value="ftw.simplelayout.interfaces.ISimplelayout" />
         <element value="plone.app.content.interfaces.INameFromTitle" />
         <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-        <element value="plone.app.referenceablebehavior.referenceable.IReferenceable"/>
     </property>
 
     <property name="default_view">@@simplelayout-view</property>
