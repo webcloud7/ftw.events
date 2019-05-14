@@ -1,4 +1,4 @@
-.archive-portlet {
+.event-archive-portlet {
   ul {
     @include list-tree($indentation: $line-height-base);
   }
@@ -7,7 +7,7 @@
     @include label-round();
   }
 
-  .year {
+  .event-year {
     @extend .fa-icon;
     @extend .fa-angle-right;
 
@@ -15,13 +15,13 @@
       @extend .fa-icon;
       @extend .fa-angle-down;
 
-      ~ .months {
+      ~ .event-months {
         display: block;
       }
     }
   }
 
-  .months {
+  .event-months {
     display: none;
   }
 }

@@ -5,7 +5,7 @@ Changelog
 1.11.1 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix event archive portlet compatibility issue with ftw.news [Nachtalb]
 
 
 1.11.0 (2019-05-14)
