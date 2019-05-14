@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-11-02 07:33+0000\n"
+"POT-Creation-Date: 2019-05-01 19:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,21 @@ msgstr ""
 msgid "Allows to export the event to a calendar app"
 msgstr ""
 
+#: ./ftw/events/browser/configure.zcml:59
+msgid "Display the contents of a event folder."
+msgstr ""
+
 #: ./ftw/events/profiles/default/types/ftw.events.EventFolder.xml
+#: ./ftw/events/profiles/default_plone5/types/ftw.events.EventFolder.xml
 msgid "Event Folder"
 msgstr ""
 
+#: ./ftw/events/browser/configure.zcml:59
+msgid "Event Listing"
+msgstr ""
+
 #: ./ftw/events/profiles/default/types/ftw.events.EventPage.xml
+#: ./ftw/events/profiles/default_plone5/types/ftw.events.EventPage.xml
 msgid "Event Page"
 msgstr ""
 
@@ -31,6 +41,7 @@ msgid "Event location"
 msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
+#: ./ftw/events/profiles/default_plone5/types/ftw.events.EventListingBlock.xml
 msgid "EventListingBlock"
 msgstr ""
 
@@ -42,7 +53,7 @@ msgstr ""
 msgid "Location fields for event pages."
 msgstr ""
 
-#: ./ftw/events/behaviors/mopage.py:27
+#: ./ftw/events/behaviors/mopage.py:29
 msgid "Mopage"
 msgstr ""
 
@@ -50,7 +61,7 @@ msgstr ""
 msgid "Mopage trigger configuration"
 msgstr ""
 
-#: ./ftw/events/profiles.zcml:16
+#: ./ftw/events/profiles.zcml:17
 msgid "Provides event pages based on simplelayout."
 msgstr ""
 
@@ -63,6 +74,7 @@ msgid "Subscribe to the RSS feed"
 msgstr ""
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
+#: ./ftw/events/profiles/default_plone5/types/ftw.events.EventListingBlock.xml
 msgid "The event listing block renders a configurable list of event pages."
 msgstr ""
 
@@ -80,12 +92,12 @@ msgid "description_hide_empty_block"
 msgstr ""
 
 #. Default: "The mopage data endpoint URL points to the \"mopage.events.xml\" view somewhere on the public visible  Plone page. It must also contain the params \"partnerid\" and \"importid\". Example: https://mypage.ch/events/mopage.events.xml?partnerid=3&importid=6"
-#: ./ftw/events/behaviors/mopage.py:64
+#: ./ftw/events/behaviors/mopage.py:66
 msgid "description_mopage_data_endpoint_url"
 msgstr ""
 
 #. Default: "Contains the mopage URL to the trigger endpoint. This is only the base URL, it does not contain the endpoint URL from which the mopage server retrieves the events. Example: https://un:pw@xml.mopage.ch/infoservice/xml.php"
-#: ./ftw/events/behaviors/mopage.py:46
+#: ./ftw/events/behaviors/mopage.py:48
 msgid "description_mopage_trigger_url"
 msgstr ""
 
@@ -205,17 +217,18 @@ msgid "eventlisting_hide_empty_block_text"
 msgstr ""
 
 #. Default: "No content available."
-#: ./ftw/events/browser/templates/eventlisting.pt:20
+#: ./ftw/events/browser/templates/eventlisting.pt:22
 #: ./ftw/events/browser/templates/eventlistingblock.pt:14
 msgid "eventlisting_no_content_text"
 msgstr ""
 
-#: ./ftw/events/profiles.zcml:16
+#: ./ftw/events/profiles.zcml:17
 msgid "ftw.events"
 msgstr ""
 
 #. Default: "Export an ICS file containing all events from the current context."
 #: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/profiles/default_plone5/actions.xml
 #: ./ftw/events/upgrades/20181031165317_add_object_action_for_exporting_ics_file/actions.xml
 msgid "help_ical_export"
 msgstr ""
@@ -226,7 +239,7 @@ msgid "label_exclude_past_events"
 msgstr ""
 
 #. Default: "${title} - Events Feed"
-#: ./ftw/events/browser/eventlisting.py:86
+#: ./ftw/events/browser/eventlisting.py:118
 msgid "label_feed_desc"
 msgstr ""
 
@@ -261,12 +274,12 @@ msgid "label_location_zip"
 msgstr ""
 
 #. Default: "Mopage data endpoint URL (Plone)"
-#: ./ftw/events/behaviors/mopage.py:62
+#: ./ftw/events/behaviors/mopage.py:64
 msgid "label_mopage_data_endpoint_url"
 msgstr ""
 
 #. Default: "Mopage trigger URL"
-#: ./ftw/events/behaviors/mopage.py:44
+#: ./ftw/events/behaviors/mopage.py:46
 msgid "label_mopage_trigger_url"
 msgstr ""
 
@@ -286,7 +299,7 @@ msgid "label_show_rss_link"
 msgstr ""
 
 #. Default: "Mopage trigger enabled"
-#: ./ftw/events/behaviors/mopage.py:35
+#: ./ftw/events/behaviors/mopage.py:37
 msgid "label_trigger_enabled"
 msgstr ""
 
@@ -297,7 +310,7 @@ msgid "more_items_link_label"
 msgstr ""
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:76
+#: ./ftw/events/browser/eventlisting.py:98
 msgid "more_items_view_fallback_title"
 msgstr ""
 
@@ -308,6 +321,7 @@ msgstr ""
 
 #. Default: "Ical export"
 #: ./ftw/events/profiles/default/actions.xml
+#: ./ftw/events/profiles/default_plone5/actions.xml
 #: ./ftw/events/upgrades/20181031165317_add_object_action_for_exporting_ics_file/actions.xml
 msgid "title_ical_export"
 msgstr ""

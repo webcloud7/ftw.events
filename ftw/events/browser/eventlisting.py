@@ -1,18 +1,21 @@
-from Products.CMFCore.permissions import AccessInactivePortalContent
-from Products.CMFCore.utils import getToolByName, _checkPermission
+from DateTime import DateTime
 from Products.CMFPlone.PloneBatch import Batch
 from Products.Five.browser import BrowserView
 from ftw.events import _
 from ftw.events.interfaces import IEventListingView
 from plone import api
+from plone.app.event.base import _prepare_range
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.i18n import translate
 from zope.interface import implements
+import datetime
 
 
 class EventListing(BrowserView):
     """
+    EventListingBlock event listing
+
     This browser view renders a list of event pages based on the parameters
     defined on the event listing block which renders a link to this browser
     view.
@@ -34,8 +37,25 @@ class EventListing(BrowserView):
             context=self.context,
             request=self.request,
         )
-        start, end = block_view.get_dates_for_query()
+
+        datestring = self.request.get('archive')
+        if datestring:
+            try:
+                start = DateTime(datestring)
+            except DateTime.interfaces.SyntaxError:
+                raise
+            end = DateTime('{0}/{1}/{2}'.format(
+                start.year() + start.month() / 12,
+                start.month() % 12 + 1,
+                1)
+            ) - 1
+
+            start = start.earliestTime()
+            end = end.latestTime()
+        else:
+            start, end = block_view.get_dates_for_query()
         block_query = block_view.get_query(start, end)
+
         return block_query
 
     def get_items(self):
@@ -80,8 +100,18 @@ class EventListing(BrowserView):
         )
         return self.context.more_items_view_title or fallback_title
 
+    @property
+    def description(self):
+        return ''
+
 
 class EventListingRss(EventListing):
+    """
+    RSS-Feed event listing
+
+    This view is to be called on an EventListingBlock and does takes its
+    parameters into account.
+    """
 
     @property
     def description(self):
@@ -99,9 +129,21 @@ class EventListingRss(EventListing):
 
 
 class EventListingFolder(EventListing):
+    """
+    EventFolder event listing
+
+    This event listing view is a simpler stripped down version of the
+    EventListingBlockEventListing. It is used on the EventFolder directly and
+    it does not take any EventListingBlock's parameters into account.
+    """
+
     @property
     def title(self):
         return self.context.Title()
+
+    @property
+    def description(self):
+        return self.context.description
 
     def get_query(self):
         query = {
@@ -113,5 +155,32 @@ class EventListingFolder(EventListing):
 
         if api.user.has_permission('ftw.events: Add Event Page', obj=self.context):
             query['show_inactive'] = True
+
+        datestring = self.request.get('archive')
+        if datestring:
+            try:
+                start = DateTime(datestring)
+            except DateTime.interfaces.SyntaxError:
+                raise
+            end = DateTime('{0}/{1}/{2}'.format(
+                start.year() + start.month() / 12,
+                start.month() % 12 + 1,
+                1)
+            ) - 1
+
+            start, end = start.earliestTime(), end.latestTime()
+        else:
+            start = datetime.datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+
+            start, end = _prepare_range(self.context, start, None)
+
+        # All events from start date ongoing:
+        # The minimum end date of events is the date from which we search.
+        query['end'] = {'query': start, 'range': 'min'}
+        # All events until end date:
+        # The maximum start date must be the date until we search.
+        query['start'] = {'query': end, 'range': 'max'}
 
         return query

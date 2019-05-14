@@ -49,4 +49,13 @@
         permission="zope2.View"
         />
 
+    <include package="plone.app.contentmenu" />
+    <browser:menuItem
+        for="ftw.events.interfaces.IEventFolder"
+        title="Event Listing"
+        description="Display the contents of a event folder."
+        menu="plone_displayviews"
+        action="event_listing"
+        />
+
 </configure>
