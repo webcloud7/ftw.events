@@ -3,7 +3,7 @@
       tal:omit-tag="python: 1"
       i18n:domain="ftw.news">
 
-    <section class="portlet archive-portlet">
+    <section class="portlet event-archive-portlet">
 
         <header class="portletHeader">
             <h2 i18n:translate="">Archive</h2>

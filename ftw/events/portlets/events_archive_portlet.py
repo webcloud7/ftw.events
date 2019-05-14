@@ -179,12 +179,12 @@ class Renderer(base.Renderer):
         items = [{
             'title': year['title'],
             'count': year['number'],
-            'class': 'year expanded' if year['mark'] else 'year',
-            'months_expanded': 'months expanded' if year['mark'] else 'months',
+            'class': 'event-year expanded' if year['mark'] else 'event-year',
+            'months_expanded': 'event-months expanded' if year['mark'] else 'event-months',
             'months': [{
                 'title': month['title'],
                 'url': month['url'],
-                'class': 'month highlight' if month['mark'] else 'month',
+                'class': 'event-month highlight' if month['mark'] else 'event-month',
                 'month': month['title'],
                 'count': month['number'],
             } for month in year['months']],

@@ -27,7 +27,7 @@
   function openYear(year) { year.addClass("expanded"); }
 
   function closeMonth(year) {
-    $(".months", year.parent()).attr("aria-hidden", "true");
+    $(".event-months", year.parent()).attr("aria-hidden", "true");
   }
 
   function closeYear(year) {
@@ -44,13 +44,13 @@
   }
 
   function selectFirstMonth(year) {
-    $(".month", year.parent()).first().focus();
-    $(".months", year.parent()).attr("aria-hidden", "false");
+    $(".event-month", year.parent()).first().focus();
+    $(".event-months", year.parent()).attr("aria-hidden", "false");
   }
 
   var yearCarousel = {
     currentIndex: 0,
-    years: $(".year"),
+    years: $(".event-year"),
     next: function() {
       if(this.currentIndex === this.years.length - 1) {
         this.currentIndex = 0;
@@ -71,7 +71,7 @@
       this.years.eq(this.currentIndex).focus();
     },
     init: function(context) {
-      this.years = $(".year", context);
+      this.years = $(".event-year", context);
       this.currentIndex = 0;
     }
   };
@@ -104,17 +104,17 @@
     },
     init: function(year, index) {
       this.year = year;
-      this.months = $(".month", this.year.parent());
+      this.months = $(".event-month", this.year.parent());
       this.currentIndex = index || 0;
     }
   };
 
-  $(document).on("click", ".year", function(event) {
+  $(document).on("click", ".event-year", function(event) {
     event.preventDefault();
     toggleYear($(event.currentTarget));
   });
 
-  $(document).on("keydown", ".year", function(event) {
+  $(document).on("keydown", ".event-year", function(event) {
     var year = $(event.currentTarget);
     monthCarousel.init(year);
 
@@ -144,7 +144,7 @@
     }
   });
 
-  $(document).on("keydown", ".month", function(event) {
+  $(document).on("keydown", ".event-month", function(event) {
     var month = $(event.currentTarget);
 
     switch (event.which) {
@@ -167,7 +167,7 @@
     }
   });
 
-  $(document).on("keyup", ".month", function(event) {
+  $(document).on("keyup", ".event-month", function(event) {
     var month = $(event.currentTarget);
 
     switch (event.which) {
@@ -178,7 +178,7 @@
   });
 
   $(function() {
-    element = $(".archive-portlet");
+    element = $(".event-archive-portlet");
     yearCarousel.init(element);
   });
 

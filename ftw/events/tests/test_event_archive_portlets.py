@@ -38,7 +38,7 @@ class TestEventArchivePortlets(FunctionalTestCase):
 
         self._add_portlet(browser, events_folder)
 
-        self.assertIn('Archive', browser.css('.archive-portlet header h2').text,
+        self.assertIn('Archive', browser.css('.event-archive-portlet header h2').text,
                       'Archive portlet is not here but it should be.')
 
     @browsing
@@ -70,7 +70,7 @@ class TestEventArchivePortlets(FunctionalTestCase):
         self.assertEqual(
             ['http://nohost/plone/event-folder/event_listing?archive=2013/02/01',
                 'http://nohost/plone/event-folder/event_listing?archive=2013/01/01'],
-            map(lambda month: month.attrib['href'], browser.css('.month')))
+            map(lambda month: month.attrib['href'], browser.css('.event-month')))
 
     @browsing
     def test_archive_portlet_not_available_on_plone_site(self, browser):
@@ -113,7 +113,7 @@ class TestEventArchivePortlets(FunctionalTestCase):
 
         self._add_portlet(browser, events_folder)
 
-        browser.css('.month').first.click()
+        browser.css('.event-month').first.click()
         self.assertEqual(2, len(browser.css('.event-item')))
 
     @browsing
@@ -129,5 +129,5 @@ class TestEventArchivePortlets(FunctionalTestCase):
 
         self._add_portlet(browser, events_folder)
 
-        browser.css('.month').first.click()
+        browser.css('.event-month').first.click()
         self.assertEqual(1, len(browser.css('.event-item')))
