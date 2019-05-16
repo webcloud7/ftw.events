@@ -5,7 +5,7 @@ Changelog
 1.11.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix typo in "Veranstalgungsauflistung" => "Veranstaltungsauflistung" [Nachtalb]
 
 
 1.11.1 (2019-05-14)

@@ -29,7 +29,7 @@ msgstr "Veranstaltungsordner"
 
 #: ./ftw/events/browser/configure.zcml:59
 msgid "Event Listing"
-msgstr "Veranstalgungsauflistung"
+msgstr "Veranstaltungsauflistung"
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventPage.xml
 #: ./ftw/events/profiles/default_plone5/types/ftw.events.EventPage.xml
