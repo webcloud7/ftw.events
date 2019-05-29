@@ -149,7 +149,6 @@ class EventListingFolder(EventListing):
         query = {
             'object_provides': 'ftw.events.interfaces.IEventPage',
             'sort_on': 'start',
-            'sort_order': 'reverse',
             'path': '/'.join(self.context.getPhysicalPath())
         }
 

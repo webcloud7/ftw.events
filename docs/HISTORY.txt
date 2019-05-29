@@ -5,7 +5,7 @@ Changelog
 1.11.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Change sort order to match the same the EventListingBlock (next events on top) [Nachtalb]
 
 
 1.11.2 (2019-05-21)
