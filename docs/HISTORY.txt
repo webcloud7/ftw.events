@@ -5,7 +5,7 @@ Changelog
 1.11.4 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix event accessor location field (includes features like location in the ics export) [Nachtalb]
 
 
 1.11.3 (2019-05-29)
