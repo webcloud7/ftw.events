@@ -6,6 +6,7 @@ from ftw.events.tests import RealFuncitionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.core import LIB_REQUESTS
 from ftw.testbrowser.pages import editbar
+import transaction
 import urlparse
 
 
@@ -34,6 +35,20 @@ class TestIsICSView(RealFuncitionalTestCase):
         self.assertIn('BEGIN:VEVENT', body)
         self.assertIn('END:VCALENDAR', body)
         self.assertIn('END:VEVENT', body)
+
+    @browsing
+    def test_location_in_ics(self, browser):
+        location = 'london baker street 221b'
+
+        browser.request_library = LIB_REQUESTS
+        browser.login().visit(self.event, view="ics_view")
+
+        self.assertNotIn(location, browser.contents)
+
+        self.event.location_title = location
+        transaction.commit()
+        browser.reload()
+        self.assertIn(location, browser.contents)
 
     @browsing
     def test_ics_view_is_ics_on_eventfolder(self, browser):

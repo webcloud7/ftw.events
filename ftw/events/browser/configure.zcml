@@ -58,4 +58,5 @@
         action="event_listing"
         />
 
+    <adapter factory=".event_accessor.FtwEventAccessor" />
 </configure>
