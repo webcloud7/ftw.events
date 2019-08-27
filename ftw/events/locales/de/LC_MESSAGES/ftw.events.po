@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-05-01 19:20+0000\n"
+"POT-Creation-Date: 2019-08-29 09:10+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,6 +13,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
+
+#: ./ftw/events/portlets/templates/events_archive_portlet.pt:34
+msgid "<span class=\"title\">${DYNAMIC_CONTENT}</span> <span class=\"count\">${DYNAMIC_CONTENT}</span>"
+msgstr ""
 
 #: ./ftw/events/upgrades/20160915095729_add_ics_action/actions.xml
 msgid "Allows to export the event to a calendar app"
@@ -86,6 +90,11 @@ msgstr "Wann"
 msgid "Where"
 msgstr "Wo"
 
+#. Default: "Archive"
+#: ./ftw/events/portlets/events_archive_portlet.py:171
+msgid "archive"
+msgstr "Archive"
+
 #. Default: "Hide the block if there are not events to be shown."
 #: ./ftw/events/contents/eventlistingblock.py:181
 msgid "description_hide_empty_block"
@@ -115,6 +124,16 @@ msgstr "Wird nicht übersetzt."
 #: ./ftw/events/contents/eventlistingblock.py:172
 msgid "description_show_rss_link"
 msgstr "Einen Link zum RSS-Feed der Veranstaltungen anzeigen."
+
+#. Default: "Add Event Archive Portlet"
+#: ./ftw/events/portlets/events_archive_portlet.py:226
+msgid "event_archive_portlet_add"
+msgstr "Event Archiv Portlet Hinzufügen"
+
+#. Default: "Edit Event Archive Portlet"
+#: ./ftw/events/portlets/events_archive_portlet.py:257
+msgid "event_archive_portlet_edit"
+msgstr "Event Archiv Portlet Editieren"
 
 #. Default: "Show title"
 #: ./ftw/events/contents/eventlistingblock.py:72
@@ -222,6 +241,16 @@ msgstr "Dieser Block ist nur noch für Benutzer sichtbar, die Inhalte bearbeiten
 msgid "eventlisting_no_content_text"
 msgstr "Kein Inhalt verfügbar."
 
+#. Default: "Cancel"
+#: ./ftw/events/portlets/events_archive_portlet.py:293
+msgid "events_portlet_edit_form_cancel_label"
+msgstr "Abbrechen"
+
+#. Default: "Save"
+#: ./ftw/events/portlets/events_archive_portlet.py:276
+msgid "events_portlet_edit_form_save_label"
+msgstr "Speichern"
+
 #: ./ftw/events/profiles.zcml:17
 msgid "ftw.events"
 msgstr "ftw.events"
@@ -313,6 +342,11 @@ msgstr "Weitere Einträge"
 #: ./ftw/events/browser/eventlisting.py:98
 msgid "more_items_view_fallback_title"
 msgstr "Veranstaltungen"
+
+#. Default: "Title"
+#: ./ftw/events/portlets/events_archive_portlet.py:156
+msgid "title"
+msgstr "Titel"
 
 #. Default: "Events"
 #: ./ftw/events/contents/eventfolder.py:33
