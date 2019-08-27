@@ -1,13 +1,19 @@
+from plone.app.portlets.interfaces import IPortletPermissionChecker
+from Acquisition import aq_parent
+from Acquisition import aq_inner
+from zope.component import getMultiAdapter
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import monthname_msgid
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from ftw.events import _
 from plone.app.portlets.portlets import base
 from plone.memoize.view import memoize
 from plone.portlets.interfaces import IPortletDataProvider
+from zope import schema
 from zope.i18n import translate
 from zope.interface import implements
-
+from plone.directives.form.form import SchemaAddForm
 from ftw.events.interfaces import IEventPage, IEventListingView
 
 
@@ -142,13 +148,30 @@ class IEventsArchivePortlet(IPortletDataProvider):
     """Archive portlet interface.
     """
 
+    portlet_title = schema.TextLine(
+        title=_(u'title', default=u'Title'),
+        required=True,
+        default=u'',
+    )
+
 
 class Assignment(base.Assignment):
     implements(IEventsArchivePortlet)
 
+    def __init__(self, portlet_title):
+        self._portlet_title = portlet_title
+
+    @property
+    def portlet_title(self):
+        return self._portlet_title or 'Archive'
+
+    @portlet_title.setter
+    def portlet_title(self, value):
+        self._portlet_title = value
+
     @property
     def title(self):
-        return 'Events Archive Portlet'
+        return u'Event Archive Portlet ({0})'.format(self.portlet_title)
 
 
 class Renderer(base.Renderer):
@@ -194,7 +217,32 @@ class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/events_archive_portlet.pt')
 
 
-class AddForm(base.NullAddForm):
+class AddForm(SchemaAddForm):
+    label = _(u'event_portlet_add_form_label', default=u'Add Event Portlet')
+    schema = IEventsArchivePortlet
 
-    def create(self):
-        return Assignment()
+    def __init__(self, context, request):
+        super(AddForm, self).__init__(context, request)
+        self.status = None
+        self._finishedAdd = None
+
+    def __call__(self):
+        IPortletPermissionChecker(aq_parent(aq_inner(self.context)))()
+        return super(AddForm, self).__call__()
+
+    def nextURL(self):
+        editview = aq_parent(aq_inner(self.context))
+        context = aq_parent(aq_inner(editview))
+        url = str(getMultiAdapter((context, self.request),
+                                  name=u'absolute_url'))
+        return url + '/@@manage-portlets'
+
+    def add(self, object_):
+        ob = self.context.add(object_)
+        self._finishedAdd = True
+        return ob
+
+    def create(self, data):
+        return Assignment(
+            portlet_title=data.get('portlet_title'),
+        )
