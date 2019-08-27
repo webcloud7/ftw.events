@@ -1,20 +1,21 @@
-from plone.app.portlets.interfaces import IPortletPermissionChecker
-from Acquisition import aq_parent
 from Acquisition import aq_inner
-from zope.component import getMultiAdapter
+from Acquisition import aq_parent
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import monthname_msgid
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.events import _
+from ftw.events.interfaces import IEventListingView
+from ftw.events.interfaces import IEventPage
+from plone.app.portlets.interfaces import IPortletPermissionChecker
 from plone.app.portlets.portlets import base
+from plone.directives.form.form import SchemaAddForm
 from plone.memoize.view import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
+from zope.component import getMultiAdapter
 from zope.i18n import translate
 from zope.interface import implements
-from plone.directives.form.form import SchemaAddForm
-from ftw.events.interfaces import IEventPage, IEventListingView
 
 
 def zLocalizedTime(request, time, long_format=False):
