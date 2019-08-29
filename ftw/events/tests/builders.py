@@ -1,3 +1,5 @@
+from datetime import datetime
+from datetime import timedelta
 from ftw.builder import builder_registry
 from ftw.builder.dexterity import DexterityBuilder
 from ftw.simplelayout.tests import builders
@@ -19,6 +21,11 @@ class EventPageBuilder(DexterityBuilder):
         self.having(recurrence='')
         # using greenwich, since the test-site / browser is set up with it:
         self.having(timezone='Etc/Greenwich')
+        # Manually set start and end because an early import of IEventBasic
+        # in the `test_staging.py` results to events having no start and end
+        now = datetime.utcnow()
+        self.starting(now)
+        self.ending(now + timedelta(hours=1))
 
     def starting(self, date):
         if IS_PLONE_5:
