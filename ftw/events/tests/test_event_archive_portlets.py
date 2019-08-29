@@ -3,19 +3,44 @@ from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.testing import FUNCTIONAL_TESTING
 from ftw.events.tests import FunctionalTestCase
+from ftw.events.tests.utils import LanguageSetter
 from ftw.testbrowser import browsing
-from plone import api
-import transaction
+from zope.i18n.locales import locales
 
 events_portlet_action = '/++contextportlets++plone.rightcolumn/+/eventsarchiveportlet'
 
 
-class TestEventArchivePortlets(FunctionalTestCase):
+class TestEventArchivePortlets(FunctionalTestCase, LanguageSetter):
     layer = FUNCTIONAL_TESTING
 
     def setUp(self):
         super(TestEventArchivePortlets, self).setUp()
         self.grant('Manager')
+
+        default = 'en'
+        supported = ['en', 'de']
+        self.set_language_settings(default, supported)
+
+    def _set_language_de(self):
+        """This Function is used to set the language of the plone site.
+        We need this, because we wan't to make sure that the language is
+        inherited when there isn't one forced.
+        """
+        locale = locales.getLocale('de')
+        target_language = locale.id.language
+
+        # If we get a territory, we enable the combined language codes
+        use_combined = False
+        if locale.id.territory:
+            use_combined = True
+            target_language += '_' + locale.id.territory
+
+        # As we have a sensible language code set now, we disable the
+        # start neutral functionality (not available in plone 5.1 anymore).
+        start_neutral = False
+
+        self.set_language_settings(target_language, [target_language],
+                                   use_combined, start_neutral)
 
     def _add_portlet(self, browser, context=None):
         """
@@ -119,16 +144,19 @@ class TestEventArchivePortlets(FunctionalTestCase):
 
     @browsing
     def test_month_with_umlaut(self, browser):
-        lang_tool = api.portal.get_tool('portal_languages')
-        lang_tool.setDefaultLanguage('de')
-        transaction.commit()
+        self._set_language_de()
 
         events_folder = create(Builder('event folder').titled(u'Event Folder')
                                .with_property('layout', 'event_listing'))
         create(Builder('event page').titled(u'Event Entry 1').within(events_folder)
                .having(start=datetime(2013, 3, 1), end=datetime(2013, 3, 1)))
 
-        self._add_portlet(browser, events_folder)
+        # Helper method sets the title in english and not in german
+        browser.login().visit(events_folder, view='@@manage-portlets')
+        browser.css('#portletmanager-plone-rightcolumn form')[0].fill(
+            {':action': events_portlet_action}).submit()
+        browser.css('#form').first.fill({'Titel': 'Archiv'}).submit()
+        browser.open(events_folder)
 
         browser.css('.event-month').first.click()
         self.assertEqual(1, len(browser.css('.event-item')))
