@@ -1,14 +1,24 @@
+from Acquisition import aq_inner
+from Acquisition import aq_parent
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.i18nl10n import monthname_msgid
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from ftw.events import _
+from ftw.events.interfaces import IEventListingView
+from ftw.events.interfaces import IEventPage
+from plone.app.portlets.interfaces import IPortletPermissionChecker
 from plone.app.portlets.portlets import base
+from plone.directives.form.form import SchemaAddForm
+from plone.directives.form.form import SchemaEditForm
 from plone.memoize.view import memoize
 from plone.portlets.interfaces import IPortletDataProvider
+from z3c.form import button
+from z3c.form import form as z3cform
+from zope import schema
+from zope.component import getMultiAdapter
 from zope.i18n import translate
 from zope.interface import implements
-
-from ftw.events.interfaces import IEventPage, IEventListingView
 
 
 def zLocalizedTime(request, time, long_format=False):
@@ -142,13 +152,31 @@ class IEventsArchivePortlet(IPortletDataProvider):
     """Archive portlet interface.
     """
 
+    portlet_title = schema.TextLine(
+        title=_(u'title', default=u'Title'),
+        required=True,
+        default=u'',
+    )
+
 
 class Assignment(base.Assignment):
     implements(IEventsArchivePortlet)
 
+    def __init__(self, portlet_title):
+        self._portlet_title = portlet_title
+
+    @property
+    def portlet_title(self):
+        return (self._portlet_title if hasattr(self, '_portlet_title') else
+                _(u'archive', default=u'Archive'))
+
+    @portlet_title.setter
+    def portlet_title(self, value):
+        self._portlet_title = value
+
     @property
     def title(self):
-        return 'Events Archive Portlet'
+        return u'Event Archive Portlet ({0})'.format(self.portlet_title)
 
 
 class Renderer(base.Renderer):
@@ -194,7 +222,79 @@ class Renderer(base.Renderer):
     render = ViewPageTemplateFile('templates/events_archive_portlet.pt')
 
 
-class AddForm(base.NullAddForm):
+class AddForm(SchemaAddForm):
+    label = _(u'event_archive_portlet_add', default=u'Add Event Archive Portlet')
+    schema = IEventsArchivePortlet
 
-    def create(self):
-        return Assignment()
+    def __init__(self, context, request):
+        super(AddForm, self).__init__(context, request)
+        self.status = None
+        self._finishedAdd = None
+
+    def __call__(self):
+        IPortletPermissionChecker(aq_parent(aq_inner(self.context)))()
+        return super(AddForm, self).__call__()
+
+    def nextURL(self):
+        editview = aq_parent(aq_inner(self.context))
+        context = aq_parent(aq_inner(editview))
+        url = str(getMultiAdapter((context, self.request),
+                                  name=u'absolute_url'))
+        return url + '/@@manage-portlets'
+
+    def add(self, object_):
+        ob = self.context.add(object_)
+        self._finishedAdd = True
+        return ob
+
+    def create(self, data):
+        return Assignment(
+            portlet_title=data.get('portlet_title'),
+        )
+
+
+class EditForm(SchemaEditForm):
+    label = _(u'event_archive_portlet_edit', default=u'Edit Event Archive Portlet')
+    schema = IEventsArchivePortlet
+
+    def __init__(self, context, request):
+        super(EditForm, self).__init__(context, request)
+        self.status = None
+        self._finishedAdd = None
+
+    def __call__(self):
+        IPortletPermissionChecker(aq_parent(aq_inner(self.context)))()
+        return super(EditForm, self).__call__()
+
+    def nextURL(self):
+        editview = aq_parent(aq_inner(self.context))
+        context = aq_parent(aq_inner(editview))
+        url = str(getMultiAdapter((context, self.request),
+                                  name=u'absolute_url'))
+        return url + '/@@manage-portlets'
+
+    @button.buttonAndHandler(_(u'events_portlet_edit_form_save_label',
+                               default=u'Save'),
+                             name='apply')
+    def handleSave(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        changes = self.applyChanges(data)
+        if changes:
+            self.status = 'Changes saved'
+        else:
+            self.status = 'No changes'
+
+        nextURL = self.nextURL()
+        return self.request.response.redirect(nextURL)
+
+    @button.buttonAndHandler(_(u'events_portlet_edit_form_cancel_label',
+                               default=u'Cancel'),
+                             name='cancel_add')
+    def handleCancel(self, action):
+        nextURL = self.nextURL()
+        return self.request.response.redirect(nextURL)
+
+    updateActions = z3cform.EditForm.updateActions

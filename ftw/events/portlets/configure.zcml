@@ -14,6 +14,7 @@
         view_permission="zope2.View"
         renderer=".events_archive_portlet.Renderer"
         addview=".events_archive_portlet.AddForm"
+        editview=".events_archive_portlet.EditForm"
         />
 
 </configure>

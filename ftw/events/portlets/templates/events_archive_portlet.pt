@@ -1,12 +1,12 @@
 <html xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       tal:omit-tag="python: 1"
-      i18n:domain="ftw.news">
+      i18n:domain="ftw.events">
 
     <section class="portlet event-archive-portlet">
 
         <header class="portletHeader">
-            <h2 i18n:translate="">Archive</h2>
+            <h2 tal:content="view/data/portlet_title"></h2>
         </header>
         <section class="portletItem">
           <ul class="years">
