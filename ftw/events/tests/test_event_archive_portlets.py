@@ -27,6 +27,7 @@ class TestEventArchivePortlets(FunctionalTestCase):
         browser.login().visit(context, view='@@manage-portlets')
         browser.css('#portletmanager-plone-rightcolumn form')[0].fill(
             {':action': events_portlet_action}).submit()
+        browser.css('#form').first.fill({'Title': 'Archive'}).submit()
         browser.open(context)
 
     @browsing
