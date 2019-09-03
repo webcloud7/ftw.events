@@ -1,14 +1,20 @@
 from ftw.builder import Builder
 from ftw.builder import create
+from ftw.events.contents.eventlistingblock import IEventListingBlockSchema
 from ftw.events.tests import FunctionalTestCase
 from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
 from ftw.testing import freeze
+from plone import api
 from plone.protect.authenticator import createToken
+from z3c.relationfield import RelationValue
+from zope.component import getUtility
+from zope.intid import IIntIds
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
 import datetime
+import transaction
 
 
 class TestEventListingBlock(FunctionalTestCase):
@@ -451,6 +457,94 @@ class TestEventListingBlock(FunctionalTestCase):
         self.assertEqual(
             'http://nohost/plone/content-page/this-is-a-eventlistingblock/events',
             browser.find('Show me more').attrib['href']
+        )
+
+    @browsing
+    def test_custom_link_to_show_more_items(self, browser):
+
+        page = create(Builder('sl content page')
+                      .titled(u'Content Page'))
+
+        page_to_link = create(Builder('sl content page')
+                              .titled(u'Content Page'))
+
+        event_folder = create(Builder('event folder').
+                              titled(u'Event Folder')
+                              .within(page))
+        create(Builder('event page')
+               .titled(u'Event')
+               .within(event_folder))
+        block = create(Builder('event listing block')
+                       .within(page)
+                       .having(show_more_items_link=True)
+                       .titled(u'This is a EventListingBlock'))
+
+        browser.login().visit(page)
+        self.assertEqual(
+            'http://nohost/plone/content-page/this-is-a-eventlistingblock/events',
+            browser.find('More Items').attrib['href']
+        )
+
+        browser.login().visit(block, view='@@edit')
+        browser.fill({'Link to more items': page_to_link}).submit()
+
+        self.assertEqual(
+            page_to_link.absolute_url(),
+            browser.find('More Items').attrib['href']
+        )
+
+    @browsing
+    def test_custom_link_to_show_more_items_when_target_is_deleted(self, browser):
+
+        # Create an event folder within the Plone Site.
+        event_folder = create(Builder('event folder').
+                              titled(u'Event Folder')
+                              .within(self.portal))
+
+        # Create an event page within the event folder so the event listing block
+        # has something to render. Empty event listing blocks will never render the
+        # "link to more items.
+        create(Builder('event page')
+               .within(event_folder))
+
+        # Create a content page we will use as the "link to more items".
+        target = create(Builder('sl content page')
+                        .titled(u'Target of the link to more items'))
+
+        # Get the event folder's event listing block which has been created
+        # automatically.
+        event_listing_block = api.content.find(
+            portal_type='ftw.events.EventListingBlock',
+            within=event_folder
+        )[0].getObject()
+
+        # Customize the "link to more items" of the event listing block so it points
+        # to the content page we just created and tell the block to render the link.
+        IEventListingBlockSchema(event_listing_block).link_to_more_items = RelationValue(
+            getUtility(IIntIds).getId(target)
+        )
+        IEventListingBlockSchema(event_listing_block).show_more_items_link = True
+        transaction.commit()
+
+        # The link is rendered on the event list block and links to our target content page.
+        # This is the expected behavior before we are going to deleted the content page.
+        browser.login().visit(event_folder)
+        self.assertEqual(
+            'http://nohost/plone/target-of-the-link-to-more-items',
+            browser.find('More Items').attrib['href']
+        )
+
+        # Somebody deletes the content page we used as the target for the "link to more items".
+        self.portal.manage_delObjects(ids=[target.getId()])
+        transaction.commit()
+
+        # Open the page again.
+        browser.login().visit(event_folder)
+
+        # Now the link points to events view on the event listing block.
+        self.assertEqual(
+            'http://nohost/plone/event-folder/events/events',
+            browser.find('More Items').attrib['href']
         )
 
     def test_syndication_is_enabled_by_default_on_block(self):

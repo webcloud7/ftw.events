@@ -30,7 +30,10 @@ class EventListingBlockView(BaseBlock):
 
         more_items_link_url = ''
         if self.context.show_more_items_link:
-            more_items_link_url = '/'.join([self.context.absolute_url(), 'events'])
+            if self.context.link_to_more_items and self.context.link_to_more_items.to_object:
+                more_items_link_url = self.context.link_to_more_items.to_object.absolute_url()
+            else:
+                more_items_link_url = '/'.join([self.context.absolute_url(), 'events'])
 
         more_items_link_label = (
             self.context.more_items_link_label or

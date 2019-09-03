@@ -46,6 +46,7 @@ class IEventListingBlockSchema(form.Schema):
                 default=u'Link'),
         fields=[
             'show_more_items_link',
+            'link_to_more_items',
             'more_items_link_label',
             'more_items_view_title',
         ]
@@ -148,6 +149,15 @@ class IEventListingBlockSchema(form.Schema):
                       default=u'Render a link to a page which renders more '
                               u'items (only if there is at least one item).'),
         default=False,
+    )
+
+    form.widget(link_to_more_items=ReferenceWidgetFactory)
+    link_to_more_items = RelationChoice(
+        title=_(u'event_listing_config_items_link', default=u'Link to more items'),
+        source=ReferenceObjSourceBinder(
+            selectable_class=FilterByPathSelectable),
+        default=None,
+        required=False,
     )
 
     more_items_link_label = schema.TextLine(
