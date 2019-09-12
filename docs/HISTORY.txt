@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.13.1 (unreleased)
+1.13.1 (2019-09-12)
 -------------------
 
 - Add a location-setter to fix the ics-importer. [elioschmutz]
