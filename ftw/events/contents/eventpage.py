@@ -43,3 +43,12 @@ class EventPage(Container):
 
         else:
             return None
+
+    @location.setter
+    def location(self, value):
+        if ILocationFields.providedBy(self):
+            ILocationFields(self).location_title = value
+        elif IEventLocation.providedBy(self):
+            IEventLocation(self).location = value
+        else:
+            raise NotImplementedError()
