@@ -5,7 +5,7 @@ Changelog
 1.13.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Use same rss label text as ftw.news for a more unified experience [Nachtalb]
 
 
 1.13.1 (2019-09-12)
