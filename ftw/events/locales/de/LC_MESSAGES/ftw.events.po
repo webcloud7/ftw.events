@@ -75,7 +75,7 @@ msgstr "Felder für die Konfiguration des Mopage Auslösers."
 
 #: ./ftw/events/browser/templates/eventlistingblock.pt:46
 msgid "Subscribe to the RSS feed"
-msgstr "RSS Feed abonnieren"
+msgstr "RSS abonnieren"
 
 #: ./ftw/events/profiles/default/types/ftw.events.EventListingBlock.xml
 #: ./ftw/events/profiles/default_plone5/types/ftw.events.EventListingBlock.xml
