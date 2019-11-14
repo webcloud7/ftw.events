@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-02 15:14+0000\n"
+"POT-Creation-Date: 2019-11-11 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "When"
 msgstr ""
 
-#: ./ftw/events/viewlets/templates/event_details.pt:22
+#: ./ftw/events/viewlets/templates/event_details.pt:27
 msgid "Where"
 msgstr ""
 
@@ -241,9 +241,13 @@ msgid "eventlisting_hide_empty_block_text"
 msgstr ""
 
 #. Default: "No content available."
-#: ./ftw/events/browser/templates/eventlisting.pt:22
 #: ./ftw/events/browser/templates/eventlistingblock.pt:14
 msgid "eventlisting_no_content_text"
+msgstr ""
+
+#. Default: "No content available"
+#: ./ftw/events/browser/templates/eventlisting.pt:23
+msgid "events_listing_no_content_text"
 msgstr ""
 
 #. Default: "Cancel"
@@ -273,8 +277,13 @@ msgid "label_exclude_past_events"
 msgstr ""
 
 #. Default: "${title} - Events Feed"
-#: ./ftw/events/browser/eventlisting.py:118
+#: ./ftw/events/browser/eventlisting.py:122
 msgid "label_feed_desc"
+msgstr ""
+
+#. Default: "Google Maps"
+#: ./ftw/events/viewlets/templates/event_details.pt:21
+msgid "label_google_maps"
 msgstr ""
 
 #. Default: "Hide empty block"
@@ -344,7 +353,7 @@ msgid "more_items_link_label"
 msgstr ""
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:98
+#: ./ftw/events/browser/eventlisting.py:102
 msgid "more_items_view_fallback_title"
 msgstr ""
 
@@ -356,6 +365,10 @@ msgstr ""
 #. Default: "Events"
 #: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
+msgstr ""
+
+#: ./ftw/events/viewlets/templates/event_details.pt:21
+msgid "title_google_maps"
 msgstr ""
 
 #. Default: "Ical export"

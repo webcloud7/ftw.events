@@ -9,7 +9,6 @@ tests_require = [
     'ftw.chameleon',
     'ftw.events[mopage_publisher_receiver]',
     'ftw.lawgiver',
-    'ftw.referencewidget[tests]',
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',

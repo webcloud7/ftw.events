@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-09-02 15:14+0000\n"
+"POT-Creation-Date: 2019-11-11 14:42+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,7 +86,7 @@ msgstr "Konfigurierbarer Block, welcher Veranstaltungen auflistet."
 msgid "When"
 msgstr "Wann"
 
-#: ./ftw/events/viewlets/templates/event_details.pt:22
+#: ./ftw/events/viewlets/templates/event_details.pt:27
 msgid "Where"
 msgstr "Wo"
 
@@ -241,9 +241,13 @@ msgid "eventlisting_hide_empty_block_text"
 msgstr "Dieser Block ist nur noch für Benutzer sichtbar, die Inhalte bearbeiten dürfen. So kann der Block weiterhin bearbeitet werden."
 
 #. Default: "No content available."
-#: ./ftw/events/browser/templates/eventlisting.pt:22
 #: ./ftw/events/browser/templates/eventlistingblock.pt:14
 msgid "eventlisting_no_content_text"
+msgstr "Kein Inhalt verfügbar."
+
+#. Default: "No content available"
+#: ./ftw/events/browser/templates/eventlisting.pt:23
+msgid "events_listing_no_content_text"
 msgstr "Kein Inhalt verfügbar."
 
 #. Default: "Cancel"
@@ -273,9 +277,14 @@ msgid "label_exclude_past_events"
 msgstr "Vergangene Veranstaltungen nicht anzeigen"
 
 #. Default: "${title} - Events Feed"
-#: ./ftw/events/browser/eventlisting.py:118
+#: ./ftw/events/browser/eventlisting.py:122
 msgid "label_feed_desc"
 msgstr "${title} - Veranstaltungs Feed"
+
+#. Default: "Google Maps"
+#: ./ftw/events/viewlets/templates/event_details.pt:21
+msgid "label_google_maps"
+msgstr "Google Maps"
 
 #. Default: "Hide empty block"
 #: ./ftw/events/contents/eventlistingblock.py:189
@@ -344,7 +353,7 @@ msgid "more_items_link_label"
 msgstr "Weitere Einträge"
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:98
+#: ./ftw/events/browser/eventlisting.py:102
 msgid "more_items_view_fallback_title"
 msgstr "Veranstaltungen"
 
@@ -357,6 +366,10 @@ msgstr "Titel"
 #: ./ftw/events/contents/eventfolder.py:33
 msgid "title_default_eventlisting_block"
 msgstr "Veranstaltungen"
+
+#: ./ftw/events/viewlets/templates/event_details.pt:21
+msgid "title_google_maps"
+msgstr "Ort auf Google Maps ansehen"
 
 #. Default: "Ical export"
 #: ./ftw/events/profiles/default/actions.xml

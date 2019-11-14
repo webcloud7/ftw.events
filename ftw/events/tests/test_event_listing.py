@@ -40,7 +40,7 @@ class TestEventListing(FunctionalTestCase):
         browser.visit(block, view='@@events')
         self.assertEqual(
             ['My Event'],
-            browser.css('.event-row .title').text
+            browser.css('.event-title').text
         )
 
     @browsing
@@ -107,7 +107,7 @@ class TestEventListing(FunctionalTestCase):
         browser.visit(block, view='@@events')
         self.assertEqual(
             ['Infinite Loop 1, Hamburgstrasse 3743x, 12345 Hamburg'],
-            browser.css('.event-row .byline .location').text
+            browser.css('.event-location').text
         )
 
         # Empty the location and make sure it is no longer rendered.
@@ -119,7 +119,7 @@ class TestEventListing(FunctionalTestCase):
         browser.visit(block, view='@@events')
         self.assertEqual(
             [],
-            browser.css('.event-row .byline .location')
+            browser.css('.event-location')
         )
 
     @browsing
@@ -144,14 +144,14 @@ class TestEventListing(FunctionalTestCase):
         browser.login(contributor).visit(block, view='@@events')
         self.assertEqual(
             ['Future Event'],
-            browser.css('.event-row .title').text
+            browser.css('.event-title').text
         )
 
         # Make sure an anonymous user does not see the inactive news.
         browser.logout().visit(block, view='@@events')
         self.assertEqual(
             [],
-            browser.css('.event-row .title').text
+            browser.css('.event-title').text
         )
 
     @browsing
@@ -194,5 +194,5 @@ class TestEventListing(FunctionalTestCase):
                 ['Event which ended a few hours ago',
                  'Today event',
                  'Future event'],
-                browser.css('.event-item h3.title').text
+                browser.css('.event-item .event-title').text
             )
