@@ -4,7 +4,7 @@ from ftw.builder import create
 from ftw.events.tests import FunctionalTestCase
 from ftw.simplelayout.staging.interfaces import IStaging
 from ftw.testbrowser import browsing
-from unittest2 import skipIf
+from unittest import skipIf
 from ftw.testing import IS_PLONE_5
 from plone.event.utils import pydt
 from plone.app.event.dx.behaviors import IEventBasic

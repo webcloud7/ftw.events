@@ -5,7 +5,7 @@ from ftw.referencewidget.tests.widgets import ReferenceBrowserWidget
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from StringIO import StringIO
-from unittest2 import TestCase
+from unittest import TestCase
 import transaction
 
 
