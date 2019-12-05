@@ -78,6 +78,7 @@ class EventListing(BrowserView):
         )
         date_snippet = provider(obj)
 
+        image_tag = obj.restrictedTraverse('@@leadimage')('events_listing_image', direction='thumbnail')
         item = {
             'title': brain.Title,
             'description': brain.Description,
@@ -85,6 +86,8 @@ class EventListing(BrowserView):
             'brain': brain,
             'date_snippet': date_snippet,
             'location': obj.location or '',
+            'image_tag': image_tag,
+            'has_image_class': image_tag and 'has-image' or 'no-image',
         }
         return item
 

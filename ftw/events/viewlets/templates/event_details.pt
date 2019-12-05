@@ -18,6 +18,12 @@
                     />
             </ul>
         </div>
+        <a tal:condition="context/location"
+           tal:attributes="href view/google_maps_link"
+           i18n:translate="label_google_maps"
+           i18n:attributes="title title_google_maps"
+           class="google-maps-link">Google Maps
+        </a>
         <div class="location" tal:condition="context/location">
             <b i18n:translate="">Where</b>
             <p tal:content="context/location"/>
