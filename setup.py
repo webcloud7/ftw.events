@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.13.3.dev0'
+version = '1.14.0'
 
 tests_require = [
     'collective.taskqueue',

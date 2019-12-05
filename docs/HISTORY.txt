@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.13.3 (unreleased)
+1.14.0 (2019-12-05)
 -------------------
 
 - New styling for event_listing view [jone, tinagerber]
