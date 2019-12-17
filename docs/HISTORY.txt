@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.14.2 (unreleased)
+1.14.2 (2019-12-17)
 -------------------
 
 - Improve reindex_indexes install hook - to not reindex if not necessary. [mathias.leimgruber]
