@@ -5,7 +5,7 @@ Changelog
 1.14.3 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Fix condition introduced in release 1.14.2. [mathias.leimgruber]
 
 
 1.14.2 (2019-12-17)

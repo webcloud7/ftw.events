@@ -16,8 +16,8 @@ def reindex_indexes(portal):
     catalog = getToolByName(portal, 'portal_catalog')
 
     # Only reindex start/end if the index is empty
-    if len(catalog.Indexes['start']):
+    if not len(catalog.Indexes['start']):
         catalog.reindexIndex('start', None)
 
-    if len(catalog.Indexes['end']):
+    if not len(catalog.Indexes['end']):
         catalog.reindexIndex('end', None)
