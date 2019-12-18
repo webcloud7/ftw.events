@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.14.3 (unreleased)
+1.14.3 (2019-12-18)
 -------------------
 
 - Fix condition introduced in release 1.14.2. [mathias.leimgruber]
