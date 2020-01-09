@@ -5,7 +5,7 @@ Changelog
 1.14.4 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add ftw.events portal_types translations to plone domain. [tinagerber]
 
 
 1.14.3 (2019-12-18)
