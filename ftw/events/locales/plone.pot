@@ -22,3 +22,7 @@ msgstr ""
 
 msgid "ftw.events.EventPage"
 msgstr ""
+
+#. Default: "${date} from ${starttime}"
+msgid "event_when_sameday_openend"
+msgstr ""
