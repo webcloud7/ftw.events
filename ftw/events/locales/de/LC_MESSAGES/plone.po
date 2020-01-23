@@ -11,6 +11,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "Preferred-Encodings: utf-8 latin1\n"
 
+#. Default: "${date} from ${starttime}"
+msgid "event_when_sameday_openend"
+msgstr "${date} ab ${starttime}"
+
 msgid "ftw.events.EventFolder"
 msgstr "Veranstaltungsordner"
 
