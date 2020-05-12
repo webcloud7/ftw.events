@@ -4,7 +4,7 @@
            interface="Products.CMFPlone.interfaces.IResourceRegistry"
            remove="true" />
 
-  <records prefix="plone.bundles/ftw-keywordwidget-resources"
+  <records prefix="plone.bundles/ftw-events-resources"
            interface="Products.CMFPlone.interfaces.IBundleRegistry">
     <value key="resources" purge="True"></value>
     <value key="enabled">True</value>
