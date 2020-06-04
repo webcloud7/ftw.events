@@ -21,7 +21,9 @@ extras_require = {
         'plonetheme.blueberry',
         'ftw.events[mopage_publisher_receiver]',
     ],
-
+    'plone4': [
+        'plone.app.referenceablebehavior',
+    ],
     # The mopage_publisher_receiver should be installed on a ftw.publisher
     # receiver installation in order to enable the mopage trigger function.
     # It should *NOT* be installed on ftw.pubsliher.sender site, since
@@ -73,7 +75,6 @@ setup(
         'plone.api',
         'plone.app.dexterity',
         'plone.app.event [dexterity]',
-        'plone.app.referenceablebehavior',
         'plone.directives.form',
         'setuptools',
     ],

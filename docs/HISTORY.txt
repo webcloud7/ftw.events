@@ -7,6 +7,7 @@ Changelog
 
 - Fix german formatted date translation for open-ended events [Nachtalb]
 - Fix plone 5 upgrade step, which accidentally broke ftw.keywordwidget [mathias.leimgruber]
+- Remove obsolete dependency from Plone 5. From now on install the "plone4" extra for Plone 4 installations [Nachtalb]
 
 
 1.14.4 (2020-01-09)
