@@ -2,10 +2,13 @@ Changelog
 =========
 
 
+
+
+
 1.7.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Respect syndications settings on EventFolder RSS viewlet. [mathias.leimgruber]
 
 
 1.7.1 (2018-02-06)

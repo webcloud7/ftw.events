@@ -4,11 +4,23 @@ from ftw.events.tests import FunctionalTestCase
 from ftw.testbrowser import browsing
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
+from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
+from Products.CMFPlone.interfaces.syndication import ISiteSyndicationSettings
+from zope.component import getUtility
 import transaction
 
 
 class TestEventFolder(FunctionalTestCase):
+
+    def setUp(self):
+        super(TestEventFolder, self).setUp()
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ISiteSyndicationSettings)
+        settings.allowed = True
+        transaction.commit()
+
 
     @browsing
     def test_create_event_folder(self, browser):
@@ -54,6 +66,19 @@ class TestEventFolder(FunctionalTestCase):
             [event1.Title(), event2.Title()],
             browser.css('item title').text
         )
+
+    @browsing
+    def test_disabled_rss(self, browser):
+        self.grant('Manager')
+        folder = create(Builder('event folder'))
+        
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ISiteSyndicationSettings)
+        settings.allowed = False
+        transaction.commit()
+
+        browser.login().visit(folder)
+        self.assertFalse(len(browser.css('link[rel="alternate"]')))
 
     @browsing
     def test_event_folder_contains_links_to_rss_feeds_of_block(self, browser):

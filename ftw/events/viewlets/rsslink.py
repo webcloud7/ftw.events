@@ -1,8 +1,11 @@
 from ftw.events.interfaces import IEventListingBlock
 from plone import api
 from plone.app.layout.links.viewlets import RSSViewlet
+from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.interfaces.syndication import IFeedSettings
+from Products.CMFPlone.interfaces.syndication import ISiteSyndicationSettings
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.component import getUtility
 
 
 class EventFolderRSSViewlet(RSSViewlet):
@@ -16,8 +19,13 @@ class EventFolderRSSViewlet(RSSViewlet):
     def update(self):
         super(EventFolderRSSViewlet, self).update()
         self.rsslinks = []
-        for block in self.get_blocks_with_syndication_enabled():
-            self.rsslinks.extend(self.getRssLinks(block))
+
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ISiteSyndicationSettings)
+
+        if settings.allowed:
+            for block in self.get_blocks_with_syndication_enabled():
+                self.rsslinks.extend(self.getRssLinks(block))
 
     def get_blocks_with_syndication_enabled(self):
         blocks = api.content.find(
