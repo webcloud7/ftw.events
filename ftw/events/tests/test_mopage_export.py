@@ -189,7 +189,7 @@ class TestMopageExport(FunctionalTestCase, XMLDiffTestCase):
 
     def assert_events_in_browser(self, expected_titles):
         got_titles = browser.css('titel').text
-        self.assertEquals(expected_titles, got_titles)
+        self.assertItemsEqual(expected_titles, got_titles)
 
     def get_links_from_response(self):
         def parse_link(text):
