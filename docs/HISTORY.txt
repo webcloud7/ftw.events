@@ -6,6 +6,7 @@ Changelog
 -------------------
 
 - Fix german formatted date translation for open-ended events [Nachtalb]
+- Fix plone 5 upgrade step, which accidentally broke ftw.keywordwidget [mathias.leimgruber]
 
 
 1.14.4 (2020-01-09)
