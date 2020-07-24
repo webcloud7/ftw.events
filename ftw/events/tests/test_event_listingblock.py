@@ -1,9 +1,11 @@
+from Products.CMFPlone.interfaces.syndication import IFeedSettings
 from ftw.builder import Builder
 from ftw.builder import create
 from ftw.events.contents.eventlistingblock import IEventListingBlockSchema
 from ftw.events.tests import FunctionalTestCase
 from ftw.events.tests.utils import enable_behavior
 from ftw.testbrowser import browsing
+from ftw.testbrowser.exceptions import NoElementFound
 from ftw.testbrowser.pages import factoriesmenu
 from ftw.testbrowser.pages import statusmessages
 from ftw.testing import freeze
@@ -12,7 +14,6 @@ from plone.protect.authenticator import createToken
 from z3c.relationfield import RelationValue
 from zope.component import getUtility
 from zope.intid import IIntIds
-from Products.CMFPlone.interfaces.syndication import IFeedSettings
 import datetime
 import transaction
 
@@ -684,3 +685,43 @@ class TestEventListingBlock(FunctionalTestCase):
         # Make sure the block has a "hidden" class now.
         browser.visit(page)
         self.assertTrue(_block_has_hidden_class(browser))
+
+    @browsing
+    def test_event_listing_block_shows_lead_image(self, browser):
+        page = create(Builder('sl content page').titled(u'Content Page'))
+        event_folder = create(
+            Builder('event folder').titled(u'Event Folder').within(page))
+        event = create(Builder('event page')
+                       .titled(u'Event Page')
+                       .having(
+                           description=u"Event Description.")
+                       .within(event_folder))
+        create(Builder('sl textblock')
+               .titled(u'Textblock with image')
+               .within(event)
+               .with_dummy_image())
+        block = create(Builder('event listing block')
+                       .within(page)
+                       .titled(u'This is a EventListingBlock')
+                       .having(show_lead_image=True))
+        browser.login().visit(page)
+
+        try:
+            browser.css('.event-item .no-image.image').first
+        except NoElementFound:
+            raise Exception('Image was not found but is enabled.')
+
+        # Now edit the block so it will not show the lead image.
+        browser.visit(block, view='edit')
+        browser.fill({'Show lead image': False}).save()
+        browser.visit(page)
+
+        raise_was_found = False
+        try:
+            browser.css('.event-item .no-image.image').first
+            raise_was_found = True
+        except NoElementFound:
+            pass
+
+        if raise_was_found:
+            raise Exception('Image was found but is disabled.')
