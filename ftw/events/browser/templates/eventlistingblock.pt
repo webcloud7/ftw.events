@@ -19,7 +19,11 @@
         <ul class="event-row">
             <li tal:repeat="item items">
                 <a class="event-item" tal:attributes="href item/url">
-                    <div class="body">
+                    <div tal:attributes="class python:'image' if item['image_tag'] else 'no-image image'"
+                         tal:condition="block_info/show_lead_image">
+                        <img tal:condition="item/image_tag" tal:replace="structure item/image_tag" />
+                    </div>
+                    <div tal:attributes="class python:'body show-image' if block_info['show_lead_image'] else 'body'">
                         <span class="byline">
                             <span tal:condition="item/date_snippet"
                                   tal:replace="structure item/date_snippet"/>

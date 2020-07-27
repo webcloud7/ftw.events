@@ -1,14 +1,14 @@
 from Acquisition._Acquisition import aq_inner, aq_parent
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from ftw.events import _
 from ftw.events import utils
+from ftw.events.contents.eventlistingblock import IEventListingBlockSchema
 from ftw.events.interfaces import IEventPage
 from ftw.simplelayout.browser.blocks.base import BaseBlock
-from ftw.simplelayout.contenttypes.behaviors import IHiddenBlock
 from plone import api
 from plone.app.event.base import _prepare_range, filter_and_resort
 from plone.dexterity.utils import safe_utf8
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
 from zope.i18n import translate
@@ -47,6 +47,7 @@ class EventListingBlockView(BaseBlock):
             'rss_link_url': rss_link_url,
             'more_items_link_url': more_items_link_url,
             'more_items_link_label': more_items_link_label,
+            'show_lead_image': self.context.show_lead_image,
             'hide_empty_block':  self.context.hide_empty_block,
         }
 
@@ -155,10 +156,16 @@ class EventListingBlockView(BaseBlock):
         )
         date_snippet = provider(obj)
 
+        image_tag = ''
+        if IEventListingBlockSchema(self.context).show_lead_image:
+            image_tag = obj.restrictedTraverse('@@leadimage')(
+                'events_listing_image')
+
         item = {
             'title': brain.Title,
             'description': description,
             'url': brain.getURL(),
+            'image_tag': image_tag,
             'brain': brain,
             'date_snippet': date_snippet,
             'location': obj.location or '',

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2019-11-11 14:42+0000\n"
+"POT-Creation-Date: 2020-07-24 09:00+0000\n"
 "PO-Revision-Date: 2016-10-18 11:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,7 +73,7 @@ msgstr "Veranstaltungens-Seiten auf Basis von Simplelayout."
 msgid "Provides fields for configuring a mopage trigger (ftw.publisher)."
 msgstr "Felder für die Konfiguration des Mopage Auslösers."
 
-#: ./ftw/events/browser/templates/eventlistingblock.pt:46
+#: ./ftw/events/browser/templates/eventlistingblock.pt:50
 msgid "Subscribe to the RSS feed"
 msgstr "RSS abonnieren"
 
@@ -86,7 +86,7 @@ msgstr "Konfigurierbarer Block, welcher Veranstaltungen auflistet."
 msgid "When"
 msgstr "Wann"
 
-#: ./ftw/events/viewlets/templates/event_details.pt:27
+#: ./ftw/events/viewlets/templates/event_details.pt:28
 msgid "Where"
 msgstr "Wo"
 
@@ -96,7 +96,7 @@ msgid "archive"
 msgstr "Archive"
 
 #. Default: "Hide the block if there are not events to be shown."
-#: ./ftw/events/contents/eventlistingblock.py:191
+#: ./ftw/events/contents/eventlistingblock.py:200
 msgid "description_hide_empty_block"
 msgstr "Der Block wird nicht angezeigt, wenn keine Veranstaltungen vorhanden sind."
 
@@ -141,7 +141,7 @@ msgid "event_listing_block_show_title_label"
 msgstr "Titel anzeigen"
 
 #. Default: "You cannot filter by path and current context at the same time."
-#: ./ftw/events/contents/eventlistingblock.py:202
+#: ./ftw/events/contents/eventlistingblock.py:211
 msgid "event_listing_config_current_context_and_path_error"
 msgstr "Es ist nicht möglich, gleichzeitig nach Pfad und aktuellem Bereich zu filtern."
 
@@ -277,7 +277,7 @@ msgid "label_exclude_past_events"
 msgstr "Vergangene Veranstaltungen nicht anzeigen"
 
 #. Default: "${title} - Events Feed"
-#: ./ftw/events/browser/eventlisting.py:122
+#: ./ftw/events/browser/eventlisting.py:121
 msgid "label_feed_desc"
 msgstr "${title} - Veranstaltungs Feed"
 
@@ -287,7 +287,7 @@ msgid "label_google_maps"
 msgstr "Google Maps"
 
 #. Default: "Hide empty block"
-#: ./ftw/events/contents/eventlistingblock.py:189
+#: ./ftw/events/contents/eventlistingblock.py:198
 msgid "label_hide_empty_block"
 msgstr "Leeren Block ausblenden"
 
@@ -336,6 +336,16 @@ msgstr "Label für den Link \"Weitere Einträge\""
 msgid "label_more_items_view_title"
 msgstr "Titel der View hinter dem Link \"Weitere Einträge\""
 
+#. Default: "Show lead image"
+#: ./ftw/events/contents/eventlistingblock.py:189
+msgid "label_show_lead_image"
+msgstr "Bild anzeigen"
+
+#. Default: "Renders a lead image (taken from the item's first text block having an image.)"
+#: ./ftw/events/contents/eventlistingblock.py:191
+msgid "label_show_lead_image_description"
+msgstr "Falls ein Textblock des Eintrages ein Bild hat, wird dieses Bild angezeigt."
+
 #. Default: "Link to RSS feed"
 #: ./ftw/events/contents/eventlistingblock.py:180
 msgid "label_show_rss_link"
@@ -348,12 +358,12 @@ msgstr "Mopage Trigger aktiviert"
 
 #. Default: "More Items"
 #: ./ftw/events/browser/eventlistingblock.py:40
-#: ./ftw/events/browser/templates/eventlistingblock.pt:40
+#: ./ftw/events/browser/templates/eventlistingblock.pt:44
 msgid "more_items_link_label"
 msgstr "Weitere Einträge"
 
 #. Default: "Events"
-#: ./ftw/events/browser/eventlisting.py:102
+#: ./ftw/events/browser/eventlisting.py:101
 msgid "more_items_view_fallback_title"
 msgstr "Veranstaltungen"
 

@@ -185,6 +185,15 @@ class IEventListingBlockSchema(form.Schema):
         required=False,
     )
 
+    show_lead_image = schema.Bool(
+        title=_(u'label_show_lead_image',
+                default=u'Show lead image'),
+        description=_(u'label_show_lead_image_description',
+                      default=u'Renders a lead image (taken from the item\'s '
+                              u'first text block having an image.)'),
+        default=False,
+    )
+
     hide_empty_block = schema.Bool(
         title=_(u'label_hide_empty_block',
                 default=u'Hide empty block'),
