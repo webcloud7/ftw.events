@@ -130,6 +130,9 @@ class EventListingRss(EventListing):
     def get_item_link(self, url):
         return '<link>{}</link>'.format(url)
 
+    def get_rfc822_datetime(self, datetime_obj):
+        return DateTime(datetime_obj).rfc822()
+
 
 class EventListingFolder(EventListing):
     """
