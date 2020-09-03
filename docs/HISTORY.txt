@@ -15,6 +15,7 @@ Changelog
 - Fix plone 5 upgrade step, which accidentally broke ftw.keywordwidget [mathias.leimgruber]
 - Remove obsolete dependency from Plone 5. From now on install the "plone4" extra for Plone 4 installations [Nachtalb]
 - Add possibility to show a leadimage within the block. [busykoala]
+- Respect syndications settings on EventFolder RSS viewlet. [mathias.leimgruber]
 
 
 1.14.4 (2020-01-09)
