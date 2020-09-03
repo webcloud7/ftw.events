@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.15.1 (unreleased)
+1.15.1 (2020-09-03)
 -------------------
 
 - Add more info to rss feed and use Event start date as pubDate. [mathias.leimgruber]
