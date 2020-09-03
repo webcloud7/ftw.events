@@ -1,3 +1,4 @@
+from DateTime import DateTime
 from datetime import datetime
 from datetime import timedelta
 from ftw.builder import Builder
@@ -62,3 +63,9 @@ class TestRssView(FunctionalTestCase):
         self.assertEqual(['http://nohost/plone/events/an-event',
                           'http://nohost/plone/events/a-second-event'],
                          browser.css('rss channel item link').text)
+        self.assertEqual([DateTime(self.event_1.start).rfc822(), DateTime(self.event_2.start).rfc822()],
+                         browser.css('rss item pubDate').text)
+        self.assertEqual([self.event_1.modified().rfc822(), self.event_2.modified().rfc822()],
+                         browser.css('rss item lastBuildDate').text)
+        self.assertEqual(['ftw.events.EventPage', 'ftw.events.EventPage'],
+                         browser.xpath('//dc:type').text)
