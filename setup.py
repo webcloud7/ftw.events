@@ -76,6 +76,7 @@ setup(
         'plone.app.dexterity',
         'plone.app.event [dexterity]',
         'plone.directives.form',
+        'plone.restapi',
         'setuptools',
     ],
 

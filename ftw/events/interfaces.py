@@ -1,3 +1,4 @@
+from ftw.simplelayout.interfaces import ISimplelayoutBlock
 from zope.interface import Interface
 
 
@@ -15,7 +16,7 @@ class IEventPage(Interface):
     """
 
 
-class IEventListingBlock(Interface):
+class IEventListingBlock(ISimplelayoutBlock):
     """Marker interface for the event listing blocks
     """
 

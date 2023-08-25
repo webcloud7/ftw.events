@@ -2,10 +2,10 @@ Changelog
 =========
 
 
-1.15.2 (unreleased)
+1.16.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add plone.restapi support [mathias.leimgruber]
 
 
 1.15.1 (2020-09-03)
