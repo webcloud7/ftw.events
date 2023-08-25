@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.16.0 (unreleased)
+1.16.0 (2023-08-25)
 -------------------
 
 - Add plone.restapi support [mathias.leimgruber]
